@@ -46,7 +46,7 @@
       "page": "Page {{ page }}"
     },
     "accessibility": {
-      "skip_to_content": "Skip to content -"
+      "skip_to_content": "Skip to content"
     },
     "search": {
       "title": "Search",
