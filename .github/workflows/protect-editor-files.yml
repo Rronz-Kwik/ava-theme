@@ -1,0 +1,58 @@
+name: Protect editor files
+
+on:
+  pull_request:
+    branches: [main, staging]
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: List changed files
+        run: |
+          git diff --name-only "$BASE_SHA...$HEAD_SHA" > changed-files.txt
+          cat changed-files.txt
+
+      - name: Block editor-owned files without approval label
+        env:
+          APPROVED: ${{ contains(github.event.pull_request.labels.*.name, 'editor-json-approved') }}
+        run: |
+          EDITOR_FILES=$(grep -E '^(config/settings_data\.json|config/markets\.json|templates/.+\.json|sections/[^/]+-group\.json)$' changed-files.txt || true)
+
+          if [ -z "$EDITOR_FILES" ]; then
+            echo "No editor-owned files changed."
+            exit 0
+          fi
+
+          echo "Editor-owned files changed:"
+          echo "$EDITOR_FILES"
+
+          if [ "$APPROVED" = "true" ]; then
+            echo "::notice::Label editor-json-approved found, changes allowed."
+            exit 0
+          fi
+
+          echo "::error::This PR changes files owned by the Shopify theme editor. Remove these changes, or add the label editor-json-approved after review."
+          exit 1
+
+      - name: Warn on removed or changed locale keys
+        run: |
+          LOCALE_FILES=$(grep -E '^locales/[^/]+\.json$' changed-files.txt || true)
+
+          if [ -z "$LOCALE_FILES" ]; then
+            echo "No locale files changed."
+            exit 0
+          fi
+
+          node .github/scripts/check-locale-keys.js "$BASE_SHA" "$HEAD_SHA" $LOCALE_FILES
