@@ -1,0 +1,6 @@
+# Files written by Shopify (theme editor / admin). Never reformat.
+config/settings_data.json
+config/markets.json
+templates/**/*.json
+sections/*-group.json
+locales/*.json
