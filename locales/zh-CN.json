@@ -367,5 +367,29 @@
     "message": "留言",
     "submit": "提交",
     "success": "感谢您的来信，我们的团队将尽快与您联系。"
+  },
+  "shopify": {
+    "checkout": {
+      "local_pickup": {
+        "stock_details": {
+          "in_stock": "现货"
+        }
+      },
+      "split_delivery": {
+        "delivery_updated_toast": {
+          "shipping_only": "您的配送信息已更新。{{shipping}}",
+          "removal_only": "您的配送信息已更新。{{removal}}",
+          "shipping_and_removal": "您的配送信息已更新。{{shipping}} {{removal}}",
+          "shipping": {
+            "one": "{{count}} 件商品已移至发货状态。",
+            "other": "{{count}} 件商品已移至发货状态。"
+          },
+          "removal": {
+            "one": "{{count}} 个项目已被移除。",
+            "other": "已移除 {{count}} 个项目。"
+          }
+        }
+      }
+    }
   }
 }
