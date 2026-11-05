@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -19,7 +10,7 @@
       "name": "Distributor Selection",
       "settings": {
         "sponsor_api_url": "https://g17dcc4016a8ea9-avadevdb.azure-westus3.adb.us-phoenix-1.oraclecloudapps.com/ords/ava/syncops-public/reps",
-        "step2_subheading": "Select Bundle",
+        "step2_subheading": "Select Bundle 1",
         "step2_heading": "Your Starter Bundle",
         "step2_description": "",
         "step2_note": "Promotions (if applicable) will be calculated at checkout.",
