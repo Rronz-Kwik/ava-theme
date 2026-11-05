@@ -1,0 +1,109 @@
+{% doc %}
+  Renders the Apex attribution / volume tracking config as a JSON island.
+  Read once by assets/apex-attribution.js and exposed as window.__APEX_CONFIG__.
+  Only data extraction here — no logic, no side effects.
+
+  Every behaviour setting comes from shop.metafields.apex.*, so nothing is
+  hardcoded per store: a fresh shop with no metafields set still gets working
+  defaults. Set the values from the app's Settings page (/app/settings).
+
+  The cart-metafield sync is a no-op unless `storefront_api_token` is set
+  (Theme settings > Storefront API). Volume reads additionally require the
+  product metafields apex.volume1 / apex.volume2 (and apex.volume3, if used)
+  to have Storefront API access enabled, otherwise the lookup returns null and
+  volume totals come back 0.
+
+  @example
+  {% render 'apex-config' %}
+{% enddoc %}
+
+{%- liquid
+  assign cfg = shop.metafields.apex
+
+  # Booleans are compared against `false` explicitly instead of using `default`,
+  # so a deliberate `false` is not silently overwritten by the fallback. An
+  # unset metafield reads as nil, which is not == false, so it keeps the default.
+
+  assign attribution_enabled = true
+  if cfg.attribution_enabled.value == false
+    assign attribution_enabled = false
+  endif
+
+  assign self_referral_block = true
+  if cfg.self_referral_block.value == false
+    assign self_referral_block = false
+  endif
+
+  assign link_type_tracking = true
+  if cfg.link_type_tracking.value == false
+    assign link_type_tracking = false
+  endif
+
+  assign utm_capture_enabled = true
+  if cfg.utm_capture_enabled.value == false
+    assign utm_capture_enabled = false
+  endif
+
+  assign volume_tracking_enabled = true
+  if cfg.volume_tracking_enabled.value == false
+    assign volume_tracking_enabled = false
+  endif
+
+  # Display-only toggle: gates whether QV/CV are shown in enrollment UI.
+  # Defaults OFF, and must never gate the volume data itself.
+  assign volume_display_enabled = false
+  if cfg.volume_display_enabled.value == true
+    assign volume_display_enabled = true
+  endif
+
+  # Numbers: `!= blank` lets an explicit 0 through while an unset metafield
+  # (nil, which is blank) falls back to the default.
+  assign attribution_window_days = 90
+  if cfg.attribution_window_days.value != blank
+    assign attribution_window_days = cfg.attribution_window_days.value
+  endif
+
+  assign first_click_window_days = 365
+  if cfg.first_click_window_days.value != blank
+    assign first_click_window_days = cfg.first_click_window_days.value
+  endif
+
+  assign touchpoint_cap = 50
+  if cfg.touchpoint_cap.value != blank
+    assign touchpoint_cap = cfg.touchpoint_cap.value
+  endif
+
+  assign attribution_model = cfg.attribution_model.value | default: 'last'
+
+  assign sponsor_aliases = cfg.sponsor_param_aliases.value
+
+  assign customer_user_type = customer.metafields.apex.user_type.value | default: 'influencer'
+-%}
+
+<script id="apex-config" type="application/json">
+{
+  "attribution_enabled": {{ attribution_enabled | json }},
+  "attribution_model": {{ attribution_model | json }},
+  "attribution_window_days": {{ attribution_window_days | json }},
+  "first_click_window_days": {{ first_click_window_days | json }},
+  "touchpoint_cap": {{ touchpoint_cap | json }},
+  "self_referral_block": {{ self_referral_block | json }},
+  "link_type_tracking": {{ link_type_tracking | json }},
+  "utm_capture_enabled": {{ utm_capture_enabled | json }},
+  "volume_tracking_enabled": {{ volume_tracking_enabled | json }},
+  "volume_display_enabled": {{ volume_display_enabled | json }},
+  "sponsor_param_aliases": {% if sponsor_aliases != blank %}{{ sponsor_aliases | json }}{% else %}["sponsor_id","ref","rep","aff","sponsor"]{% endif %},
+  "storefront_api_token": {{ settings.storefront_api_token | default: '' | json }},
+  "sponsor_proxy_url": "https://g17dcc4016a8ea9-avadevdb.azure-westus3.adb.us-phoenix-1.oraclecloudapps.com/ords/ava/syncops-public/reps"
+  {%- if customer -%}
+  ,
+  "customer": {
+    "id": {{ customer.id | json }},
+    "apex_user_id": {{ customer.metafields.apex.apex_user_id.value | default: '' | json }},
+    "rep_id": {{ customer.metafields.apex.rep_id.value | default: '' | json }},
+    "user_type": {{ customer_user_type | json }},
+    "sponsor_id": {{ customer.metafields.apex.sponsor_id.value | default: '' | json }}
+  }
+  {%- endif %}
+}
+</script>

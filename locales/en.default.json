@@ -1,0 +1,371 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "date_formats": {
+    "article_date": "%b %-d, %Y"
+  },
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were looking for doesn’t exist."
+    },
+    "nav": {
+      "products": "Products",
+      "science": "Our Science",
+      "about": "About",
+      "journal": "Journal",
+      "login": "Log in",
+      "account": "Account",
+      "cart": "Cart",
+      "become_influencer": "Become an Influencer"
+    },
+    "dropdown": {
+      "balance": "Foundational support",
+      "balance_plus": "Targeted support",
+      "renew": "Collagen renewal",
+      "all_products": "All Products",
+      "view_all_products": "View all products"
+    },
+    "announcement": {
+      "default": "Free shipping on every subscription"
+    },
+    "market": {
+      "label": "Region & language",
+      "title": "Choose your market",
+      "subtitle": "Select your region and language."
+    },
+    "meta": {
+      "tags": "Tagged “{{ tags }}”",
+      "page": "Page {{ page }}"
+    },
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search",
+      "submit": "Search"
+    },
+    "newsletter": {
+      "confirmation": "Thanks for subscribing."
+    },
+    "continue_shopping": "Continue shopping"
+  },
+  "footer": {
+    "tagline": "Balance in Motion. Precision wellness to help you age with your body, not against it.",
+    "shop": "Shop",
+    "company": "Company",
+    "contact": "Contact",
+    "rights": "© 2026 AVA. All rights reserved.",
+    "disclaimer": "These products are designed to support daily wellness routines and are not intended to diagnose, treat, cure, or prevent any disease.",
+    "join": "Join the movement",
+    "join_body": "Insights on aging well, precision wellness, and living in rhythm with your body.",
+    "email_placeholder": "Email address",
+    "join_button": "Join"
+  },
+  "cta": {
+    "heading": "Find your balance in motion.",
+    "subtitle": "Discover precision wellness products designed to help you age with your body, not against it.",
+    "shop": "Shop AVA"
+  },
+  "product": {
+    "about": "About",
+    "subscribe": "Subscribe",
+    "save20": "Save 20% with a subscription",
+    "free_ship": "Free shipping, always",
+    "guarantee": "90-day money-back guarantee",
+    "cancel": "Change or cancel anytime",
+    "onetime": "One-time order",
+    "add_cart": "Add to Cart",
+    "ic_precision": "Precision formulated",
+    "ic_clean": "Clean & conscious",
+    "ic_gmp": "GMP quality",
+    "acc_benefits": "Benefits",
+    "acc_ingredients": "Ingredients & highlights",
+    "acc_howto": "How to use",
+    "acc_faqs": "FAQs",
+    "why_label": "Why It Matters",
+    "blend_label": "Inside the Blend",
+    "blend_h": "Purposeful ingredients, each chosen for a reason.",
+    "ritual_label": "The Ritual",
+    "howto_label": "How to Use",
+    "standard_label": "The AVA Standard",
+    "reviews": "reviews"
+  },
+  "journal": {
+    "header": "Learn the science of balance.",
+    "subhead": "Insights on aging well, precision wellness, and living in rhythm with your body, from the people who formulate AVA.",
+    "chip_all": "All",
+    "cat_precision": "Precision Wellness",
+    "cat_aging": "Aging Well",
+    "cat_renewal": "Renewal",
+    "cat_rhythm": "Daily Rhythm",
+    "cat_products": "The Products",
+    "cat_science": "Our Science",
+    "featured": "Featured",
+    "latest": "Latest articles",
+    "nl_h": "Join the movement.",
+    "nl_sub": "New writing on aging well, precision wellness, and living in rhythm with your body, delivered occasionally, never noisily.",
+    "nl_email": "Email address",
+    "nl_btn": "Subscribe",
+    "read_more": "Read article"
+  },
+  "article": {
+    "back": "Journal",
+    "back_btn": "Back to Journal",
+    "written_by": "Written by",
+    "bio_suffix": " at AVA. Writing on precision wellness and aging with your body."
+  },
+  "about": {
+    "hero_ey": "About AVA",
+    "hero_h1": "What it means to truly live, not just function.",
+    "hero_sub": "AVA, meaning “life,” was created for people who want to feel more balanced, more capable, and more in tune with their body at every stage of life.",
+    "story_ey": "Our Story",
+    "story_h": "Balance is not stillness. It is movement.",
+    "story_p1": "AVA is a premium health and wellness brand built around the belief that balance is rhythm — the body’s ability to adapt, respond, shift, and return to center through every shift, stage, and season of life.",
+    "story_p2": "The wellness industry has made health feel confusing, overly clinical, and disconnected from how people actually live. AVA challenges that model. We believe balance should be understood as a foundation of life — not a niche issue, and not something addressed only when people feel broken.",
+    "mission_l": "Mission",
+    "mission_t": "AVA helps men and women age with their bodies, not against them, through precise, science-led wellness for every shift, stage, and season of life.",
+    "vision_l": "Vision",
+    "vision_t": "AVA envisions a future where aging well begins with balance — active, responsive, and personal.",
+    "origin_ey": "Origin",
+    "origin_h": "Created to challenge what wellness could be.",
+    "origin_p1": "AVA was born from a belief that wellness needed to be reimagined. For decades, the industry relied on generic solutions and one-size-fits-all thinking. But the body is not generic. It is intelligent, adaptive, and constantly in motion.",
+    "origin_p2": "The ideas behind AVA trace back to the late 1990s, where our development team cut their teeth challenging assumptions and reinventing the status quo. Decades of observation, refinement, and scientific exploration evolved into a vision for category-creating products designed to support the body with more precision, more intention, and more respect for how it actually works.",
+    "origin_p3": "AVA believes aging well is not about fighting the body. It is about understanding it, supporting it, and moving in rhythm with it.",
+    "pillars_l": "Brand Pillars",
+    "p1_h": "Balance in Motion",
+    "p1_p": "Balance is not static. It is the body’s ability to adapt, respond, shift, and return to center through every stage of life.",
+    "p2_h": "Precision Wellness",
+    "p2_p": "Science-led solutions made with intention — advanced thinking and purposeful design that support the body in smarter ways.",
+    "p3_h": "Age With Your Body",
+    "p3_p": "We help people work with their body’s natural rhythm, not against it — aging well, living fully, becoming their fullest self.",
+    "values_h": "What we value",
+    "v1_h": "Precision",
+    "v1_p": "Wellness should be intentional, thoughtful, and exacting — never generic.",
+    "v2_h": "Balance",
+    "v2_p": "True wellness is dynamic, helping the body return to center through every season.",
+    "v3_h": "Innovation",
+    "v3_p": "We challenge outdated norms by applying advanced science to create smarter solutions.",
+    "v4_h": "Integrity",
+    "v4_p": "We lead with trust, transparency, and responsibility in all we create and deliver.",
+    "v5_h": "Accessibility",
+    "v5_p": "We make advanced wellness feel human, understandable, and within reach."
+  },
+  "science": {
+    "hero_h1": "Advanced science, made human.",
+    "hero_sub": "AVA uses precise formulation, purposeful ingredients, thoughtful delivery formats, and human-centered design to create wellness products that feel intelligent, modern, and easy to use.",
+    "phil_ey": "Science Philosophy",
+    "phil_h": "Science should be advanced, precise, and deeply human.",
+    "phil_p1": "Every AVA product is designed with intention — from ingredient selection and formulation strategy to delivery format and daily-use experience. For AVA, science is not about complexity for its own sake. It is about creating smarter, more thoughtful wellness solutions that support balance through every shift, stage, and season of life.",
+    "phil_p2": "We challenge the idea that advanced wellness has to feel cold, clinical, or out of reach. We believe the best science should feel personal, purposeful, and connected to the way people actually live.",
+    "build_h": "How we build every product",
+    "b1_h": "Precise formulation",
+    "b1_p": "Designed with intention, from ingredient selection and formulation strategy to delivery format.",
+    "b2_h": "Purposeful ingredients",
+    "b2_p": "Selected botanicals and nutrients, each chosen for a reason — never filler.",
+    "b3_h": "Thoughtful delivery",
+    "b3_p": "Formats designed around real life — topical pumps, single-serve sachets, simple daily rituals.",
+    "b4_h": "Human-centered design",
+    "b4_p": "Advanced wellness that feels personal — never cold or clinical.",
+    "band_ey": "The AVA Approach",
+    "band_h": "Disruptive in thinking, premium in execution, and human at the core.",
+    "std_ey": "The AVA Standard",
+    "std_h": "Proactive wellness, before you feel dismissed.",
+    "std_p1": "We respect modern healthcare, but believe people deserve proactive, science-led wellness solutions before they feel reduced to a symptom or handed a one-size-fits-all answer.",
+    "std_p2": "AVA uses science to create solutions that help people age with their body, not against it — disruptive in thinking, premium in execution, human at the core."
+  },
+  "cart": {
+    "general": {
+      "title": "Your cart",
+      "empty": "Your cart is empty.",
+      "update": "Update",
+      "remove": "Remove",
+      "quantity": "Quantity",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "fee_included": "Includes Shipping and Import Costs"
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "Sold out"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_matches": "No products found."
+    }
+  },
+  "blogs": {
+    "article": {
+      "empty": "No articles yet."
+    }
+  },
+  "onboarding": {
+    "article_title": "Article title"
+  },
+  "enrollment": {
+    "summary": {
+      "summary_label": "Order summary",
+      "choose_pack": "Choose an Influencer Bundle",
+      "no_pack": "No pack selected yet.",
+      "add_products": "Add additional products",
+      "no_products": "No additional products.",
+      "how_it_works": "How does this work?",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "taxes": "Taxes",
+      "total": "Total",
+      "calculated_at_checkout": "Calculated at checkout",
+      "agree_to": "I agree to the",
+      "terms": "Terms and Conditions",
+      "checkout": "Proceed to Checkout",
+      "next": "Next",
+      "remove": "Remove",
+      "payment_methods": "We support these payment methods",
+      "overview_title": "Overview",
+      "affiliate_pack": "Influencer Bundle",
+      "no_pack_short": "No pack selected.",
+      "one_time": "Additional One Time Product",
+      "monthly": "Your Monthly Subscription Order",
+      "change": "Change",
+      "total_label": "Total:"
+    },
+    "shipping": {
+      "subheading": "Shipping",
+      "heading": "Where should we ship your order?",
+      "country_label": "Country/region:",
+      "country_name": "Mainland China",
+      "last_name": "Last name",
+      "first_name": "First name",
+      "province": "Province",
+      "city": "City",
+      "district": "District",
+      "address1": "Address",
+      "address2": "Apartment, suite, etc. (optional)",
+      "zip": "Postal code",
+      "phone": "Mobile phone (mainland China)",
+      "save_default": "Save as my default shipping address",
+      "back": "Back",
+      "continue": "Continue",
+      "confirm_before_checkout": "Please confirm your shipping address before checkout.",
+      "select_province": "Select a province",
+      "select_city": "Select a city",
+      "select_province_first": "Select a province first",
+      "select_district": "Select a district",
+      "select_city_first": "Select a city first",
+      "no_districts": "Not needed",
+      "load_failed": "We couldn't load the address options. Please try again.",
+      "validate_failed": "We couldn't check your address right now. Please try again.",
+      "fix_errors": "Please fix the highlighted fields.",
+      "checking": "Checking…"
+    },
+    "sponsor": {
+      "eyebrow": "Choose Your Sponsor",
+      "heading": "Enroll A New Distributor",
+      "select": "Select Distributor",
+      "search_placeholder": "Enter Sponsor ID…",
+      "search_label": "Search sponsor by ID",
+      "continue": "Continue",
+      "enter_id": "Enter a Sponsor ID to search…",
+      "searching": "Searching…",
+      "not_found": "No sponsor found with that ID.",
+      "unavailable": "Sponsor lookup unavailable. Please contact support.",
+      "failed": "Search failed. Please try again.",
+      "required": "Please select a distributor."
+    },
+    "products": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold Out",
+      "package": "Package:",
+      "business_kit": "Business Kit:",
+      "back": "Back"
+    },
+    "popup": {
+      "title": "Product Selection Required",
+      "go_back": "Go Back",
+      "close": "Close popup",
+      "select_before_checkout": "Please select a product before checkout. You need to choose a main package to complete your enrollment.",
+      "select_before_continue": "Please select a product before continuing. Choose one package to proceed to the next step.",
+      "sold_out": "This product is sold out. Please select another available product to continue."
+    },
+    "copy": {
+      "step2_subheading": "Select Kit",
+      "step2_heading": "Your Starter Kit",
+      "step2_description": "Each starter kit includes a 1-year membership, a personalized distributor website, the product kit of your choice, and tools to get you started.",
+      "step2_note": "Promotions (if applicable) will be calculated at checkout.",
+      "step2_note_tooltip": "Any active promotions, member discounts, or bundle pricing are applied automatically when you reach checkout. No promo code entry is needed.",
+      "step3_subheading": "Select Kit",
+      "step3_heading": "Add Additional Products",
+      "step3_note": "Promotions (if applicable) will be calculated at checkout.",
+      "step3_note_tooltip": "These products are optional add-ons. You can adjust quantities or remove them before completing checkout.",
+      "summary_step3_title": "Setup Your Subscription!",
+      "summary_step4_title": "Finish up",
+      "summary_sponsor_help": "Your sponsor is the distributor who referred you. They'll be credited for your enrollment and can help you get started.",
+      "finish_heading": "Nice going! You're almost there!",
+      "finish_subtext": "Below you'll find an overview of your selection. If everything is in order, proceed to checkout.",
+      "summary_welcome_text": "Welcome to our store!",
+      "summary_reassurance_text": "Ships in 24 hours, 30-day money-back guarantee",
+      "more_info": "More information"
+    }
+  },
+  "confirm_shipping": {
+    "eyebrow": "Shipping address",
+    "heading": "Confirm your shipping address.",
+    "intro": "Please review your shipping details so your orders reach you.",
+    "required_note": "Required field",
+    "country": "Country/Region",
+    "country_name": "Mainland China",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "phone": "Phone number",
+    "address1": "Address",
+    "address2": "Apartment, suite, etc. (optional)",
+    "province": "Province",
+    "city": "City",
+    "district": "District",
+    "zip": "Postal code",
+    "submit": "Confirm address",
+    "saving": "Saving…",
+    "confirmed": "Confirmed",
+    "saved": "Your shipping address has been confirmed. Redirecting…",
+    "login_prompt": "Please log in to confirm your shipping address.",
+    "login_link": "Log in",
+    "session_expired": "Your session has expired. Please log in again.",
+    "error_summary": "Please correct the highlighted fields.",
+    "error_generic": "We couldn't save your address right now. Please try again.",
+    "error_network": "We couldn't reach the server. Please check your connection and try again."
+  },
+  "obo": {
+    "banner": {
+      "region_label": "Ordering for another influencer",
+      "shopping_for": "Shopping for {{ name }}",
+      "registering": "Registering {{ name }}",
+      "clear": "Clear",
+      "incomplete": "Details for this order are incomplete — please start again from your dashboard."
+    }
+  },
+  "contact": {
+    "heading": "Access the world's leading specialists, anywhere in the world, when you need it most.",
+    "subheading": "Contact us for inquiries, requests or questions.",
+    "form_heading": "Complete this form to be contacted by our team",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "country": "Country",
+    "country_placeholder": "Select...",
+    "message": "Message",
+    "submit": "Submit",
+    "success": "Thanks for reaching out. Our team will be in touch soon."
+  }
+}

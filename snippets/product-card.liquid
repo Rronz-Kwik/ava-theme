@@ -1,0 +1,31 @@
+{%- comment -%} Reusable product card. Usage: {% render 'product-card', product: product %} {%- endcomment -%}
+{%- comment -%} Pack-type colour block (ClickUp 869etbgcb). Empty for non-pack products. {%- endcomment -%}
+{%- capture pack_type -%}{% render 'pack-type', product: product %}{%- endcapture -%}
+{%- assign pack_type = pack_type | strip -%}
+{%- unless settings.pack_colour_enabled -%}{%- assign pack_type = '' -%}{%- endunless -%}
+<a href="{{ product.url }}" class="ava-pcard ava-pcard--link"{% if pack_type != blank %} data-ava-pack="{{ pack_type }}"{% endif %}>
+  {%- if pack_type != blank -%}
+    {%- comment -%}
+      Colour alone cannot carry the meaning for screen-reader or colour-blind
+      users, and the visible word is being removed by client request, so the
+      label is present but visually hidden.
+    {%- endcomment -%}
+    <span class="ava-visually-hidden">{% if pack_type == 'enrolment' %}{{ 'product.pack_type.enrolment' | t }}{% else %}{{ 'product.pack_type.reorder' | t }}{% endif %}</span>
+  {%- endif -%}
+  <span class="ava-pcard__media">
+    {%- if product.featured_image -%}  
+      <img src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.title | escape }}" loading="lazy">
+    {%- else -%}
+      <img src="{{ 'balance-card.png' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
+    {%- endif -%}
+  </span>
+  <span class="ava-pcard__body">
+    {%- if product.metafields.ava.format != blank -%}<span class="ava-pcard__fmt">{{ product.metafields.ava.format }}</span>{%- endif -%}
+    <span class="ava-pcard__title ava-pcard__title--block">{{ product.title }}</span>
+    {%- if product.description != blank -%}<span class="ava-pcard__desc ava-pcard__desc--block">{{ product.description | strip_html | truncatewords: 18 }}</span>{%- endif -%}
+    <span class="ava-price ava-price--stack">
+      {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s> {% endif -%}
+      {{ product.price | money }}
+    </span>
+  </span>
+</a>

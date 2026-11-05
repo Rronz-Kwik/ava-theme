@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "heading": "Learn the science of balance.",
+        "subheading": "Insights on aging well, precision wellness, and living in rhythm with your body, from the people who formulate AVA."
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join the movement.",
+        "subheading": "New writing on aging well, precision wellness, and living in rhythm with your body, delivered occasionally, never noisily.",
+        "placeholder": "Email address",
+        "button_label": "Subscribe"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

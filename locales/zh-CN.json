@@ -1,0 +1,371 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "date_formats": {
+    "article_date": "%Y年%-m月%-d日"
+  },
+  "general": {
+    "404": {
+      "title": "页面未找到",
+      "subtext": "您要查找的页面不存在。"
+    },
+    "nav": {
+      "products": "产品",
+      "science": "科学理念",
+      "about": "关于我们",
+      "journal": "专栏",
+      "login": "登录",
+      "account": "账户",
+      "cart": "购物车",
+      "become_influencer": "成为推广达人"
+    },
+    "dropdown": {
+      "balance": "基础支持",
+      "balance_plus": "针对性支持",
+      "renew": "胶原焕活",
+      "all_products": "所有产品",
+      "view_all_products": "查看所有产品"
+    },
+    "announcement": {
+      "default": "每次订阅均享受免费配送"
+    },
+    "market": {
+      "label": "地区与语言",
+      "title": "选择您的市场",
+      "subtitle": "请选择您的地区和语言。"
+    },
+    "meta": {
+      "tags": "标签“{{ tags }}”",
+      "page": "第 {{ page }} 页"
+    },
+    "accessibility": {
+      "skip_to_content": "跳至内容"
+    },
+    "search": {
+      "title": "搜索",
+      "placeholder": "搜索",
+      "submit": "搜索"
+    },
+    "newsletter": {
+      "confirmation": "感谢您的订阅。"
+    },
+    "continue_shopping": "继续购物"
+  },
+  "footer": {
+    "tagline": "动态平衡。精准健康，助您顺应身体而非对抗身体地优雅老去。",
+    "shop": "购买",
+    "company": "公司",
+    "contact": "联系我们",
+    "rights": "© 2026 AVA。保留所有权利。",
+    "disclaimer": "本产品旨在支持日常健康习惯，无意诊断、治疗、治愈或预防任何疾病。",
+    "join": "加入我们的行列",
+    "join_body": "探索健康老龄化、精准健康管理，以及与身体节律和谐共处的相关见解。",
+    "email_placeholder": "电子邮箱地址",
+    "join_button": "加入"
+  },
+  "cta": {
+    "heading": "找到你的动态平衡。",
+    "subtitle": "探索精准健康产品，助您顺应身体而非对抗身体地优雅老去。",
+    "shop": "选购 AVA"
+  },
+  "product": {
+    "about": "关于",
+    "subscribe": "订阅",
+    "save20": "订阅立享 8 折",
+    "free_ship": "始终免费配送",
+    "guarantee": "90 天无理由退款保证",
+    "cancel": "随时更改或取消",
+    "onetime": "单次购买",
+    "add_cart": "加入购物车",
+    "ic_precision": "精准配方",
+    "ic_clean": "清洁而用心",
+    "ic_gmp": "GMP 品质",
+    "acc_benefits": "功效",
+    "acc_ingredients": "成分与亮点",
+    "acc_howto": "使用方法",
+    "acc_faqs": "常见问题",
+    "why_label": "为何重要",
+    "blend_label": "配方之内",
+    "blend_h": "有目的的成分，每一种都有其理由。",
+    "ritual_label": "仪式",
+    "howto_label": "使用方法",
+    "standard_label": "AVA 标准",
+    "reviews": "reviews"
+  },
+  "journal": {
+    "header": "了解平衡的科学。",
+    "subhead": "关于优雅老去、精准健康以及与身体同节奏生活的见解，来自配制 AVA 的团队。",
+    "chip_all": "全部",
+    "cat_precision": "精准健康",
+    "cat_aging": "优雅老去",
+    "cat_renewal": "焕活",
+    "cat_rhythm": "日常节奏",
+    "cat_products": "产品",
+    "cat_science": "科学理念",
+    "featured": "精选",
+    "latest": "最新文章",
+    "nl_h": "加入这场运动。",
+    "nl_sub": "关于优雅老去、精准健康与与身体同节奏生活的新作，偶尔送达，绝不喧嚣。",
+    "nl_email": "电子邮箱",
+    "nl_btn": "订阅",
+    "read_more": "Read article"
+  },
+  "article": {
+    "back": "专栏",
+    "back_btn": "返回专栏",
+    "written_by": "撰文",
+    "bio_suffix": "，AVA。撰写关于精准健康与顺应身体老去的文章。"
+  },
+  "about": {
+    "hero_ey": "关于 AVA",
+    "hero_h1": "真正地生活，而不只是维持运转。",
+    "hero_sub": "AVA 意为“生命”，为那些希望在人生每个阶段都更平衡、更有活力、与身体更加同步的人而生。",
+    "story_ey": "我们的故事",
+    "story_h": "平衡不是静止，而是运动。",
+    "story_p1": "AVA 是一个高端健康与沉澜品牌，核心信念是平衡即节奏——身体在每个变化、阶段与季节中适应、回应、调整并重新回到中心的能力。",
+    "story_p2": "健康行业让健康变得令人困惑、过于临床化，也脱离了人们真实的生活。AVA 挑战这种模式。我们认为平衡应被视为生命的基础，而非小众议题，也不是只有在人们感到状态不佳时才去处理的事。",
+    "mission_l": "使命",
+    "mission_t": "AVA 通过精准、以科学为导的健康方案，帮助男性与女性顺应身体而非对抗身体地走过每个变化、阶段与季节。",
+    "vision_l": "愿景",
+    "vision_t": "AVA 期待一个优雅老去始于平衡的未来——主动、响应且个性化。",
+    "origin_ey": "起源",
+    "origin_h": "为重新定义健康而生。",
+    "origin_p1": "AVA 诞生于一个信念：健康需要被重新想象。几十年来，行业依赖通用方案与“一刷子”思维。但身体并非千人一面，它智能、适应且始终处于运动之中。",
+    "origin_p2": "AVA 背后的理念可追溯至上世纪九十年代末，我们的研发团队在挑战假设、重塑现状中磨练成长。数十年的观察、打磨与科学探索，最终凝聚为一种开创品类的产品愿景，以更精准、更有意图、更尊重身体真实运作方式的方式支持身体。",
+    "origin_p3": "AVA 相信，优雅老去不是与身体对抗，而是理解它、支持它，并与它同节奏同行。",
+    "pillars_l": "品牌支柱",
+    "p1_h": "动态平衡",
+    "p1_p": "平衡并非静止。它是身体在人生每个阶段适应、回应、调整并重新回到中心的能力。",
+    "p2_h": "精准健康",
+    "p2_p": "以科学为导、有意而为的方案——前沿思维与有目的的设计，以更智慧的方式支持身体。",
+    "p3_h": "顺应身体而老",
+    "p3_p": "我们帮助人们顺应身体的自然节奏而非对抗——优雅老去、充实生活、成为最好的自己。",
+    "values_h": "我们的价值观",
+    "v1_h": "精准",
+    "v1_p": "健康应该是有意、用心且严谨的，绝不通用化。",
+    "v2_h": "平衡",
+    "v2_p": "真正的健康是动态的，帮助身体在每个季节重新回到中心。",
+    "v3_h": "创新",
+    "v3_p": "我们运用前沿科学挑战陈旧规范，创造更智慧的方案。",
+    "v4_h": "诚信",
+    "v4_p": "我们以信任、透明与责任引领我们所创造和交付的一切。",
+    "v5_h": "可及性",
+    "v5_p": "我们让先进的健康变得亲切、易懂且触手可及。"
+  },
+  "science": {
+    "hero_h1": "先进的科学，以人为本。",
+    "hero_sub": "AVA 以精准的配方、有目的的成分、用心的使用形式以及以人为本的设计，打造智能、现代且易于使用的健康产品。",
+    "phil_ey": "科学理念",
+    "phil_h": "科学应当先进、精准，且深具人文。",
+    "phil_p1": "每一款 AVA 产品都是有意而为的设计——从成分选择、配方策略到使用形式与日常体验。对 AVA 而言，科学不是为了复杂而复杂，而是创造更智慧、更用心的健康方案，在每个变化、阶段与季节中支持平衡。",
+    "phil_p2": "我们挑战“先进健康必然冷漠、临床或遥不可及”的观念。我们相信，最好的科学应该亲切、有目的，并与人们真实的生活相连。",
+    "build_h": "我们如何打造每一款产品",
+    "b1_h": "精准配方",
+    "b1_p": "有意而为的设计，从成分选择、配方策略到使用形式。",
+    "b2_h": "有目的的成分",
+    "b2_p": "精选的植物与营养成分，每一种都有其理由，绝非填充。",
+    "b3_h": "用心的形式",
+    "b3_p": "围绕真实生活设计的形式——外用泵装、单份装袋、简单的日常仪式。",
+    "b4_h": "以人为本的设计",
+    "b4_p": "先进的健康也可以很亲切——绝不冷漠或临床。",
+    "band_ey": "AVA 理念",
+    "band_h": "思维上具颗覆性，执行上足够高端，本质上以人为本。",
+    "std_ey": "AVA 标准",
+    "std_h": "主动的健康，在你被忽视之前。",
+    "std_p1": "我们尊重现代医疗，但相信人们值得拥有主动、以科学为导的健康方案，而不是被简化为一个症状或得到一个“一刷子”的答案。",
+    "std_p2": "AVA 运用科学创造解决方案，帮助人们顺应身体而非对抗身体地老去——思维颗覆、执行高端、以人为本。"
+  },
+  "cart": {
+    "general": {
+      "title": "您的购物车",
+      "empty": "您的购物车是空的。",
+      "update": "更新",
+      "remove": "移除",
+      "quantity": "数量",
+      "increase": "增加数量",
+      "decrease": "减少数量",
+      "subtotal": "小计",
+      "checkout": "结账",
+      "fee_included": "含运费及进口费用"
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "售罄"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_matches": "未找到商品。"
+    }
+  },
+  "blogs": {
+    "article": {
+      "empty": "暂无文章。"
+    }
+  },
+  "onboarding": {
+    "article_title": "文章标题"
+  },
+  "enrollment": {
+    "summary": {
+      "summary_label": "订单摘要",
+      "choose_pack": "选择联盟会员礼包",
+      "no_pack": "尚未选择礼包。",
+      "add_products": "添加其他产品",
+      "no_products": "暂无其他产品。",
+      "how_it_works": "这是如何运作的？",
+      "subtotal": "小计",
+      "shipping": "运费",
+      "taxes": "税费",
+      "total": "合计",
+      "calculated_at_checkout": "结账时计算",
+      "agree_to": "我同意",
+      "terms": "条款与条件",
+      "checkout": "前往结账",
+      "next": "下一步",
+      "remove": "移除",
+      "payment_methods": "我们支持以下付款方式",
+      "overview_title": "注册概览",
+      "affiliate_pack": "联盟会员礼包",
+      "no_pack_short": "未选择礼包。",
+      "one_time": "其他单次购买产品",
+      "monthly": "您的每月订阅订单",
+      "change": "更改",
+      "total_label": "合计："
+    },
+    "shipping": {
+      "subheading": "收货地址",
+      "heading": "您的订单要寄送到哪里？",
+      "country_label": "国家/地区：",
+      "country_name": "中国大陆",
+      "last_name": "姓",
+      "first_name": "名",
+      "province": "省份",
+      "city": "城市",
+      "district": "区/县",
+      "address1": "详细地址",
+      "address2": "楼栋、单元、门牌号（选填）",
+      "zip": "邮政编码",
+      "phone": "手机号码（中国大陆）",
+      "save_default": "保存为我的默认收货地址",
+      "back": "返回",
+      "continue": "继续",
+      "confirm_before_checkout": "结账前请确认您的收货地址。",
+      "select_province": "请选择省份",
+      "select_city": "请选择城市",
+      "select_province_first": "请先选择省份",
+      "select_district": "请选择区/县",
+      "select_city_first": "请先选择城市",
+      "no_districts": "无需选择",
+      "load_failed": "暂时无法加载地址选项，请稍后重试。",
+      "validate_failed": "暂时无法验证地址，请稍后重试。",
+      "fix_errors": "请修正以下标记的信息。",
+      "checking": "正在验证…"
+    },
+    "sponsor": {
+      "eyebrow": "选择您的推荐人",
+      "heading": "注册新经销商",
+      "select": "选择经销商",
+      "search_placeholder": "输入推荐人 ID…",
+      "search_label": "按 ID 搜索推荐人",
+      "continue": "继续",
+      "enter_id": "请输入推荐人 ID 进行搜索…",
+      "searching": "正在搜索…",
+      "not_found": "未找到该 ID 对应的推荐人。",
+      "unavailable": "暂时无法查询推荐人，请联系客服。",
+      "failed": "搜索失败，请重试。",
+      "required": "请选择一位经销商。"
+    },
+    "products": {
+      "add_to_cart": "加入购物车",
+      "sold_out": "售罄",
+      "package": "套餐：",
+      "business_kit": "创业套件：",
+      "back": "返回"
+    },
+    "popup": {
+      "title": "请选择产品",
+      "go_back": "返回",
+      "close": "关闭",
+      "select_before_checkout": "结账前请先选择产品。您需要选择一个主套餐才能完成注册。",
+      "select_before_continue": "继续前请先选择产品。请选择一个套餐以进入下一步。",
+      "sold_out": "该产品已售罄，请选择其他有货产品继续。"
+    },
+    "copy": {
+      "step2_subheading": "选择套餐",
+      "step2_heading": "您的入门套餐",
+      "step2_description": "每个入门套餐均包含一年会员资格、专属个人经销商网站、您所选的产品套装，以及助您起步的实用工具。",
+      "step2_note": "优惠（如适用）将在结账时计算。",
+      "step2_note_tooltip": "所有有效的促销、会员折扣或组合优惠价格将在结账时自动应用，无需输入优惠码。",
+      "step3_subheading": "选择套餐",
+      "step3_heading": "添加其他产品",
+      "step3_note": "优惠（如适用）将在结账时计算。",
+      "step3_note_tooltip": "这些为可选附加产品。完成结账前，您可以调整数量或将其移除。",
+      "summary_step3_title": "设置您的订阅！",
+      "summary_step4_title": "完成注册",
+      "summary_sponsor_help": "您的推荐人是推荐您加入的经销商。您的注册将计入其名下，他们也可以协助您快速上手。",
+      "finish_heading": "做得好！马上就完成了！",
+      "finish_subtext": "以下是您所选内容的概览。如确认无误，请前往结账。",
+      "summary_welcome_text": "欢迎光临本店！",
+      "summary_reassurance_text": "24 小时内发货，30 天无理由退款保证",
+      "more_info": "更多信息"
+    }
+  },
+  "confirm_shipping": {
+    "eyebrow": "收货地址",
+    "heading": "确认您的收货地址。",
+    "intro": "请核对您的收货信息，以确保订单准确送达。",
+    "required_note": "必填字段",
+    "country": "国家/地区",
+    "country_name": "中国大陆",
+    "first_name": "名",
+    "last_name": "姓",
+    "phone": "手机号码",
+    "address1": "详细地址",
+    "address2": "楼栋、单元、门牌号（选填）",
+    "province": "省份",
+    "city": "城市",
+    "district": "区/县",
+    "zip": "邮政编码",
+    "submit": "确认地址",
+    "saving": "正在保存…",
+    "confirmed": "已确认",
+    "saved": "您的收货地址已确认，正在跳转…",
+    "login_prompt": "请登录后确认您的收货地址。",
+    "login_link": "登录",
+    "session_expired": "登录状态已过期，请重新登录。",
+    "error_summary": "请修正标记的字段。",
+    "error_generic": "暂时无法保存您的地址，请稍后重试。",
+    "error_network": "无法连接服务器，请检查网络后重试。"
+  },
+  "obo": {
+    "banner": {
+      "region_label": "为其他推广达人下单",
+      "shopping_for": "正在为 {{ name }} 购物",
+      "registering": "正在为 {{ name }} 注册",
+      "clear": "清除",
+      "incomplete": "此订单信息不完整，请从您的仪表板重新开始。"
+    }
+  },
+  "contact": {
+    "heading": "无论身在何处，在您最需要的时候，都能获得全球顶尖专家的支持。",
+    "subheading": "如有任何咨询、需求或问题，请联系我们。",
+    "form_heading": "填写此表单，我们的团队将与您联系",
+    "first_name": "名字",
+    "last_name": "姓氏",
+    "email": "电子邮箱",
+    "country": "国家/地区",
+    "country_placeholder": "请选择...",
+    "message": "留言",
+    "submit": "提交",
+    "success": "感谢您的来信，我们的团队将尽快与您联系。"
+  }
+}

@@ -1,0 +1,106 @@
+{%- liquid
+  assign locale_root = routes.root_url
+  assign locale_root_last_char = locale_root | slice: -1, 1
+  unless locale_root_last_char == '/'
+    assign locale_root = locale_root | append: '/'
+  endunless
+  if section.settings.hero_image != blank
+    assign hero = section.settings.hero_image | image_url: width: 2400
+  else
+    assign hero = 'AdobeStock_243466445.jpeg' | asset_url
+  endif
+  assign story = 'AdobeStock_439114244.jpeg' | asset_url
+  if section.settings.story_image != blank
+    assign story = section.settings.story_image | image_url: width: 1200
+  endif
+  assign cta = 'Depositphotos_64377651_ds.jpg' | asset_url
+  if section.settings.cta_image != blank
+    assign cta = section.settings.cta_image | image_url: width: 2400
+  endif
+-%}
+
+<section class="ava-hero ava-on-dark ava-hero--dynamic" style="--hero-minh:clamp(480px,66vh,680px);">
+  <img class="ava-hero__bg" src="{{ hero }}" alt="{{ 'about.hero_h1' | t | escape }}" width="1600" height="1000" style="object-position:left center" loading="eager" fetchpriority="high" decoding="async">
+  <div class="ava-hero__overlay" style="background:linear-gradient(90deg,rgba(13,22,33,.72) 0%,rgba(13,22,33,.42) 55%,rgba(13,22,33,.15) 100%)"></div>
+  <div class="ava-hero__inner"><div class="ava-hero__content ava-hero__content--wide">
+    <div class="ava-eyebrow ava-eyebrow--light">{{ 'about.hero_ey' | t }}</div>
+    <h1 class="ava-h1 ava-h1--hero">{{ 'about.hero_h1' | t }}</h1>
+    <p class="ava-lead ava-hero__lead">{{ 'about.hero_sub' | t }}</p>
+  </div></div>
+</section>
+
+<section class="ava-section ava-bg-white">
+  <div class="ava-split">
+    <div class="ava-split__col">
+      <div class="ava-eyebrow">{{ 'about.story_ey' | t }}</div>
+      <h2 class="ava-h2">{{ 'about.story_h' | t }}</h2>
+      <p class="ava-body ava-story__p1">{{ 'about.story_p1' | t }}</p>
+      <p class="ava-body">{{ 'about.story_p2' | t }}</p>
+    </div>
+    <div class="ava-split__col ava-split__media"><img src="{{ story }}" alt="{{ 'about.story_h' | t | escape }}" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="ava-section ava-bg-panel">
+  <div class="ava-panels">
+    <div class="ava-panel-card"><div class="ava-eyebrow ava-eyebrow--blue">{{ 'about.mission_l' | t }}</div><p class="ava-panel-card__t">{{ 'about.mission_t' | t }}</p></div>
+    <div class="ava-panel-card"><div class="ava-eyebrow ava-eyebrow--blue">{{ 'about.vision_l' | t }}</div><p class="ava-panel-card__t">{{ 'about.vision_t' | t }}</p></div>
+  </div>
+</section>
+
+<section class="ava-section ava-bg-white">
+  <div class="ava-rich">
+    <div class="ava-eyebrow">{{ 'about.origin_ey' | t }}</div>
+    <h2 class="ava-h2 ava-origin__h">{{ 'about.origin_h' | t }}</h2>
+    <p class="ava-body">{{ 'about.origin_p1' | t }}</p>
+    <p class="ava-body">{{ 'about.origin_p2' | t }}</p>
+    <p class="ava-body">{{ 'about.origin_p3' | t }}</p>
+  </div>
+</section>
+
+<section class="ava-section ava-bg-dark-2">
+  <div class="ava-container">
+    <div class="ava-eyebrow ava-eyebrow--light ava-mb-fluid">{{ 'about.pillars_l' | t }}</div>
+    <div class="ava-grid ava-grid--3">
+      <div class="ava-pillar"><h3>{{ 'about.p1_h' | t }}</h3><p>{{ 'about.p1_p' | t }}</p></div>
+      <div class="ava-pillar"><h3>{{ 'about.p2_h' | t }}</h3><p>{{ 'about.p2_p' | t }}</p></div>
+      <div class="ava-pillar"><h3>{{ 'about.p3_h' | t }}</h3><p>{{ 'about.p3_p' | t }}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ava-section ava-bg-panel">
+  <div class="ava-container">
+    <h2 class="ava-h2 ava-mb-fluid">{{ 'about.values_h' | t }}</h2>
+    <div class="ava-values">
+      <div class="ava-values__cell"><h3>{{ 'about.v1_h' | t }}</h3><p>{{ 'about.v1_p' | t }}</p></div>
+      <div class="ava-values__cell"><h3>{{ 'about.v2_h' | t }}</h3><p>{{ 'about.v2_p' | t }}</p></div>
+      <div class="ava-values__cell"><h3>{{ 'about.v3_h' | t }}</h3><p>{{ 'about.v3_p' | t }}</p></div>
+      <div class="ava-values__cell"><h3>{{ 'about.v4_h' | t }}</h3><p>{{ 'about.v4_p' | t }}</p></div>
+      <div class="ava-values__cell"><h3>{{ 'about.v5_h' | t }}</h3><p>{{ 'about.v5_p' | t }}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ava-hero ava-on-dark ava-hero--center ava-hero--dynamic" style="--hero-minh:clamp(460px,54vh,620px);">
+  <img class="ava-hero__bg" src="{{ cta }}" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+  <div class="ava-hero__overlay" style="background:linear-gradient(rgba(13,22,33,.64),rgba(13,22,33,.64))"></div>
+  <div class="ava-hero__inner"><div class="ava-hero__content">
+    <h2 class="ava-h2 ava-h2--cta">{{ 'cta.heading' | t }}</h2>
+    <p class="ava-lead ava-cta__sub">{{ 'cta.subtitle' | t }}</p>
+    <div class="ava-btn-row"><a href="{{ locale_root }}collections/all" class="ava-btn ava-btn--light">{{ 'cta.shop' | t }}</a></div>
+  </div></div>
+</section>
+
+{% schema %}
+{
+  "name": "About page",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "All copy is localised in locales/*.json under the `about` and `cta` keys (8 languages). Override the imagery below; empty = bundled fallback." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "image_picker", "id": "story_image", "label": "Brand story image" },
+    { "type": "image_picker", "id": "cta_image", "label": "Closing CTA image" }
+  ]
+}
+{% endschema %}

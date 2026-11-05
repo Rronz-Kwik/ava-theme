@@ -1,0 +1,11 @@
+<section class="ava-section ava-bg-white ava-404">
+  <div class="ava-container ava-404__inner">
+    <div class="ava-eyebrow ava-404__eyebrow">404</div>
+    <h1 class="ava-h1 ava-h1--404">{{ 'general.404.title' | t | default: 'Page not found' }}</h1>
+    <p class="ava-lead ava-404__sub">{{ 'general.404.subtext' | t | default: 'The page you were looking for doesn’t exist.' }}</p>
+    <div class="ava-404__cta"><a href="{{ routes.root_url }}" class="ava-btn">{{ 'general.continue_shopping' | t | default: 'Back home' }}</a></div>
+  </div>
+</section>
+{% schema %}
+{ "name": "404", "tag": "section", "settings": [] }
+{% endschema %}

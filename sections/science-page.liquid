@@ -1,0 +1,97 @@
+{%- liquid
+  assign locale_root = routes.root_url
+  assign locale_root_last_char = locale_root | slice: -1, 1
+  unless locale_root_last_char == '/'
+    assign locale_root = locale_root | append: '/'
+  endunless
+  assign hero = 'AdobeStock_246772962.jpeg' | asset_url
+  if section.settings.hero_image != blank
+    assign hero = section.settings.hero_image | image_url: width: 2400
+  endif
+  assign band = 'AdobeStock_309080008.jpeg' | asset_url
+  if section.settings.band_image != blank
+    assign band = section.settings.band_image | image_url: width: 2400
+  endif
+  assign std = 'AdobeStock_896117752.jpeg' | asset_url
+  if section.settings.standard_image != blank
+    assign std = section.settings.standard_image | image_url: width: 1200
+  endif
+  assign cta = 'AdobeStock_479042105.jpeg' | asset_url
+  if section.settings.cta_image != blank
+    assign cta = section.settings.cta_image | image_url: width: 2400
+  endif
+-%}
+
+<section class="ava-hero ava-on-dark ava-hero--dynamic" style="--hero-minh:clamp(480px,66vh,680px);">
+  <img class="ava-hero__bg" src="{{ hero }}" alt="{{ 'science.hero_h1' | t | escape }}" width="1600" height="1000" loading="eager" fetchpriority="high" decoding="async">
+  <div class="ava-hero__overlay" style="background:linear-gradient(90deg,rgba(13,22,33,.74) 0%,rgba(13,22,33,.45) 55%,rgba(13,22,33,.15) 100%)"></div>
+  <div class="ava-hero__inner"><div class="ava-hero__content ava-hero__content--wide">
+    <div class="ava-eyebrow ava-eyebrow--light">{{ 'general.nav.science' | t }}</div>
+    <h1 class="ava-h1">{{ 'science.hero_h1' | t }}</h1>
+    <p class="ava-lead ava-hero__lead--wide">{{ 'science.hero_sub' | t }}</p>
+  </div></div>
+</section>
+
+<section class="ava-section ava-bg-white">
+  <div class="ava-rich">
+    <div class="ava-eyebrow">{{ 'science.phil_ey' | t }}</div>
+    <h2 class="ava-h2 ava-origin__h">{{ 'science.phil_h' | t }}</h2>
+    <p class="ava-body">{{ 'science.phil_p1' | t }}</p>
+    <p class="ava-body">{{ 'science.phil_p2' | t }}</p>
+  </div>
+</section>
+
+<section class="ava-section ava-bg-panel">
+  <div class="ava-container">
+    <h2 class="ava-h2 ava-mb-fluid">{{ 'science.build_h' | t }}</h2>
+    <div class="ava-grid ava-grid--4">
+      <div class="ava-ncard"><div class="ava-ncard__n">01</div><h3 class="ava-ncard__t">{{ 'science.b1_h' | t }}</h3><p class="ava-ncard__d">{{ 'science.b1_p' | t }}</p></div>
+      <div class="ava-ncard"><div class="ava-ncard__n">02</div><h3 class="ava-ncard__t">{{ 'science.b2_h' | t }}</h3><p class="ava-ncard__d">{{ 'science.b2_p' | t }}</p></div>
+      <div class="ava-ncard"><div class="ava-ncard__n">03</div><h3 class="ava-ncard__t">{{ 'science.b3_h' | t }}</h3><p class="ava-ncard__d">{{ 'science.b3_p' | t }}</p></div>
+      <div class="ava-ncard"><div class="ava-ncard__n">04</div><h3 class="ava-ncard__t">{{ 'science.b4_h' | t }}</h3><p class="ava-ncard__d">{{ 'science.b4_p' | t }}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ava-band ava-band--dynamic ava-on-dark" style="--band-bg:linear-gradient(rgba(11,22,30,.6),rgba(11,22,30,.6)),url('{{ band }}')">
+  <div class="ava-band__inner">
+    <div class="ava-eyebrow ava-eyebrow--light">{{ 'science.band_ey' | t }}</div>
+    <h2 class="ava-h2">{{ 'science.band_h' | t }}</h2>
+  </div>
+</section>
+
+<section class="ava-section ava-bg-white">
+  <div class="ava-split ava-split--rev">
+    <div class="ava-split__col ava-split__media"><img src="{{ std }}" alt="{{ 'science.std_h' | t | escape }}" loading="lazy"></div>
+    <div class="ava-split__col">
+      <div class="ava-eyebrow">{{ 'science.std_ey' | t }}</div>
+      <h2 class="ava-h2">{{ 'science.std_h' | t }}</h2>
+      <p class="ava-body ava-story__p1">{{ 'science.std_p1' | t }}</p>
+      <p class="ava-body">{{ 'science.std_p2' | t }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="ava-hero ava-on-dark ava-hero--center ava-hero--dynamic" style="--hero-minh:clamp(460px,54vh,620px);">
+  <img class="ava-hero__bg" src="{{ cta }}" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+  <div class="ava-hero__overlay" style="background:linear-gradient(rgba(13,22,33,.66),rgba(13,22,33,.66))"></div>
+  <div class="ava-hero__inner"><div class="ava-hero__content">
+    <h2 class="ava-h2 ava-h2--cta">{{ 'cta.heading' | t }}</h2>
+    <p class="ava-lead ava-cta__sub">{{ 'cta.subtitle' | t }}</p>
+    <div class="ava-btn-row"><a href="{{ locale_root }}collections/all" class="ava-btn ava-btn--light">{{ 'cta.shop' | t }}</a></div>
+  </div></div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Science page",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "All copy is localised in locales/*.json under the `science` and `cta` keys (8 languages). Override imagery below; empty = bundled fallback." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "image_picker", "id": "band_image", "label": "Molecule band image" },
+    { "type": "image_picker", "id": "standard_image", "label": "Standard section image" },
+    { "type": "image_picker", "id": "cta_image", "label": "Closing CTA image" }
+  ]
+}
+{% endschema %}

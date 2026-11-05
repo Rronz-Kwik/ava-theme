@@ -1,0 +1,85 @@
+{%- liquid
+  assign bg = section.settings.background | default: 'white'
+  assign img = section.settings.image
+  if img != blank
+    assign img_url = img | image_url: width: 1200
+  else
+    assign img_url = section.settings.fallback_asset | asset_url
+  endif
+  assign rev = ''
+  if section.settings.media_side == 'left'
+    assign rev = 'ava-split--rev'
+  endif
+-%}
+<section class="ava-section ava-bg-{{ bg }}">
+  <div class="ava-split {{ rev }}">
+    {%- if section.settings.media_side == 'left' -%}
+      <div class="ava-split__col ava-split__media"><img src="{{ img_url }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy"></div>
+    {%- endif -%}
+
+    <div class="ava-split__col">
+      {%- if section.settings.eyebrow != blank -%}<div class="ava-eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="ava-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.body != blank -%}<div class="ava-body ava-split__body">{{ section.settings.body }}</div>{%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="ava-featrows">
+          {%- for block in section.blocks -%}
+            <div class="ava-featrow" {{ block.shopify_attributes }}>
+              <span class="ava-featrow__n">{{ block.settings.marker }}</span>
+              <div>
+                <div class="ava-featrow__t">{{ block.settings.title }}</div>
+                <div class="ava-featrow__d">{{ block.settings.description }}</div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        {%- if section.settings.button_style == 'link' -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="ava-link ava-split__link">{{ section.settings.button_label }} &rarr;</a>
+        {%- else -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="ava-btn ava-split__btn">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    {%- unless section.settings.media_side == 'left' -%}
+      <div class="ava-split__col ava-split__media"><img src="{{ img_url }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy"></div>
+    {%- endunless -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Split media + text",
+  "tag": "section",
+  "settings": [
+    { "type": "select", "id": "background", "label": "Background", "options": [ {"value":"white","label":"White"}, {"value":"panel","label":"Light panel"}, {"value":"panel-2","label":"Off-white"} ], "default": "white" },
+    { "type": "select", "id": "media_side", "label": "Image side", "options": [ {"value":"right","label":"Right"}, {"value":"left","label":"Left"} ], "default": "right" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "info": "e.g. AdobeStock_280164805.jpeg" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "select", "id": "button_style", "label": "Button style", "options": [ {"value":"button","label":"Button"}, {"value":"link","label":"Text link"} ], "default": "button" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Feature row",
+      "settings": [
+        { "type": "text", "id": "marker", "label": "Marker", "default": "i" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "description", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Split media + text" } ]
+}
+{% endschema %}

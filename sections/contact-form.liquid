@@ -1,0 +1,295 @@
+{%- comment -%}
+  Contact form — two-column layout: intro copy on the left, form card on the right.
+
+  Why it is built this way:
+  - Uses the theme's own tokens and classes (theme.css: --ava-*, .ava-section,
+    .ava-container, .ava-btn), so it stays consistent with the rest of the store
+    and follows any colour/font changes made in the theme editor.
+  - Only the layout and field styles that don't exist in theme.css live in the
+    {% stylesheet %} block at the bottom.
+  - Copy is edited in the theme editor; other languages use the `contact.*`
+    translations (snippets/editor-text.liquid).
+  - Submissions go either to Shopify's native contact form (emailed to the store's
+    contact address) or to an external endpoint set in the section settings.
+    Shopify's native form cannot send to a different recipient per form, which is
+    why the "external endpoint" option exists.
+{%- endcomment -%}
+
+{%- liquid
+  assign bg = section.settings.background | default: 'panel-2'
+  assign form_id = 'ContactForm-' | append: section.id
+  assign use_external = false
+  if section.settings.destination == 'external' and section.settings.endpoint != blank
+    assign use_external = true
+  endif
+
+  if use_external
+    assign n_first = 'first_name'
+    assign n_last = 'last_name'
+    assign n_email = 'email'
+    assign n_country = 'country'
+    assign n_message = 'message'
+  else
+    assign n_first = 'contact[First name]'
+    assign n_last = 'contact[Last name]'
+    assign n_email = 'contact[email]'
+    assign n_country = 'contact[Country]'
+    assign n_message = 'contact[body]'
+  endif
+
+  # Editor text: as entered on the primary language, contact.* translations elsewhere.
+  capture t_heading
+    render 'editor-text', value: section.settings.heading, key: 'contact.heading'
+  endcapture
+  capture t_subheading
+    render 'editor-text', value: section.settings.subheading, key: 'contact.subheading'
+  endcapture
+  capture t_form_heading
+    render 'editor-text', value: section.settings.form_heading, key: 'contact.form_heading'
+  endcapture
+  capture t_first_name_label
+    render 'editor-text', value: section.settings.first_name_label, key: 'contact.first_name'
+  endcapture
+  capture t_last_name_label
+    render 'editor-text', value: section.settings.last_name_label, key: 'contact.last_name'
+  endcapture
+  capture t_email_label
+    render 'editor-text', value: section.settings.email_label, key: 'contact.email'
+  endcapture
+  capture t_country_label
+    render 'editor-text', value: section.settings.country_label, key: 'contact.country'
+  endcapture
+  capture t_country_placeholder
+    render 'editor-text', value: section.settings.country_placeholder, key: 'contact.country_placeholder'
+  endcapture
+  capture t_message_label
+    render 'editor-text', value: section.settings.message_label, key: 'contact.message'
+  endcapture
+  capture t_button_label
+    render 'editor-text', value: section.settings.button_label, key: 'contact.submit'
+  endcapture
+  capture t_success_message
+    render 'editor-text', value: section.settings.success_message, key: 'contact.success'
+  endcapture
+-%}
+
+{%- capture contact_fields -%}
+  <div class="ava-contact__row">
+    <div class="ava-contact__field">
+      <label class="ava-contact__label" for="{{ form_id }}-first">{{ t_first_name_label }}</label>
+      <input class="ava-contact__input" type="text" id="{{ form_id }}-first" name="{{ n_first }}" autocomplete="given-name">
+    </div>
+    <div class="ava-contact__field">
+      <label class="ava-contact__label" for="{{ form_id }}-last">{{ t_last_name_label }}</label>
+      <input class="ava-contact__input" type="text" id="{{ form_id }}-last" name="{{ n_last }}" autocomplete="family-name">
+    </div>
+  </div>
+
+  <div class="ava-contact__row">
+    <div class="ava-contact__field">
+      <label class="ava-contact__label" for="{{ form_id }}-email">{{ t_email_label }}*</label>
+      <input class="ava-contact__input" type="email" id="{{ form_id }}-email" name="{{ n_email }}" autocomplete="email" required aria-required="true" spellcheck="false" autocapitalize="off">
+    </div>
+    <div class="ava-contact__field">
+      <label class="ava-contact__label" for="{{ form_id }}-country">{{ t_country_label }}</label>
+      <div class="ava-contact__select-wrap">
+        <select class="ava-contact__input ava-contact__select" id="{{ form_id }}-country" name="{{ n_country }}" autocomplete="country-name">
+          <option value="" selected>{{ t_country_placeholder }}</option>
+          {{ all_country_option_tags }}
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="ava-contact__field">
+    <label class="ava-contact__label" for="{{ form_id }}-message">{{ t_message_label }}</label>
+    <textarea class="ava-contact__input ava-contact__textarea" id="{{ form_id }}-message" name="{{ n_message }}" rows="4"></textarea>
+  </div>
+
+  <div class="ava-contact__actions">
+    <button type="submit" class="ava-btn ava-btn--sm">{{ t_button_label }}</button>
+  </div>
+{%- endcapture -%}
+
+<section class="ava-section ava-bg-{{ bg }} ava-contact" id="contact-{{ section.id }}">
+  <div class="ava-container">
+    <div class="ava-contact__grid">
+
+      <div class="ava-contact__intro">
+        {%- if t_heading != blank -%}
+          <h2 class="ava-contact__heading">{{ t_heading }}</h2>
+        {%- endif -%}
+        {%- if t_subheading != blank -%}
+          <p class="ava-body-sm ava-contact__sub">{{ t_subheading }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="ava-contact__card">
+        {%- if t_form_heading != blank -%}
+          <h3 class="ava-contact__form-heading">{{ t_form_heading }}</h3>
+        {%- endif -%}
+
+        {%- if use_external -%}
+          <form id="{{ form_id }}" class="ava-contact__form" action="{{ section.settings.endpoint }}" method="post" accept-charset="UTF-8">
+            {{ contact_fields }}
+          </form>
+        {%- else -%}
+          {%- form 'contact', id: form_id, class: 'ava-contact__form' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="ava-contact__notice ava-contact__notice--success" role="status" tabindex="-1" autofocus>
+                {{ t_success_message }}
+              </div>
+            {%- elsif form.errors -%}
+              <div class="ava-contact__notice ava-contact__notice--error" role="alert" tabindex="-1" autofocus>
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+            {{ contact_fields }}
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.ava-contact__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);
+  gap:clamp(40px,5vw,88px);
+  align-items:start;
+}
+.ava-contact__heading{
+  font-family:var(--ava-font-head);
+  font-weight:600;
+  font-size:clamp(26px,2.6vw,34px);
+  line-height:1.2;
+  letter-spacing:-.015em;
+  color:var(--ava-ink);
+}
+.ava-contact__sub{margin-top:18px;max-width:440px;}
+
+.ava-contact__card{
+  background:#fff;
+  border:1px solid var(--ava-border);
+  border-radius:var(--ava-radius);
+  padding:clamp(24px,3vw,40px);
+}
+.ava-contact__form-heading{
+  font-family:var(--ava-font-head);
+  font-weight:600;
+  font-size:19px;
+  line-height:1.3;
+  color:var(--ava-ink);
+  margin:0 0 24px;
+}
+.ava-contact__form{display:flex;flex-direction:column;gap:20px;}
+.ava-contact__row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.ava-contact__field{display:flex;flex-direction:column;gap:8px;min-width:0;}
+.ava-contact__label{font-size:14px;font-weight:600;color:var(--ava-ink);}
+
+.ava-contact__input{
+  width:100%;
+  height:48px;
+  padding:0 14px;
+  border:1px solid var(--ava-border);
+  border-radius:10px;
+  background:#fff;
+  color:var(--ava-ink);
+  font:inherit;
+  font-size:15px;
+  transition:border-color .15s ease,box-shadow .15s ease;
+}
+.ava-contact__input:hover{border-color:#C9D1D7;}
+.ava-contact__input:focus{
+  outline:none;
+  border-color:var(--ava-blue);
+  box-shadow:0 0 0 3px rgba(44,111,176,.15);
+}
+.ava-contact__textarea{height:auto;min-height:110px;padding:12px 14px;resize:vertical;line-height:1.5;}
+
+.ava-contact__select-wrap{position:relative;}
+.ava-contact__select{appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer;}
+.ava-contact__select-wrap::after{
+  content:"";
+  position:absolute;
+  right:16px;top:50%;
+  width:7px;height:7px;
+  border-right:1.6px solid var(--ava-text);
+  border-bottom:1.6px solid var(--ava-text);
+  transform:translateY(-70%) rotate(45deg);
+  pointer-events:none;
+}
+
+.ava-contact__actions{margin-top:4px;}
+
+.ava-contact__notice{padding:14px 16px;border-radius:10px;font-size:14.5px;line-height:1.5;}
+.ava-contact__notice:focus{outline:none;}
+.ava-contact__notice--success{background:var(--ava-panel);color:var(--ava-ink);}
+.ava-contact__notice--error{background:rgba(180,35,24,.06);color:#B42318;}
+.ava-contact__notice--error ul{margin:0;padding-left:18px;}
+
+@media (max-width:900px){
+  .ava-contact__grid{grid-template-columns:1fr;gap:32px;}
+}
+@media (max-width:600px){
+  .ava-contact__row{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){
+  .ava-contact__input{transition:none;}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "section",
+  "class": "ava-contact-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "panel", "label": "Light panel" },
+        { "value": "panel-2", "label": "Off-white" }
+      ],
+      "default": "panel-2"
+    },
+    { "type": "header", "content": "Intro" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Access the world's leading specialists, anywhere in the world, when you need it most." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Contact us for inquiries, requests or questions." },
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Complete this form to be contacted by our team" },
+    { "type": "text", "id": "first_name_label", "label": "First name label", "default": "First Name" },
+    { "type": "text", "id": "last_name_label", "label": "Last name label", "default": "Last Name" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email", "info": "A * is added automatically because this field is required." },
+    { "type": "text", "id": "country_label", "label": "Country label", "default": "Country" },
+    { "type": "text", "id": "country_placeholder", "label": "Country placeholder", "default": "Select..." },
+    { "type": "text", "id": "message_label", "label": "Message label", "default": "Message" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Submit" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks for reaching out. Our team will be in touch soon.", "info": "Shown only when submissions go to Shopify." },
+    { "type": "header", "content": "Submissions" },
+    {
+      "type": "select",
+      "id": "destination",
+      "label": "Send submissions to",
+      "options": [
+        { "value": "shopify", "label": "Shopify (store contact email)" },
+        { "value": "external", "label": "External endpoint" }
+      ],
+      "default": "shopify",
+      "info": "Shopify sends submissions to the store's contact email. Use an external endpoint (e.g. Formspree, Zapier, Make, a CRM webhook) to send them elsewhere."
+    },
+    {
+      "type": "url",
+      "id": "endpoint",
+      "label": "External endpoint URL",
+      "info": "Used only when 'External endpoint' is selected. Fields are sent as first_name, last_name, email, country, message."
+    }
+  ],
+  "presets": [ { "name": "Contact form" } ]
+}
+{% endschema %}

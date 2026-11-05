@@ -1,0 +1,42 @@
+<section class="ava-section ava-bg-{{ section.settings.background | default: 'panel' }}">
+  <div class="ava-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ava-h2 ava-mb-fluid">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <div class="ava-grid ava-grid--4">
+      {%- for block in section.blocks -%}
+        <div class="ava-ncard" {{ block.shopify_attributes }}>
+          <div class="ava-ncard__n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+          <h3 class="ava-ncard__t">{{ block.settings.title }}</h3>
+          <p class="ava-ncard__d">{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Numbered cards",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "select", "id": "background", "label": "Background", "options": [ {"value":"white","label":"White"}, {"value":"panel","label":"Light panel"}, {"value":"panel-2","label":"Off-white"} ], "default": "panel" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "description", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [ {
+    "name": "Numbered cards",
+    "blocks": [ { "type": "step" }, { "type": "step" }, { "type": "step" }, { "type": "step" } ]
+  } ]
+}
+{% endschema %}

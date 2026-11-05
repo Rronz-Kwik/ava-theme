@@ -1,0 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "distributor_selection_APwdWT": {
+      "type": "distributor-selection",
+      "name": "Distributor Selection",
+      "settings": {
+        "sponsor_api_url": "https://g17dcc4016a8ea9-avadevdb.azure-westus3.adb.us-phoenix-1.oraclecloudapps.com/ords/ava/syncops-public/reps",
+        "step2_subheading": "Select Bundle",
+        "step2_heading": "Your Starter Bundle",
+        "step2_description": "",
+        "step2_note": "Promotions (if applicable) will be calculated at checkout.",
+        "step2_note_tooltip": "Any active promotions, member discounts, or bundle pricing are applied automatically when you reach checkout. No promo code entry is needed.",
+        "step2_collection": "enrollement",
+        "step3_subheading": "Select Bundle",
+        "step3_heading": "Add a Additional Products",
+        "step3_description": "",
+        "step3_note": "Promotions (if applicable) will be calculated at checkout.",
+        "step3_note_tooltip": "These products are optional add-ons. You can adjust quantities or remove them before completing checkout.",
+        "step3_collection": "wholesale",
+        "show_metafeilds_container": false,
+        "summary_step3_show": false,
+        "summary_step3_title": "Setup Your Subscription!",
+        "summary_step4_show": true,
+        "summary_step4_title": "Finish up",
+        "summary_sponsor_help": "Your influencer is the influencer who referred you. They'll be credited for your enrollment and can help you get started.",
+        "finish_heading": "Nice going! You're almost there!",
+        "finish_subtext": "Below you'll find an overview of your selection. If everything is in order, proceed to checkout.",
+        "terms_page": "",
+        "summary_welcome_text": "Ships from China!",
+        "summary_reassurance_text": "Ships within 72 hours",
+        "left_image": "shopify://shop_images/More_Health_1_db0921ff-9b0a-495f-a9b0-f78ef85d45d1.webp",
+        "enroll_c_primary": "#2c6fb0",
+        "enroll_c_secondary": "#2c6fb0",
+        "enroll_c_accent": "#2c6fb0",
+        "enroll_c_heading": "#1c5d6e",
+        "enroll_c_total": "#2c6fb0",
+        "enroll_c_badge_text": "#2c6fb0",
+        "enroll_c_tint_bg": "#f0faf8",
+        "enroll_c_tint_border": "#c6daed",
+        "china_enrollment_address_enabled": false,
+        "shipping_subheading": "",
+        "shipping_heading": "",
+        "shipping_proxy_path": "/apps/ava-china-address"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "distributor_selection_APwdWT"
+  ]
+}

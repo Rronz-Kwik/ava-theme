@@ -1,0 +1,85 @@
+{%- liquid
+  assign bg = section.settings.background | default: 'white'
+-%}
+<section class="ava-section ava-bg-{{ bg }}">
+  <div class="ava-container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="ava-block-head">
+        {%- if section.settings.eyebrow != blank -%}<div class="ava-eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="ava-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.subheading != blank -%}<p class="ava-lead ava-block-head__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="ava-grid ava-grid--3">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign product = block.settings.product
+          if product != blank
+            assign purl = product.url
+            assign ptitle = product.title
+            assign pimg = product.featured_image
+          else
+            assign purl = block.settings.link | default: '#'
+            assign ptitle = block.settings.title
+          endif
+        -%}
+        {%- capture pack_type -%}{% render 'pack-type', product: product %}{%- endcapture -%}
+        {%- assign pack_type = pack_type | strip -%}
+        {%- unless settings.pack_colour_enabled -%}{%- assign pack_type = '' -%}{%- endunless -%}
+        <div class="ava-pcard"{% if pack_type != blank %} data-ava-pack="{{ pack_type }}"{% endif %} {{ block.shopify_attributes }}>
+          {%- if pack_type != blank -%}
+            <span class="ava-visually-hidden">{% if pack_type == 'enrolment' %}{{ 'product.pack_type.enrolment' | t }}{% else %}{{ 'product.pack_type.reorder' | t }}{% endif %}</span>
+          {%- endif -%}
+          <a class="ava-pcard__media" href="{{ purl }}">
+            {%- if pimg != blank -%}
+              <img src="{{ pimg | image_url: width: 700 }}" alt="{{ ptitle | escape }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ block.settings.fallback_asset | asset_url }}" alt="{{ ptitle | escape }}" loading="lazy">
+            {%- endif -%}
+          </a>
+          <div class="ava-pcard__body">
+            {%- if block.settings.format != blank -%}<div class="ava-pcard__fmt">{{ block.settings.format }}</div>{%- endif -%}
+            <h3 class="ava-pcard__title">{{ ptitle }}</h3>
+            {%- if block.settings.description != blank -%}<p class="ava-pcard__desc">{{ block.settings.description }}</p>{%- endif -%}
+            {%- if product != blank and block.settings.show_price -%}
+              <div class="ava-pcard__desc ava-pcard__pricebox"><span class="ava-price">{{ product.price | money }}</span></div>
+            {%- endif -%}
+            <a href="{{ purl }}" class="ava-btn ava-btn--sm ava-btn--self-start">{{ block.settings.button_label | default: 'Shop' }}</a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product cards",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "select", "id": "background", "label": "Background", "options": [ {"value":"white","label":"White"}, {"value":"panel","label":"Light panel"}, {"value":"panel-2","label":"Off-white"} ], "default": "white" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Collection" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Support your balance, your way." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "title", "label": "Title (used if no product)" },
+        { "type": "text", "id": "format", "label": "Format label", "default": "Foundational · Topical" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop" },
+        { "type": "url", "id": "link", "label": "Link (used if no product)" },
+        { "type": "checkbox", "id": "show_price", "label": "Show price", "default": false },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "info": "e.g. balance-card.png" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Product cards" } ]
+}
+{% endschema %}

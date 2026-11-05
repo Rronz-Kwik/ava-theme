@@ -1,0 +1,76 @@
+{%- comment -%}
+  Language selector, posted to the Shopify /localization endpoint.
+
+  Renders nothing unless the shop publishes more than one language
+  (Settings → Languages), so it stays inert until Chinese (or any other
+  locale) is actually published.
+
+  A manual pick is remembered in localStorage under `ava_lang_choice`, which is
+  also what switches off the geo preselect for that visitor.
+
+  Accepts:
+    uid     - REQUIRED. Unique suffix for the label/select ids. Pass `section.id`
+              so two instances on the same page never collide.
+    variant - 'header' (bordered pill, default), 'footer' (bordered pill on the
+              dark footer) or 'announcement' (bare).
+    geo     - when true, preselect the visitor's language from their location on
+              their first visit (assets/geo-language.js).
+{%- endcomment -%}
+
+{%- if localization.available_languages.size > 1 -%}
+  {%- liquid
+    assign ava_root = routes.root_url
+    if ava_root == '/'
+      assign ava_root = ''
+    endif
+    assign lang_variant = variant | default: 'header'
+    assign lang_id = 'ava-lang-' | append: lang_variant | append: '-' | append: uid
+    case lang_variant
+      when 'announcement'
+        assign lang_class = 'ava-lang ava-lang--announce'
+      when 'footer'
+        assign lang_class = 'ava-lang ava-lang--footer'
+      else
+        assign lang_class = 'ava-lang ava-lang--header ava-market'
+    endcase
+  -%}
+  <form
+    method="post"
+    action="{{ ava_root }}/localization"
+    accept-charset="UTF-8"
+    class="{{ lang_class }}"
+    {%- if geo %}
+      data-ava-geo-lang
+      data-current-locale="{{ localization.language.iso_code }}"
+      data-country="{{ localization.country.iso_code }}"
+    {%- endif %}
+  >
+    <input type="hidden" name="form_type" value="localization">
+    <input type="hidden" name="utf8" value="✓">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="return_to" value="{{ request.path | escape }}">
+    <span class="ava-lang__dot" aria-hidden="true"></span>
+    <label class="ava-visually-hidden" for="{{ lang_id }}">{{ 'general.market.label' | t }}</label>
+    <select
+      id="{{ lang_id }}"
+      class="ava-lang__select"
+      name="locale_code"
+      onchange="try{localStorage.setItem('ava_lang_choice',this.value)}catch(e){};this.form.requestSubmit ? this.form.requestSubmit() : this.form.submit()"
+    >
+      {%- for language in localization.available_languages -%}
+        <option
+          value="{{ language.iso_code }}"
+          lang="{{ language.iso_code }}"
+          {% if language.iso_code == localization.language.iso_code %}selected{% endif %}
+        >{{ language.endonym_name | capitalize }}</option>
+      {%- endfor -%}
+    </select>
+    <noscript>
+      <button type="submit" class="ava-lang__go">{{ 'cart.general.update' | t }}</button>
+    </noscript>
+  </form>
+
+  {%- if geo -%}
+    <script src="{{ 'geo-language.js' | asset_url }}" defer></script>
+  {%- endif -%}
+{%- endif -%}

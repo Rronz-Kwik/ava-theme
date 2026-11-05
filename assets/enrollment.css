@@ -1,0 +1,1424 @@
+    /* Page container — mirrors the theme's .ava-container so the enrollment
+       flow lines up with the rest of the site. The .page-width wrappers in
+       steps 2–4 are otherwise unstyled. */
+    .distributor-wrapper .page-width {
+    max-width: var(--ava-container, 1320px);
+    margin-inline: auto;
+    padding-inline: var(--ava-gutter, clamp(24px, 4vw, 52px));
+    width: 100%;
+    }
+
+    .distributor-inner {
+    display: flex;
+    min-height: 500px;
+    }
+
+    .distributor-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    .distributor-left {
+    width: 50%;
+    }
+
+    .distributor-right {
+    width: 50%;
+    padding: 80px;
+    display: flex;
+    align-items: center;
+    }
+
+    .dropdown-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    }
+
+    .dropdown-list li span:last-child {
+    color: var(--enroll-primary);
+    font-weight: 600;
+    }
+
+    .sub-heading {
+    color: var(--enroll-primary);
+    }
+
+    .custom-dropdown {
+    position: relative;
+    margin-top: 20px;
+    }
+
+    .dropdown-selected {
+    padding: 12px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 8px;
+    position: relative;
+    }
+
+    .dropdown-selected::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #333;
+    border-bottom: 2px solid #333;
+    transform: translateY(-50%) rotate(45deg);
+    pointer-events: none;
+    }
+
+    .dropdown-selected.active::after {
+    transform: translateY(-50%) rotate(-135deg);
+    }
+
+    .inner-distributor_right {
+    width: 100%;
+    }
+
+    .dropdown-list {
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 2;
+    padding: 0;
+    }
+
+    .dropdown-search-wrap {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    }
+
+    .dropdown-search {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font: inherit;
+    color: inherit;
+    outline: none;
+    box-sizing: border-box;
+    }
+
+    .dropdown-search:focus {
+    border-color: var(--enroll-primary);
+    }
+
+    .dropdown-results {
+    margin: 0;
+    padding: 0;
+    }
+
+    .dropdown-list li {
+    padding: 10px;
+    cursor: pointer;
+    list-style: none;
+    }
+
+    .dropdown-list li:hover {
+    background: #f5f5f5;
+    }
+
+    .dropdown-state-msg {
+    padding: 12px;
+    list-style: none;
+    color: #97A3B6;
+    font-style: italic;
+    pointer-events: none;
+    }
+
+    .dropdown-state-msg--error {
+    color: #c0392b;
+    }
+
+    .dropdown-selected.is-loading {
+    color: #97A3B6;
+    pointer-events: none;
+    cursor: default;
+    }
+
+    /* ── Sponsor banner ── */
+    .sponsor-banner {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    background: var(--enroll-tint-bg);
+    border: 1px solid var(--enroll-tint-border);
+    border-radius: 10px;
+    margin-bottom: 24px;
+    }
+
+    .sponsor-banner__inner {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    }
+
+    .sponsor-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--enroll-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    font-family: var(--enroll-font-body);
+    letter-spacing: 0.5px;
+    }
+
+    .sponsor-banner__label {
+    display: block;
+    font-size: 12px;
+    color: #677489;
+    font-family: var(--enroll-font-body);
+    font-weight: 400;
+    line-height: 1.4;
+    }
+
+    .sponsor-banner__name {
+    display: block;
+    font-size: 15px;
+    color: #111729;
+    font-family: var(--enroll-font-body);
+    font-weight: 600;
+    line-height: 1.4;
+    }
+
+    /* ── Info tooltip ── */
+    .subscription-header .info-icon {
+    position: relative;
+    cursor: help;
+    }
+
+    .info-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111729;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.6;
+    width: 260px;
+    white-space: normal;
+    text-align: left;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 20;
+    font-style: normal;
+    font-weight: 400;
+    font-family: var(--enroll-font-body);
+    box-shadow: 0 4px 12px rgba(17,23,41,0.15);
+    }
+
+    .info-tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #111729;
+    }
+
+    .info-icon:hover .info-tooltip,
+    .info-icon.is-open .info-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    }
+
+    .continue-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: var(--enroll-primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 136px;
+    border-radius: 8px;
+    }
+
+
+    .package-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 40px 0;
+    }
+
+    .package-card {
+    border: 1px solid #E3E8EF;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    }
+
+    .select-circle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 18px;
+    width: 18px;
+    border: 2px solid var(--enroll-primary);
+    border-radius: 50%;
+    }
+
+    .package-card.active .select-circle {
+    border: none;
+    background-color: var(--enroll-accent);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5L6.5 11.5L12.5 5' stroke='%23ffffff' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size: 12px 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+    }
+
+    .package-card .select-circle {
+    display: block;
+    }
+
+    .product-title h3 {
+    font-family: var(--enroll-font-body);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #111729;
+    text-transform: capitalize;
+    margin: 0;
+    }
+
+    .package-card img {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .package-card .product-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .package-card .short_description {
+      margin-bottom: 12px;
+    }
+
+    .package-card .product-info > .metafeilds_container {
+      margin-top: 12px;
+    }
+
+    /* Pin the action (Add to cart / qty stepper) to the bottom of the card.
+       Only one is ever in flow at a time (the other is display:none), so a
+       single auto margin lines the buttons up across a row regardless of
+       description or metafield height. */
+    .package-card .product-info > .add-to-cart-btn,
+    .package-card .product-info > .qty-box {
+      margin-top: auto;
+    }
+
+    .checkout-button {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 40px;
+    background: #fff;
+    z-index: 10;
+    }
+
+    .subscription-header {
+    padding-top: 40px;
+    }
+
+    .inner-subscription-header{
+    width: 100%;
+    max-width: 620px;
+    }
+
+    .subscription-header p.subheading {
+    font-family: var(--enroll-font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    margin: 0;
+    color: var(--enroll-secondary);
+    }
+
+    .subscription-header h2.heading {
+    font-family: var(--enroll-font-body);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 38px;
+    color: #111729;
+    margin: 15px 0 8px;
+    }
+
+    .subscription-header p.description {
+    font-family: var(--enroll-font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #97A3B6;
+    margin: 0;
+    }
+
+    .subscription-header p.note {
+    font-family: var(--enroll-font-body);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #4A5567;
+    }
+
+    .subscription-header .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    font-size: 11px;
+    border-radius: 50%;
+    color: #374151;
+    border: 1px solid #677489;
+    }
+
+    .subscription-header .divider {
+    margin: 40px 0;
+    border-bottom: 1px solid #e5e7eb;
+    display:block;
+    }
+
+    .product-title p {
+    font-family: var(--enroll-font-body);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--enroll-secondary);
+    margin: 5px 0 0;
+    }
+
+    .meta-block strong {
+    font-family: var(--enroll-font-body);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 22px;
+    color: #111729;
+    margin: 0;
+    }
+
+    .metafield-rich_text_field p, .metafield-rich_text_field ul li {
+    font-family: var(--enroll-font-body);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 22px;
+    color: #677489;
+    margin: 0;
+    }
+
+    .checkout-button button {
+    background: var(--enroll-secondary);
+    font-family: var(--enroll-font-body);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 120px;
+    height: 100%;
+    min-height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    }
+
+    .metafeilds_container .bv-value span.membership-bv {
+        font-family: var(--enroll-font-body);
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 20px;
+        color: var(--enroll-badge-text);
+    }
+
+    .metafeilds_container .bv-value.PV {
+      justify-content: flex-start;
+    }
+
+    .metafeilds_container .bv-value.product-rating {
+      justify-content: flex-end;
+    }
+
+    .checkout-button button span svg {
+      margin-top: 9px;
+    }
+
+    .metafield-rich_text_field ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .product-title {
+    border-bottom: 1px solid #E3E8EF;
+    padding: 10px 0;
+    }
+
+    .product-meta {
+    padding-top: 10px;
+    }
+
+    .package-card.active {
+    border: 2px solid var(--enroll-primary);
+    }
+
+    .package-card {
+    position: relative;
+    }
+
+    .sold-out-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--enroll-accent);
+    color: #fff;
+    font-size: 12px;
+    padding: 0px 10px;
+    border-radius: 11px;
+    font-weight: 600;
+    z-index: 2;
+    }
+
+    .distributor-wrapper {
+    position: relative;
+    }
+
+    .qty-box button.qty-minus, .qty-box button.qty-plus {
+    border: 1px solid #E3E8EF;
+    background: transparent;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 500;
+    width: 25px;
+    cursor: pointer;
+    }
+
+  .qty-box input.qty-input {
+      border: none;
+      text-align: center;
+      -moz-appearance: textfield;
+      width: 30px;
+      font-family: var(--enroll-font-body);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 26px;
+      color: #111729;
+  }
+
+    .qty-box input.qty-input::-webkit-outer-spin-button,
+    .qty-box input.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    .qty-box {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+    }
+
+  .qty-box.is-hidden {
+    display: none;
+  }
+
+  .add-to-cart-btn {
+    background: var(--enroll-secondary);
+    font-family: var(--enroll-font-body);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 40px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+    .qty-input[value="0"] + .qty-plus {
+    opacity: 1;
+  }
+
+  .qty-input[value="0"] ~ .qty-minus {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .step-navigation {
+      position: sticky;
+      bottom: 0;
+      display: grid;
+      justify-content: center;
+      padding: 15px 0px;
+      background: #fff;
+      z-index: 10;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+  }
+
+  .step-navigation button {
+      background: var(--enroll-secondary);
+      font-family: var(--enroll-font-body);
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 120px;
+      height: 100%;
+      min-height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 10px;
+  }
+
+  .step-navigation button svg {
+      display: block;
+  }
+
+  /* The arrow sits in its own <span>; make that span a flex box so the icon
+     centres on the text line instead of dropping below the baseline. */
+  .step-navigation button span {
+      display: inline-flex;
+      align-items: center;
+  }
+
+  .bv-value.product-rating span.product-number {
+      font-family: var(--enroll-font-body);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 20px;
+      color: #677489;
+  }
+
+  .metafeilds_container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 10px 0;
+      border-bottom: 1px solid #E3E8EF;
+  }
+
+  .package-grid.additional-products .package-card .product-title {
+      border: none;
+      padding: 10px 0 5px;
+  }
+
+  .package-grid.additional-products .package-card .product-title p {
+      color: #111729;
+  }
+
+  .metafeilds_container .bv-value.BV {
+      border-left: 1px solid #E3E8EF;
+      border-right: 1px solid #E3E8EF;
+  }
+
+  .package-grid.additional-products .product-title h3 {
+      margin-top: 4px;
+  }
+
+  .step-navigation button.back-btn.back {
+      border: 1px solid #E3E8EF;
+      background: transparent;
+      color: #111729;
+  }
+
+  .step-navigation .checkout-buttom {
+      display: flex;
+      justify-content: flex-end;
+  }
+
+  /* Step 4 nav: Back on the left, Proceed to Checkout on the right. */
+  .step-navigation.step-navigation--split {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  /* "Proceed to Checkout" needs more room than the 120px nav buttons. */
+  .step-navigation button.step4-checkout-btn {
+      max-width: none;
+      width: auto;
+      padding: 0 22px;
+      white-space: nowrap;
+  }
+
+  .step-navigation button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+  }
+
+  .distributor-step.step-2 .step-navigation {
+      display: flex;
+      justify-content: flex-end;
+  }
+
+  #step1,
+  #step2,
+  #step3 {
+    display: none;
+  }
+
+  /* ── Order summary sidebar layout ── */
+  .enroll-shell {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .enroll-main {
+    min-width: 0;
+  }
+
+  /* Two products per row within the narrower main column */
+  .enroll-shell .package-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .enroll-summary {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    margin-bottom: 15px;
+  }
+
+  /* ── Steps 2–4: left column holds the title/intro, then the main content
+     (product grid or overview), then the nav; the order summary sits in the
+     right column and lines up with that main-content row. ──
+     .enroll-main is flattened (display:contents) so its children become
+     direct items of the .enroll-shell grid alongside .enroll-summary. */
+  .distributor-step.step-2 .enroll-main,
+  .distributor-step.step-3 .enroll-main,
+  .distributor-step.step-4 .enroll-main {
+    display: contents;
+  }
+
+  .distributor-step.step-2 .subscription-header,
+  .distributor-step.step-3 .subscription-header,
+  .distributor-step.step-4 .enroll-finish-intro {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .distributor-step.step-2 .package-grid,
+  .distributor-step.step-3 .package-grid {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+    /* Intro/divider sits above in row 1, so drop the grid's own top pad. */
+    padding-top: 0;
+  }
+
+  .distributor-step.step-4 .enroll-overview {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+  }
+
+  .distributor-step.step-2 .step-navigation,
+  .distributor-step.step-3 .step-navigation,
+  .distributor-step.step-4 .step-navigation {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .distributor-step.step-2 .enroll-summary,
+  .distributor-step.step-3 .enroll-summary,
+  .distributor-step.step-4 .enroll-summary {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  /* Step 4 override: don't flatten the main column into shared grid rows.
+     Keeping it a real block column lets the nav sit directly under the
+     overview instead of being pushed down to clear the taller summary
+     sidebar (terms + checkout + payment icons). */
+  .distributor-step.step-4 .enroll-main {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .distributor-step.step-4 .enroll-summary {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .enroll-summary__inner {
+    display: block;
+  }
+
+  /* Outer card holding the step checklist + sponsor */
+  .enroll-summary__card {
+    border: 1px solid #E3E8EF;
+    border-radius: 12px;
+    padding: 20px;
+    background: #fff;
+  }
+
+  /* ── Steps ── */
+  .enroll-step {
+    margin-bottom: 22px;
+  }
+
+  .enroll-step:last-child {
+    margin-bottom: 0;
+  }
+
+  .enroll-step__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .enroll-step__badge {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EEF1F5;
+    color: #97A3B6;
+    font-family: var(--enroll-font-body);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .enroll-step__badge.is-complete {
+    background: var(--enroll-primary);
+    color: #fff;
+  }
+
+  .enroll-step__title {
+    font-family: var(--enroll-font-body);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #111729;
+  }
+
+  .enroll-step--pending .enroll-step__title {
+    color: #97A3B6;
+  }
+
+  .enroll-step__items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .enroll-step__items:empty {
+    display: none;
+  }
+
+  .enroll-step__empty {
+    font-family: var(--enroll-font-body);
+    font-size: 13px;
+    color: #97A3B6;
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* ── Selected product line ── */
+  .enroll-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #E3E8EF;
+    border-radius: 10px;
+    padding: 12px 36px 12px 12px;
+  }
+
+  .enroll-item__thumb {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    object-fit: cover;
+    background: #f7f8fa;
+    border: 1px solid #E3E8EF;
+  }
+
+  .enroll-item__text {
+    font-family: var(--enroll-font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: #111729;
+    line-height: 1.3;
+  }
+
+  .enroll-item__remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: transparent;
+    color: #97A3B6;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .enroll-item__remove:hover {
+    color: #111729;
+  }
+
+  /* ── Sponsor block ── */
+  .enroll-sponsor {
+    margin-top: 4px;
+  }
+
+  .enroll-sponsor__title {
+    font-family: var(--enroll-font-body);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.2;
+    color: #111729;
+    margin: 0 0 8px;
+  }
+
+  .enroll-sponsor__help {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--enroll-font-body);
+    font-size: 13px;
+    color: #111729;
+    text-decoration: underline;
+    cursor: help;
+    margin-bottom: 12px;
+  }
+
+  .enroll-sponsor__value {
+    border: 1px solid #E3E8EF;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: var(--enroll-font-body);
+    font-size: 15px;
+    color: #111729;
+  }
+
+  /* ── Totals ── */
+  .enroll-summary__totals {
+    padding: 20px 4px 0;
+  }
+
+  .enroll-summary__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--enroll-font-body);
+    font-size: 14px;
+    color: #4a5567;
+    margin-bottom: 12px;
+  }
+
+  .enroll-summary__row > span:last-child {
+    color: #111729;
+    font-weight: 600;
+  }
+
+  .enroll-summary__muted {
+    color: #677489 !important;
+    font-weight: 400 !important;
+  }
+
+  .enroll-summary__row--total {
+    border-top: 1px solid #E3E8EF;
+    padding-top: 16px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111729;
+  }
+
+  .enroll-summary__row--total > span:last-child {
+    font-weight: 700;
+  }
+
+  .enroll-summary__checkout {
+    margin-top: 18px;
+    width: 100%;
+    min-height: 48px;
+    border: none;
+    border-radius: 8px;
+    background: var(--enroll-secondary);
+    color: #fff;
+    font-family: var(--enroll-font-body);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease;
+  }
+
+  .enroll-summary__checkout:hover:not(:disabled) {
+    background: var(--enroll-primary);
+  }
+
+  .enroll-summary__checkout:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ── "Enrollment overview" variant (step 3) ── */
+  .enroll-overview__card {
+    border: 1px solid #E3E8EF;
+    border-radius: 12px;
+    padding: 22px;
+    background: #fff;
+  }
+
+  .enroll-overview__title {
+    font-family: var(--enroll-font-body);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--enroll-heading);
+    margin: 0 0 18px;
+  }
+
+  .enroll-group {
+    border: 1px solid #E3E8EF;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+
+  .enroll-group__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .enroll-group__title {
+    font-family: var(--enroll-font-body);
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.2;
+    color: var(--enroll-heading);
+  }
+
+  .enroll-group__change {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: var(--enroll-font-body);
+    font-size: 14px;
+    color: var(--enroll-heading);
+    text-decoration: underline;
+  }
+
+  .enroll-group__change:hover {
+    color: var(--enroll-primary);
+  }
+
+  .enroll-group__items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .enroll-group__items:empty {
+    display: none;
+  }
+
+  .enroll-group__empty {
+    font-family: var(--enroll-font-body);
+    font-size: 13px;
+    color: #97A3B6;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .enroll-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .enroll-row__thumb {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #f7f8fa;
+    border: 1px solid #E3E8EF;
+  }
+
+  .enroll-row__qty {
+    flex-shrink: 0;
+    font-family: var(--enroll-font-body);
+    font-size: 14px;
+    color: #677489;
+  }
+
+  .enroll-row__title {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--enroll-font-body);
+    font-size: 14px;
+    line-height: 1.35;
+    color: #4a5567;
+  }
+
+  .enroll-row__price {
+    flex-shrink: 0;
+    font-family: var(--enroll-font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5567;
+    white-space: nowrap;
+  }
+
+  .enroll-group__total {
+    margin-top: 18px;
+    text-align: right;
+    font-family: var(--enroll-font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5567;
+  }
+
+  /* Totals inside the overview card */
+  .enroll-overview .enroll-summary__totals {
+    padding: 8px 4px 0;
+  }
+
+  .enroll-overview .enroll-summary__row--total {
+    font-size: 20px;
+    color: var(--enroll-total);
+  }
+
+  .enroll-overview .enroll-summary__row--total > span:last-child {
+    color: var(--enroll-total);
+    font-weight: 700;
+  }
+
+  /* Step 3 review intro */
+  .enroll-finish-intro {
+    margin-bottom: 28px;
+  }
+
+  .enroll-finish-title {
+    font-family: var(--enroll-font-body);
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.15;
+    color: var(--enroll-heading);
+    margin: 0 0 12px;
+  }
+
+  .enroll-finish-sub {
+    font-family: var(--enroll-font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #677489;
+    margin: 0;
+    max-width: 560px;
+  }
+
+  /* Checkout extras (terms, payments, reassurance) */
+  .enroll-terms-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 18px;
+    font-family: var(--enroll-font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: #4a5567;
+    cursor: pointer;
+  }
+
+  .enroll-terms-label input {
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--enroll-primary);
+    cursor: pointer;
+  }
+
+  .enroll-terms-label a {
+    color: var(--enroll-primary);
+    text-decoration: underline;
+  }
+
+  .enroll-summary .enroll-summary__checkout {
+    border-radius: 999px;
+  }
+
+  .enroll-payments {
+    margin-top: 18px;
+    text-align: center;
+  }
+
+  .enroll-payments__label {
+    font-family: var(--enroll-font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: #111729;
+    margin: 0 0 10px;
+  }
+
+  .enroll-payments__icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .enroll-payments__icon {
+    width: 40px;
+    height: 26px;
+  }
+
+  .enroll-welcome {
+    margin: 16px 0 0;
+    text-align: center;
+    font-family: var(--enroll-font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: #111729;
+  }
+
+  .enroll-reassurance {
+    margin: 6px 0 0;
+    text-align: center;
+    font-family: var(--enroll-font-body);
+    font-size: 12px;
+    color: #97A3B6;
+  }
+
+  @media (max-width: 990px) {
+    .enroll-shell {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .enroll-summary {
+      position: static;
+    }
+    /* Un-flatten so header + main content + summary stack in one column. */
+    .distributor-step.step-2 .enroll-main,
+    .distributor-step.step-3 .enroll-main,
+    .distributor-step.step-4 .enroll-main {
+      display: block;
+    }
+    .distributor-step.step-2 .enroll-summary,
+    .distributor-step.step-3 .enroll-summary,
+    .distributor-step.step-4 .enroll-summary {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+
+  @media(max-width:768px){
+    .distributor-left {
+    width: 50%;
+    display: none;
+    }
+
+    .distributor-right {
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    }
+
+    .inner-distributor_right p.sub-heading {
+    margin: 0 0;
+    }
+
+    .inner-distributor_right p.sponsor-id {
+    margin: 6px 0 0;
+    }
+
+    .continue-btn {
+    margin-top: 15px;
+    }
+
+    .inner-distributor_right h2 {
+    margin: 6px 0 0;
+    }
+
+    .custom-dropdown {
+    position: relative;
+    margin-top: 10px;
+    }
+
+    .package-grid,
+    .enroll-shell .package-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    padding: 25px 0;
+    }
+
+    .subscription-header .divider {
+    margin: 28px 0;
+    }
+
+    .subscription-header h2.heading {
+    font-size: 22px;
+    line-height: 25px;
+    }
+
+    .subscription-header p.description {
+    font-size: 14px;
+    line-height: 23px;
+    }
+
+    .subscription-header {
+    padding-top: 20px;
+    }
+
+    .subscription-header p.note {
+    font-size: 12px;
+    line-height: 22px;
+    }
+
+    .subscription-header .info-icon {
+    width: 13px;
+    height: 14px;
+    font-size: 10px;
+    }
+
+    /* On phones the icon sits near the right edge, so a centred tooltip
+       overflows the viewport. Anchor it to the icon's right and grow left,
+       and cap the width to the available space. */
+    .info-tooltip {
+    left: auto;
+    right: 0;
+    transform: none;
+    width: min(260px, calc(100vw - 24px));
+    }
+
+    .info-tooltip::before {
+    left: auto;
+    right: 4px;
+    transform: none;
+    }
+
+    .package-card img {
+      width: 100%;
+      max-height:100%;
+    }
+
+  }
+
+  /* Phones: one product card per row. Tablets (incl. large tablets) and up
+     keep two per row via the rules above. */
+  @media (max-width: 600px) {
+    .package-grid,
+    .enroll-shell .package-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Display headings use the theme's heading font; everything else inherits
+     the body font set on .distributor-wrapper. */
+  .distributor-right h2,
+  .product-title h3,
+  .subscription-header h2.heading,
+  .enroll-sponsor__title,
+  .enroll-finish-title,
+  .enroll-overview__title,
+  .enroll-group__title {
+    font-family: var(--enroll-font-head);
+  }
+
+/* ── China Shipping step (snippets/enrollment-shipping.liquid) ── */
+.enroll-shipping__country { margin: 0 0 16px; }
+.enroll-shipping__status {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #fdecec;
+  color: #8a1c1c;
+}
+.enroll-shipping__form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.enroll-shipping__field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.enroll-shipping__field[hidden] { display: none; }
+.enroll-shipping__field--wide { grid-column: 1 / -1; }
+.enroll-shipping__field label { font-weight: 600; font-size: 14px; }
+.enroll-shipping__field input,
+.enroll-shipping__field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #c9d2d8;
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+}
+.enroll-shipping__field input:focus,
+.enroll-shipping__field select:focus { outline: 2px solid var(--enroll-primary); outline-offset: 1px; }
+.enroll-shipping__field [aria-invalid="true"] { border-color: #c0392b; }
+.enroll-shipping__field input[hidden],
+.enroll-shipping__field select[hidden] { display: none; }
+.enroll-shipping__error { margin: 0; font-size: 13px; color: #c0392b; }
+.enroll-shipping__save { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+@media (max-width: 749px) {
+  .enroll-shipping__form { grid-template-columns: minmax(0, 1fr); }
+}

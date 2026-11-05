@@ -1,0 +1,59 @@
+{%- comment -%}
+  "Enrollment overview" review block shown in the MAIN area of step 3.
+  Grouped bordered cards (Affiliate Pack / Additional One Time Product / Monthly
+  Subscription) each with a "Change" link (back to step 2) and per-group total,
+  followed by the order totals. Populated live by assets/new-enrollment.js.
+{%- endcomment -%}
+<div class="enroll-overview">
+  <div class="enroll-overview__card">
+    <h3 class="enroll-overview__title">{{ 'enrollment.summary.overview_title' | t }}</h3>
+
+    <div class="enroll-group" data-summary-kit-group>
+      <div class="enroll-group__head">
+        <span class="enroll-group__title">{{ 'enrollment.summary.affiliate_pack' | t }}</span>
+        <button type="button" class="enroll-group__change" data-goto="kit">{{ 'enrollment.summary.change' | t }}</button>
+      </div>
+      <div class="enroll-group__items" data-summary-kit></div>
+      <p class="enroll-group__empty" data-summary-kit-empty>{{ 'enrollment.summary.no_pack_short' | t }}</p>
+      <div class="enroll-group__total">{{ 'enrollment.summary.total_label' | t }} <span data-summary-kit-total>—</span></div>
+    </div>
+
+    <div class="enroll-group" data-summary-addon-group>
+      <div class="enroll-group__head">
+        <span class="enroll-group__title">{{ 'enrollment.summary.one_time' | t }}</span>
+        <button type="button" class="enroll-group__change" data-goto="addons">{{ 'enrollment.summary.change' | t }}</button>
+      </div>
+      <div class="enroll-group__items" data-summary-addons></div>
+      <p class="enroll-group__empty" data-summary-addon-empty>{{ 'enrollment.summary.no_products' | t }}</p>
+      <div class="enroll-group__total">{{ 'enrollment.summary.total_label' | t }} <span data-summary-addon-total>—</span></div>
+    </div>
+
+    <div class="enroll-group" data-summary-sub-group hidden>
+      <div class="enroll-group__head">
+        <span class="enroll-group__title">{{ 'enrollment.summary.monthly' | t }}</span>
+        <button type="button" class="enroll-group__change" data-goto="addons">{{ 'enrollment.summary.change' | t }}</button>
+      </div>
+      <div class="enroll-group__items" data-summary-subs></div>
+      <div class="enroll-group__total">{{ 'enrollment.summary.total_label' | t }} <span data-summary-sub-total>—</span></div>
+    </div>
+
+    <div class="enroll-summary__totals">
+      <div class="enroll-summary__row">
+        <span>{{ 'enrollment.summary.subtotal' | t }}</span>
+        <span data-summary-subtotal>—</span>
+      </div>
+      <div class="enroll-summary__row">
+        <span>{{ 'enrollment.summary.shipping' | t }}</span>
+        <span class="enroll-summary__muted">{{ 'enrollment.summary.calculated_at_checkout' | t }}</span>
+      </div>
+      <div class="enroll-summary__row">
+        <span>{{ 'enrollment.summary.taxes' | t }}</span>
+        <span class="enroll-summary__muted">{{ 'enrollment.summary.calculated_at_checkout' | t }}</span>
+      </div>
+      <div class="enroll-summary__row enroll-summary__row--total">
+        <span>{{ 'enrollment.summary.total' | t }}</span>
+        <span data-summary-total>—</span>
+      </div>
+    </div>
+  </div>
+</div>

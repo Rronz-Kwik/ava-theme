@@ -1,0 +1,323 @@
+{%- liquid
+  assign mf = product.metafields.ava
+  assign price = product.price
+  # subscribe price: use metafield, else 20% off
+  if mf.subscribe_price.value != blank
+    assign sub_price = mf.subscribe_price.value | times: 100
+  else
+    assign sub_price = price | times: 0.8 | round
+  endif
+-%}
+
+<section class="ava-section ava-bg-white ava-pdp__section">
+  <div class="ava-pdp" data-gallery>
+
+    {%- comment -%} ---------------- GALLERY ---------------- {%- endcomment -%}
+    <div class="ava-pdp__gallery">
+      <div class="ava-pdp__galtop">
+        <div class="ava-pdp__thumbs">
+          {%- for media in product.media -%}
+            <button type="button" class="ava-thumb {% if forloop.first %}ava-thumb--active{% endif %}" data-thumb="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}">
+              <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape }}" loading="lazy">
+            </button>
+          {%- endfor -%}
+        </div>
+
+
+        {%- capture pack_type -%}{% render 'pack-type', product: product %}{%- endcapture -%}
+        {%- assign pack_type = pack_type | strip -%}
+        {%- unless settings.pack_colour_enabled -%}{%- assign pack_type = '' -%}{%- endunless -%}
+        <div class="ava-pdp__stage" data-gal-stage{% if pack_type != blank %} data-ava-pack="{{ pack_type }}"{% endif %}>
+          {%- if pack_type != blank -%}
+            <span class="ava-visually-hidden">{% if pack_type == 'enrolment' %}Enrolment pack{% else %}{{ 'product.pack_type.reorder' | t }}{% endif %}</span>
+          {%- endif -%}
+          {%- if product.media.size > 0 -%}
+            <div class="ava-pdp__track" data-gal-track>
+              {%- for media in product.media -%}
+                <div class="ava-pdp__slide" data-main="{{ forloop.index0 }}"{% if forloop.first %} aria-hidden="false"{% else %} aria-hidden="true"{% endif %}>
+                  <img class="ava-pdp__main{% if mf.gallery_cover.value %} ava-pdp__main--cover{% endif %}"
+                       src="{{ media | image_url: width: 1200 }}"
+                       alt="{{ media.alt | escape | default: product.title }}"
+                       {% unless forloop.first %}loading="lazy"{% endunless %}
+                       data-zoom-src="{{ media | image_url: width: 2000 }}">
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <div class="ava-pdp__placeholder"></div>
+          {%- endif -%}
+          {%- if product.media.size > 1 -%}
+            <button type="button" class="ava-galnav ava-galnav--prev" data-gal-prev aria-label="Previous">&lsaquo;</button>
+            <button type="button" class="ava-galnav ava-galnav--next" data-gal-next aria-label="Next">&rsaquo;</button>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} About panel {%- endcomment -%}
+      <div class="ava-pdp__about">
+        <div class="ava-eyebrow ava-eyebrow--blue ava-pdp__about-eyebrow">{{ 'product.about' | t }} {{ product.title }}</div>
+        {%- if mf.tagline != blank -%}
+          <p class="ava-pdp__tagline">{{ mf.tagline | newline_to_br }}</p>
+        {%- endif -%}
+        {%- if mf.what_is != blank -%}
+          {{ mf.what_is | metafield_tag }}
+        {%- else -%}
+          <div class="ava-body-sm">{{ product.description }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} ---------------- BUY BOX ---------------- {%- endcomment -%}
+    <div class="ava-buybox">
+      {%- if mf.format != blank -%}<div class="ava-eyebrow ava-eyebrow--blue ava-pdp__format-eyebrow">{{ mf.format }}</div>{%- endif -%}
+      <h1 class="ava-buybox__title">{{ product.title }}</h1>
+
+      <div class="ava-buybox__rating">
+        <span class="ava-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        {%- if mf.reviews_text != blank -%}<span>{{ mf.reviews_text }}</span>{%- endif -%}
+      </div>
+
+      {%- assign product_form_id = 'ProductForm-' | append: product.id -%}
+      {%- form 'product', product, id: product_form_id -%}
+        {%- unless product.has_only_default_variant -%}
+          <div class="ava-pdp__variants">
+            {%- for option in product.options_with_values -%}
+              <label class="ava-pdp__variant-label">
+                <span class="ava-body-sm ava-pdp__variant-name">{{ option.name }}</span>
+                <select class="ava-pdp__variant-select" name="options[{{ option.name | escape }}]">
+                  {%- for value in option.values -%}<option value="{{ value | escape }}">{{ value }}</option>{%- endfor -%}
+                </select>
+              </label>
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {%- comment -%} Subscribe vs one-time — visual selector (wire to selling plans) {%- endcomment -%}
+        <div class="ava-pricebox">
+          <div class="ava-pricebox__row">
+            <div class="ava-pricebox__head">
+              <b>{{ 'product.subscribe' | t }}</b>
+              <span><s>{{ price | money }}</s><span class="ava-price">{{ sub_price | money }}</span></span>
+            </div>
+            <div class="ava-pricebox__perks">
+              <div class="ava-perk"><b>&checkmark;</b> {{ 'product.save20' | t }}</div>
+              <div class="ava-perk"><b>&checkmark;</b> {{ 'product.free_ship' | t }}</div>
+              <div class="ava-perk"><b>&checkmark;</b> {{ 'product.guarantee' | t }}</div>
+              <div class="ava-perk"><b>&checkmark;</b> {{ 'product.cancel' | t }}</div>
+            </div>
+          </div>
+          <div class="ava-pricebox__onetime">
+            <span>{{ 'product.onetime' | t }}</span>
+            <span>{{ price | money }}</span>
+          </div>
+        </div>
+
+        <button type="submit" name="add" class="ava-btn ava-btn--block ava-pdp__submit"{% unless product.available %} disabled{% endunless %}>
+          {%- if product.available -%}{{ 'product.add_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t | default: 'Sold out' }}{%- endif -%}
+        </button>
+      {%- endform -%}
+
+      {%- comment -%} benefit icons {%- endcomment -%}
+      <div class="ava-iconrow">
+        <div class="ava-iconcell ava-iconcell--blue">{% render 'ava-icon', icon: 'precision', size: 30 %}<div>{{ 'product.ic_precision' | t }}</div></div>
+        <div class="ava-iconcell ava-iconcell--blue">{% render 'ava-icon', icon: 'leaf', size: 30 %}<div>{{ 'product.ic_clean' | t }}</div></div>
+        <div class="ava-iconcell ava-iconcell--blue">{% render 'ava-icon', icon: 'gmp', size: 30 %}<div>{{ 'product.ic_gmp' | t }}</div></div>
+      </div>
+
+      {%- comment -%} accordions {%- endcomment -%}
+      <div class="ava-pdp__accblock">
+        {%- if mf.benefits.value != blank -%}
+          <details class="ava-acc" open>
+            <summary>{{ 'product.acc_benefits' | t }}</summary>
+            <div class="ava-acc__body">
+              {%- for b in mf.benefits.value -%}<div class="ava-acc__li"><b>&checkmark;</b> {{ b }}</div>{%- endfor -%}
+            </div>
+          </details>
+        {%- endif -%}
+        {%- if mf.highlights.value != blank -%}
+          <details class="ava-acc">
+            <summary>{{ 'product.acc_ingredients' | t }}</summary>
+            <div class="ava-acc__body">
+              {%- for h in mf.highlights.value -%}<div class="ava-acc__li"><span class="ava-acc__dot"></span> {{ h }}</div>{%- endfor -%}
+            </div>
+          </details>
+        {%- endif -%}
+        {%- if mf.how_to_use != blank -%}
+          <details class="ava-acc">
+            <summary>{{ 'product.acc_howto' | t }}</summary>
+            <div class="ava-acc__body"><p class="ava-acc__a">{{ mf.how_to_use | newline_to_br }}</p></div>
+          </details>
+        {%- endif -%}
+        {%- if mf.faq_question.value != blank -%}
+          <details class="ava-acc">
+            <summary>{{ 'product.acc_faqs' | t }}</summary>
+            <div class="ava-acc__body">
+              {%- for q in mf.faq_question.value -%}
+                <div class="ava-pdp__acc-row">
+                  <div class="ava-acc__q">{{ q }}</div>
+                  <div class="ava-acc__a">{{ mf.faq_answer.value[forloop.index0] }}</div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </details>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ---------------- WHY IT MATTERS ---------------- {%- endcomment -%}
+{%- if mf.why_title != blank or mf.why_body != blank -%}
+<section class="ava-section ava-bg-panel">
+  <div class="ava-rich">
+    <div class="ava-eyebrow">{{ 'product.why_label' | t }}</div>
+    {%- if mf.why_title != blank -%}<h2 class="ava-h2 ava-origin__h">{{ mf.why_title }}</h2>{%- endif -%}
+    {%- if mf.why_body != blank -%}<div class="ava-body">{{ mf.why_body | metafield_tag }}</div>{%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} ---------------- LIFESTYLE BAND ---------------- {%- endcomment -%}
+{%- if mf.band_image != blank -%}
+<section class="ava-lifeband">
+  <img src="{{ mf.band_image.value | image_url: width: 2400 }}" alt="{{ mf.band_title | escape }}">
+  <div class="ava-lifeband__scrim"></div>
+  <div class="ava-lifeband__inner ava-on-dark">
+    <div class="ava-pdp__lifeband-inner">
+      {%- if mf.band_eyebrow != blank -%}<div class="ava-eyebrow ava-eyebrow--light">{{ mf.band_eyebrow }}</div>{%- endif -%}
+      {%- if mf.band_title != blank -%}<h2 class="ava-h2">{{ mf.band_title }}</h2>{%- endif -%}
+      {%- if mf.band_subtitle != blank -%}<p class="ava-lead ava-pdp__lifeband-sub">{{ mf.band_subtitle }}</p>{%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} ---------------- BY THE NUMBERS ---------------- {%- endcomment -%}
+{%- if mf.stat_number.value != blank -%}
+<section class="ava-section ava-bg-white">
+  <div class="ava-stats">
+    {%- for n in mf.stat_number.value -%}
+      <div class="ava-stat"><div class="ava-stat__n">{{ n }}</div><div class="ava-stat__l">{{ mf.stat_label.value[forloop.index0] }}</div></div>
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} ---------------- KEY INGREDIENTS ---------------- {%- endcomment -%}
+{%- if mf.key_ingredients.value != blank -%}
+<section class="ava-section ava-bg-panel">
+  <div class="ava-container">
+    <div class="ava-block-head ava-pdp__section-head">
+      <div class="ava-eyebrow">{{ 'product.blend_label' | t }}</div>
+      <h2 class="ava-h2">{{ 'product.blend_h' | t }}</h2>
+    </div>
+    <div class="ava-grid ava-pdp__ingrid">
+      {%- for ing in mf.key_ingredients.value -%}
+        <div class="ava-ingcard"><span class="ava-ingcard__icon ava-ingcard__icon--blue">{% render 'ava-icon', icon: 'ingredient', size: 24 %}</span><span>{{ ing }}</span></div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} ---------------- THE RITUAL ---------------- {%- endcomment -%}
+{%- if mf.ritual_title.value != blank -%}
+<section class="ava-section ava-bg-white">
+  <div class="ava-container">
+    <div class="ava-block-head ava-block-head--center ava-pdp__section-head--narrow">
+      <div class="ava-eyebrow">{{ 'product.ritual_label' | t }}</div>
+      {%- if mf.ritual_heading != blank -%}<h2 class="ava-h2">{{ mf.ritual_heading }}</h2>{%- endif -%}
+    </div>
+    <div class="ava-ritual">
+      <div class="ava-ritual__line"></div>
+      <div class="ava-ritual__grid">
+        {%- for t in mf.ritual_title.value -%}
+          <div class="ava-ritual__step">
+            <div class="ava-ritual__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+            <h3>{{ t }}</h3>
+            <p>{{ mf.ritual_desc.value[forloop.index0] }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} ---------------- HOW TO USE BAND ---------------- {%- endcomment -%}
+{%- if mf.how_to_use != blank -%}
+<section class="ava-section ava-howto ava-on-dark">
+  <div class="ava-howto__inner">
+    <div class="ava-eyebrow ava-eyebrow--light ava-pdp__howto-eyebrow">{{ 'product.howto_label' | t }}</div>
+    <p>{{ mf.how_to_use | newline_to_br }}</p>
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} ---------------- AVA STANDARD ---------------- {%- endcomment -%}
+{%- if mf.standard_body != blank -%}
+<section class="ava-section ava-bg-white">
+  <div class="ava-rich">
+    <div class="ava-eyebrow">{{ 'product.standard_label' | t }}</div>
+    <div class="ava-body">{{ mf.standard_body | metafield_tag }}</div>
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} ---------------- FINAL CTA ---------------- {%- endcomment -%}
+{%- if mf.final_title != blank -%}
+<section class="ava-section ava-bg-dark ava-on-dark ava-pdp__final">
+  <div class="ava-pdp__final-inner">
+    <h2 class="ava-h2">{{ mf.final_title }}</h2>
+    {%- if mf.final_copy != blank -%}<p class="ava-lead ava-pdp__final-copy">{{ mf.final_copy }}</p>{%- endif -%}
+    <button
+      type="submit"
+      name="add"
+      form="{{ product_form_id }}"
+      class="ava-btn ava-btn--light ava-pdp__final-btn"
+      {% unless product.available %}disabled{% endunless %}
+    >
+      {%- if product.available -%}{{ 'product.add_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t | default: 'Sold out' }}{%- endif -%}
+    </button>
+  </div>
+</section>
+{%- endif -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ request.origin | append: product.url | json }},
+  "description": {{ product.description | strip_html | truncate: 500 | json }},
+  {%- if product.featured_media -%}
+  "image": [{{ product.featured_media | image_url: width: 1200 | prepend: 'https:' | json }}],
+  {%- endif -%}
+  {%- if product.vendor != blank -%}
+  "brand": { "@type": "Brand", "name": {{ product.vendor | json }} },
+  {%- endif -%}
+  "offers": [
+    {%- for variant in product.variants -%}
+    {
+      "@type": "Offer",
+      {%- if variant.sku != blank %}"sku": {{ variant.sku | json }},{% endif -%}
+      "price": {{ variant.price | divided_by: 100.0 | json }},
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+      "url": {{ request.origin | append: variant.url | json }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Rich PDP content is read from product metafields in the `ava` namespace (see README → Metafields). Sections auto-hide when their metafield is empty. The Add to cart form is functional; Subscribe/one-time is a visual selector to wire to selling plans." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+{%- liquid
+  assign img = section.settings.image
+  if img != blank
+    assign band_url = img | image_url: width: 2400
+  elsif section.settings.fallback_asset != blank
+    assign band_url = section.settings.fallback_asset | asset_url
+  endif
+  assign op = section.settings.overlay_opacity | default: 60 | times: 0.01
+  assign band_bg = 'linear-gradient(rgba(11,22,30,' | append: op | append: '),rgba(11,22,30,' | append: op | append: '))'
+  if band_url
+    assign band_bg = band_bg | append: ",url('" | append: band_url | append: "')"
+  endif
+-%}
+<section class="ava-band ava-band--dynamic ava-on-dark" style="--band-bg:{{ band_bg }}">
+  <div class="ava-band__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="ava-eyebrow ava-eyebrow--light">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ava-h2">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image band",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "info": "Bundled /assets file shown when no image is set" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 60 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "textarea", "id": "heading", "label": "Heading" }
+  ],
+  "presets": [{ "name": "Image band" }]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+{%- liquid
+  assign bg = section.settings.background | default: 'panel'
+-%}
+<section class="ava-section ava-bg-{{ bg }}">
+  <div class="ava-panels">
+    {%- for block in section.blocks -%}
+      <div class="ava-panel-card" {{ block.shopify_attributes }}>
+        {%- if block.settings.label != blank -%}<div class="ava-eyebrow ava-eyebrow--blue">{{ block.settings.label }}</div>{%- endif -%}
+        <p class="ava-panel-card__t">{{ block.settings.statement }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Mission / Vision",
+  "tag": "section",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "select", "id": "background", "label": "Background", "options": [ {"value":"white","label":"White"}, {"value":"panel","label":"Light panel"}, {"value":"panel-2","label":"Off-white"} ], "default": "panel" }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "textarea", "id": "statement", "label": "Statement" }
+      ]
+    }
+  ],
+  "presets": [ {
+    "name": "Mission / Vision",
+    "blocks": [ { "type": "panel" }, { "type": "panel" } ]
+  } ]
+}
+{% endschema %}

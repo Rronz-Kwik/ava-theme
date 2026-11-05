@@ -1,0 +1,397 @@
+{%- liquid
+  assign posts = blog.articles
+  assign featured = posts.first
+  assign is_cjk = false
+  if request.locale.iso_code contains 'zh'
+    assign is_cjk = true
+  endif
+-%}
+
+<section class="ava-section ava-bg-white ava-blog__intro">
+  <div class="ava-container">
+
+    <div class="ava-eyebrow">
+      {{ 'general.nav.journal' | t }}
+    </div>
+
+    <h1 class="ava-h1 ava-blog__title">
+      {{ section.settings.heading | default: blog.title }}
+    </h1>
+
+    {%- if section.settings.subheading != blank -%}
+      <p class="ava-lead ava-blog__sub">
+        {{ section.settings.subheading }}
+      </p>
+    {%- endif -%}
+
+    <div class="ava-chiprow">
+
+      <a
+        href="{{ blog.url }}"
+        class="ava-chip {% unless current_tags %}ava-chip--active{% endunless %}"
+      >
+        {{ 'journal.chip_all' | t }}
+      </a>
+
+      {%- for tag in blog.all_tags -%}
+
+        <a
+          href="{{ blog.url }}/tagged/{{ tag | handle }}"
+          class="ava-chip {% if current_tags contains tag %}ava-chip--active{% endif %}"
+        >
+          {%- case tag -%}
+
+            {%- when 'Precision Wellness' -%}
+              {{ 'journal.cat_precision' | t }}
+
+            {%- when 'Aging Well' -%}
+              {{ 'journal.cat_aging' | t }}
+
+            {%- when 'Renewal' -%}
+              {{ 'journal.cat_renewal' | t }}
+
+            {%- when 'Daily Rhythm' -%}
+              {{ 'journal.cat_rhythm' | t }}
+
+            {%- when 'The Products' -%}
+              {{ 'journal.cat_products' | t }}
+
+            {%- when 'Our Science' -%}
+              {{ 'journal.cat_science' | t }}
+
+            {%- else -%}
+              {{ tag }}
+
+          {%- endcase -%}
+        </a>
+
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+
+{%- comment -%}
+  FEATURED
+  Only on unfiltered first page
+{%- endcomment -%}
+
+{%- if featured and current_tags == empty and current_page == 1 -%}
+
+  {%- liquid
+    assign fi = featured.metafields.ava.author_initials | default: featured.author | slice: 0, 2 | upcase
+    assign frole = featured.metafields.ava.author_role
+    assign fread = featured.metafields.ava.read_time
+  -%}
+
+  <section class="ava-section ava-bg-white ava-blog__featured-wrap">
+
+    <a href="{{ featured.url }}" class="ava-feature">
+
+      <div class="ava-feature__media">
+
+        {%- if featured.image -%}
+          <img
+            src="{{ featured.image | image_url: width: 1200 }}"
+            alt="{{ featured.title | escape }}"
+          >
+        {%- endif -%}
+
+      </div>
+
+      <div class="ava-feature__body">
+
+        <div class="ava-blog__featured-meta">
+
+          <span class="ava-tag">
+            {{ 'journal.featured' | t }}
+          </span>
+
+          {%- if featured.tags.size > 0 -%}
+
+            {%- assign featured_tag = featured.tags.first -%}
+
+            <span class="ava-eyebrow ava-inline-eyebrow">
+
+              {%- case featured_tag -%}
+
+                {%- when 'Precision Wellness' -%}
+                  {{ 'journal.cat_precision' | t }}
+
+                {%- when 'Aging Well' -%}
+                  {{ 'journal.cat_aging' | t }}
+
+                {%- when 'Renewal' -%}
+                  {{ 'journal.cat_renewal' | t }}
+
+                {%- when 'Daily Rhythm' -%}
+                  {{ 'journal.cat_rhythm' | t }}
+
+                {%- when 'The Products' -%}
+                  {{ 'journal.cat_products' | t }}
+
+                {%- when 'Our Science' -%}
+                  {{ 'journal.cat_science' | t }}
+
+                {%- else -%}
+                  {{ featured_tag }}
+
+              {%- endcase -%}
+
+            </span>
+
+          {%- endif -%}
+
+        </div>
+
+        <h2 class="ava-h2 ava-h2--featured">
+          {{ featured.title }}
+        </h2>
+
+        {%- if featured.excerpt_or_content != blank -%}
+          <p class="ava-body ava-blog__featured-excerpt">
+            {%- if is_cjk -%}
+              {{ featured.excerpt_or_content | strip_html | truncate: 90 }}
+            {%- else -%}
+              {{ featured.excerpt_or_content | strip_html | truncatewords: 34 }}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+
+        <div class="ava-byline ava-blog__featured-byline">
+
+          <span class="ava-avatar">
+            {{ fi }}
+          </span>
+
+          <div class="ava-body-sm ava-blog__byline-lines-sm">
+
+            <div class="ava-byline__name">
+              {{ featured.author }}
+            </div>
+
+            <div class="ava-byline__meta">
+              {{ frole }}
+
+              {% if frole and featured.published_at %}
+                &middot;
+              {% endif %}
+
+              {{ featured.published_at | date: format: 'article_date' }}
+
+              {% if fread %}
+                &middot; {{ fread }}
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </a>
+
+  </section>
+
+{%- endif -%}
+
+
+{%- comment -%}
+  GRID
+{%- endcomment -%}
+
+<section class="ava-section ava-bg-panel">
+  <div class="ava-container">
+
+    <h2 class="ava-h2 ava-blog__latest-h">
+      {{ 'journal.latest' | t }}
+    </h2>
+
+    {%- paginate blog.articles by 12 -%}
+
+      <div class="ava-grid ava-grid--auto">
+
+        {%- for article in blog.articles -%}
+
+          {%- unless forloop.first and current_tags == empty and current_page == 1 -%}
+
+            {%- liquid
+              assign ai = article.metafields.ava.author_initials | default: article.author | slice: 0, 2 | upcase
+              assign arole = article.metafields.ava.author_role
+            -%}
+
+            <a href="{{ article.url }}" class="ava-acard">
+
+              {%- if article.image -%}
+                <img
+                  src="{{ article.image | image_url: width: 700 }}"
+                  alt="{{ article.title | escape }}"
+                  loading="lazy"
+                >
+              {%- endif -%}
+
+              <div class="ava-acard__body">
+
+                {%- if article.tags.size > 0 -%}
+
+                  {%- assign article_tag = article.tags.first -%}
+
+                  <div class="ava-acard__cat">
+
+                    {%- case article_tag -%}
+
+                      {%- when 'Precision Wellness' -%}
+                        {{ 'journal.cat_precision' | t }}
+
+                      {%- when 'Aging Well' -%}
+                        {{ 'journal.cat_aging' | t }}
+
+                      {%- when 'Renewal' -%}
+                        {{ 'journal.cat_renewal' | t }}
+
+                      {%- when 'Daily Rhythm' -%}
+                        {{ 'journal.cat_rhythm' | t }}
+
+                      {%- when 'The Products' -%}
+                        {{ 'journal.cat_products' | t }}
+
+                      {%- when 'Our Science' -%}
+                        {{ 'journal.cat_science' | t }}
+
+                      {%- else -%}
+                        {{ article_tag }}
+
+                    {%- endcase -%}
+
+                  </div>
+
+                {%- endif -%}
+
+                <h3 class="ava-acard__title">
+                  {{ article.title }}
+                </h3>
+
+                {%- if article.excerpt_or_content != blank -%}
+                  <p class="ava-acard__excerpt">
+                    {%- if is_cjk -%}
+                      {{ article.excerpt_or_content | strip_html | truncate: 60 }}
+                    {%- else -%}
+                      {{ article.excerpt_or_content | strip_html | truncatewords: 22 }}
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+
+                <div class="ava-byline ava-byline--top">
+
+                  <span class="ava-avatar ava-avatar--sm">
+                    {{ ai }}
+                  </span>
+
+                  <div class="ava-body-sm ava-blog__byline-lines-tight">
+
+                    <div class="ava-byline__name">
+                      {{ article.author }}
+                    </div>
+
+                    <div class="ava-byline__meta">
+                      {{ arole }}
+
+                      {% if arole %}
+                        &middot;
+                      {% endif %}
+
+                      {{ article.published_at | date: format: 'article_date' }}
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </a>
+
+          {%- endunless -%}
+
+        {%- else -%}
+
+          <p class="ava-body">
+            {{ 'blogs.article.empty' | t }}
+          </p>
+
+        {%- endfor -%}
+
+      </div>
+
+
+      {%- if paginate.pages > 1 -%}
+
+        <div class="ava-blog__pager">
+
+          {%- if paginate.previous -%}
+            <a
+              class="ava-chip"
+              href="{{ paginate.previous.url }}"
+            >
+              &larr;
+            </a>
+          {%- endif -%}
+
+          {%- for part in paginate.parts -%}
+
+            {%- if part.is_link -%}
+
+              <a
+                class="ava-chip"
+                href="{{ part.url }}"
+              >
+                {{ part.title }}
+              </a>
+
+            {%- else -%}
+
+              <span class="ava-chip ava-chip--active">
+                {{ part.title }}
+              </span>
+
+            {%- endif -%}
+
+          {%- endfor -%}
+
+          {%- if paginate.next -%}
+            <a
+              class="ava-chip"
+              href="{{ paginate.next.url }}"
+            >
+              &rarr;
+            </a>
+          {%- endif -%}
+
+        </div>
+
+      {%- endif -%}
+
+    {%- endpaginate -%}
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Blog (Journal)",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Learn the science of balance."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Insights on aging well, precision wellness, and living in rhythm with your body, from the people who formulate AVA."
+    }
+  ]
+}
+{% endschema %}

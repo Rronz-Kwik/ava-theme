@@ -1,0 +1,78 @@
+{%- comment -%}
+  Resolves which pack type a product is, for the enrolment-vs-reorder colour
+  block (ClickUp 869etbgcb).
+
+  Context: the word "Enrolment" is being removed from pack names, so the colour
+  block is the ONLY signal telling a customer which pack type they are looking
+  at. It therefore has to resolve the same way on every surface — collection
+  page, homepage cards and PDP — which is why the logic lives in one snippet
+  rather than being repeated per template.
+
+  Outputs a bare token, nothing else. Capture it in the caller:
+
+    {%- capture pack_type -%}{% render 'pack-type', product: product %}{%- endcapture -%}
+    {%- assign pack_type = pack_type | strip -%}
+
+  Returns 'enrolment', 'reorder', or an empty string when the product is
+  neither (e.g. a single bottle), in which case callers render no colour block
+  and the card keeps its current appearance.
+
+  Resolution order:
+    1. product.metafields.ava.pack_type  — authoritative. Set per product in
+       Shopify admin, so pack classification never needs a theme deploy.
+    2. Collection handles from the theme settings, as a fallback for products
+       whose metafield is not populated yet.
+
+  Accepts:
+    product - REQUIRED. The product object.
+{%- endcomment -%}
+
+{%- liquid
+  assign resolved = ''
+
+  # 1. Metafield wins. Tolerate the spellings people actually type.
+  assign mf_value = product.metafields.ava.pack_type.value | default: product.metafields.ava.pack_type
+  assign mf_value = mf_value | downcase | strip
+
+  if mf_value != blank
+    if mf_value contains 'enrol'
+      assign resolved = 'enrolment'
+    elsif mf_value contains 'reorder' or mf_value contains 'maintenance' or mf_value contains 'repeat'
+      assign resolved = 'reorder'
+    endif
+  endif
+
+  # 2. Fall back to collection membership while metafields are still being
+  #    populated. Handles are theme settings so they stay editable.
+  if resolved == blank
+    assign enrol_handles = settings.pack_enrolment_collections | default: '' | downcase | split: ','
+    assign reorder_handles = settings.pack_reorder_collections | default: '' | downcase | split: ','
+
+    for collection in product.collections
+      assign handle = collection.handle | downcase
+
+      for candidate in enrol_handles
+        assign candidate_handle = candidate | strip
+        if handle == candidate_handle
+          assign resolved = 'enrolment'
+          break
+        endif
+      endfor
+      if resolved != blank
+        break
+      endif
+
+      for candidate in reorder_handles
+        assign candidate_handle = candidate | strip
+        if handle == candidate_handle
+          assign resolved = 'reorder'
+          break
+        endif
+      endfor
+      if resolved != blank
+        break
+      endif
+    endfor
+  endif
+-%}
+{{- resolved -}}

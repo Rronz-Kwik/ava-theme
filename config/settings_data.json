@@ -1,0 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_primary": "#2C6FB0",
+    "color_primary_dark": "#235A90",
+    "color_ink": "#1B2228",
+    "color_dark": "#0F1A22",
+    "color_dark_2": "#162430",
+    "color_panel": "#EAF1F6",
+    "color_panel_2": "#F7FAFB",
+    "logo_dark": "shopify://shop_images/ava-logo-ink.png",
+    "logo_light": "shopify://shop_images/ava-logo-white.png",
+    "logo_height": 52,
+    "favicon": "shopify://shop_images/ava-logo-azure.png",
+    "storefront_api_token": "e5d91e128b503dab82aae4745716d69e",
+    "content_for_index": [],
+    "blocks": {
+      "6813491992938784016": {
+        "type": "shopify://apps/ava-attribution-staging/blocks/fee_breakdown/01a16912-1eca-7ef2-8350-c6ea5105ff77",
+        "disabled": false,
+        "settings": {
+          "product_cost_label": "Product cost",
+          "fee_label": "Includes Shipping and Import Cost 20.7%"
+        }
+      }
+    }
+  }
+}

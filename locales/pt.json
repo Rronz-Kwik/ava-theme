@@ -1,0 +1,169 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "nav": {
+      "products": "Produtos",
+      "science": "Nossa ciência",
+      "about": "Sobre",
+      "journal": "Journal",
+      "login": "Entrar",
+      "account": "Conta",
+      "cart": "Carrinho"
+    },
+    "dropdown": {
+      "balance": "Suporte fundamental",
+      "balance_plus": "Suporte direcionado",
+      "renew": "Renovação com colágeno"
+    },
+    "market": {
+      "label": "Region & language",
+      "title": "Choose your market",
+      "subtitle": "Select your region and language."
+    }
+  },
+  "footer": {
+    "tagline": "Balance in Motion. Bem-estar de precisão para ajudar você a envelhecer com seu corpo, não contra ele.",
+    "shop": "Comprar",
+    "company": "Empresa",
+    "contact": "Contato",
+    "rights": "© 2026 AVA. Todos os direitos reservados.",
+    "disclaimer": "Estes produtos são pensados para apoiar rotinas diárias de bem-estar e não têm a intenção de diagnosticar, tratar, curar ou prevenir qualquer doença.",
+    "join": "Join the movement",
+    "join_body": "Insights on aging well, precision wellness, and living in rhythm with your body.",
+    "email_placeholder": "Email address",
+    "join_button": "Join"
+  },
+  "cta": {
+    "heading": "Encontre seu equilíbrio em movimento.",
+    "subtitle": "Descubra produtos de bem-estar de precisão pensados para ajudar você a envelhecer com seu corpo, não contra ele.",
+    "shop": "Comprar AVA"
+  },
+  "product": {
+    "about": "Sobre",
+    "subscribe": "Assinatura",
+    "save20": "Economize 20% com uma assinatura",
+    "free_ship": "Frete grátis, sempre",
+    "guarantee": "Garantia de reembolso de 90 dias",
+    "cancel": "Altere ou cancele quando quiser",
+    "onetime": "Compra única",
+    "add_cart": "Adicionar ao carrinho",
+    "ic_precision": "Formulação de precisão",
+    "ic_clean": "Limpo e consciente",
+    "ic_gmp": "Qualidade GMP",
+    "acc_benefits": "Benefícios",
+    "acc_ingredients": "Ingredientes e destaques",
+    "acc_howto": "Como usar",
+    "acc_faqs": "Perguntas frequentes",
+    "why_label": "Por que importa",
+    "blend_label": "Dentro da fórmula",
+    "blend_h": "Ingredientes com propósito, cada um escolhido por um motivo.",
+    "ritual_label": "O ritual",
+    "howto_label": "Como usar",
+    "standard_label": "O padrão AVA",
+    "reviews": "reviews"
+  },
+  "journal": {
+    "header": "Conheça a ciência do equilíbrio.",
+    "subhead": "Reflexões sobre envelhecer bem, bem-estar de precisão e viver no ritmo do seu corpo, de quem formula a AVA.",
+    "chip_all": "Tudo",
+    "cat_precision": "Bem-estar de precisão",
+    "cat_aging": "Envelhecer bem",
+    "cat_renewal": "Renovação",
+    "cat_rhythm": "Ritmo diário",
+    "cat_products": "Os produtos",
+    "cat_science": "Nossa ciência",
+    "featured": "Destaque",
+    "latest": "Últimos artigos",
+    "nl_h": "Junte-se ao movimento.",
+    "nl_sub": "Novos textos sobre envelhecer bem, bem-estar de precisão e viver no ritmo do seu corpo, enviados de vez em quando, nunca com barulho.",
+    "nl_email": "Endereço de e-mail",
+    "nl_btn": "Assinar",
+    "read_more": "Read article"
+  },
+  "article": {
+    "back": "Journal",
+    "back_btn": "Voltar ao Journal",
+    "written_by": "Escrito por",
+    "bio_suffix": " na AVA. Escreve sobre bem-estar de precisão e envelhecer com o próprio corpo."
+  },
+  "about": {
+    "hero_ey": "Sobre a AVA",
+    "hero_h1": "O que significa viver de verdade, não apenas funcionar.",
+    "hero_sub": "AVA, que significa “vida”, foi criada para quem quer se sentir mais equilibrado, mais capaz e mais em sintonia com o próprio corpo em cada fase da vida.",
+    "story_ey": "Nossa história",
+    "story_h": "Equilíbrio não é imobilidade. É movimento.",
+    "story_p1": "A AVA é uma marca premium de saúde e bem-estar construída sobre a ideia de que equilíbrio é ritmo — a capacidade do corpo de se adaptar, responder, mudar e voltar ao centro através de cada mudança, fase e estação da vida.",
+    "story_p2": "A indústria do bem-estar tornou a saúde confusa, clínica demais e desconectada de como as pessoas realmente vivem. A AVA desafia esse modelo. Acreditamos que o equilíbrio deve ser entendido como um fundamento da vida — não um tema de nicho, nem algo abordado apenas quando as pessoas se sentem mal.",
+    "mission_l": "Missão",
+    "mission_t": "A AVA ajuda homens e mulheres a envelhecer com seus corpos, não contra eles, por meio de um bem-estar preciso e guiado pela ciência para cada mudança, fase e estação da vida.",
+    "vision_l": "Visão",
+    "vision_t": "A AVA imagina um futuro em que envelhecer bem começa com equilíbrio — ativo, responsivo e pessoal.",
+    "origin_ey": "Origem",
+    "origin_h": "Criada para repensar o que o bem-estar poderia ser.",
+    "origin_p1": "A AVA nasceu da convicção de que o bem-estar precisava ser reinventado. Durante décadas, a indústria se apoiou em soluções genéricas e no pensamento de tamanho único. Mas o corpo não é genérico. Ele é inteligente, adaptável e está em constante movimento.",
+    "origin_p2": "As ideias por trás da AVA remontam ao final dos anos 1990, quando nossa equipe de desenvolvimento se formou questionando suposições e reinventando o status quo. Décadas de observação, refinamento e exploração científica evoluíram para uma visão de produtos que criam categoria, projetados para apoiar o corpo com mais precisão, mais intenção e mais respeito por como ele realmente funciona.",
+    "origin_p3": "A AVA acredita que envelhecer bem não é lutar contra o corpo. É entendê-lo, apoiá-lo e mover-se no ritmo dele.",
+    "pillars_l": "Pilares da marca",
+    "p1_h": "Equilíbrio em movimento",
+    "p1_p": "O equilíbrio não é estático. É a capacidade do corpo de se adaptar, responder, mudar e voltar ao centro em cada fase da vida.",
+    "p2_h": "Bem-estar de precisão",
+    "p2_p": "Soluções guiadas pela ciência e feitas com intenção — pensamento avançado e design com propósito que apoiam o corpo de maneiras mais inteligentes.",
+    "p3_h": "Envelheça com seu corpo",
+    "p3_p": "Ajudamos as pessoas a trabalhar com o ritmo natural do corpo, não contra ele — envelhecer bem, viver plenamente, tornar-se a melhor versão de si.",
+    "values_h": "O que valorizamos",
+    "v1_h": "Precisão",
+    "v1_p": "O bem-estar deve ser intencional, cuidadoso e rigoroso — nunca genérico.",
+    "v2_h": "Equilíbrio",
+    "v2_p": "O verdadeiro bem-estar é dinâmico e ajuda o corpo a voltar ao centro em cada estação.",
+    "v3_h": "Inovação",
+    "v3_p": "Desafiamos normas ultrapassadas aplicando ciência avançada para criar soluções mais inteligentes.",
+    "v4_h": "Integridade",
+    "v4_p": "Agimos com confiança, transparência e responsabilidade em tudo o que criamos e entregamos.",
+    "v5_h": "Acessibilidade",
+    "v5_p": "Tornamos o bem-estar avançado humano, compreensível e ao alcance de todos."
+  },
+  "science": {
+    "hero_h1": "Ciência avançada, com um toque humano.",
+    "hero_sub": "A AVA usa formulação precisa, ingredientes com propósito, formatos de uso bem pensados e um design centrado nas pessoas para criar produtos de bem-estar inteligentes, modernos e fáceis de usar.",
+    "phil_ey": "Filosofia científica",
+    "phil_h": "A ciência deve ser avançada, precisa e profundamente humana.",
+    "phil_p1": "Cada produto AVA é projetado com intenção — da seleção de ingredientes e da estratégia de formulação ao formato de uso e à experiência do dia a dia. Para a AVA, ciência não é complexidade por si só. É criar soluções de bem-estar mais inteligentes e cuidadosas que apoiem o equilíbrio através de cada mudança, fase e estação da vida.",
+    "phil_p2": "Questionamos a ideia de que o bem-estar avançado precisa ser frio, clínico ou inacessível. Acreditamos que a melhor ciência deve ser pessoal, com propósito e conectada à forma como as pessoas realmente vivem.",
+    "build_h": "Como criamos cada produto",
+    "b1_h": "Formulação precisa",
+    "b1_p": "Projetada com intenção, da seleção de ingredientes e da estratégia de formulação ao formato de uso.",
+    "b2_h": "Ingredientes com propósito",
+    "b2_p": "Botânicos e nutrientes selecionados, cada um escolhido por um motivo — nunca de enchimento.",
+    "b3_h": "Entrega bem pensada",
+    "b3_p": "Formatos projetados em torno da vida real — dosadores tópicos, sachês de dose única, rituais diários simples.",
+    "b4_h": "Design centrado nas pessoas",
+    "b4_p": "Bem-estar avançado que continua pessoal — nunca frio ou clínico.",
+    "band_ey": "A abordagem AVA",
+    "band_h": "Disruptiva no pensamento, premium na execução e humana no cerne.",
+    "std_ey": "O padrão AVA",
+    "std_h": "Bem-estar proativo, antes de você se sentir ignorado.",
+    "std_p1": "Respeitamos a medicina moderna, mas acreditamos que as pessoas merecem soluções de bem-estar proativas e guiadas pela ciência antes de serem reduzidas a um sintoma ou receberem uma resposta de tamanho único.",
+    "std_p2": "A AVA usa a ciência para criar soluções que ajudam as pessoas a envelhecer com o corpo, não contra ele — disruptiva no pensamento, premium na execução, humana no cerne."
+  },
+  "contact": {
+    "heading": "Acesse os maiores especialistas do mundo, em qualquer lugar, quando você mais precisar.",
+    "subheading": "Fale conosco para dúvidas, solicitações ou perguntas.",
+    "form_heading": "Preencha este formulário para ser contatado pela nossa equipe",
+    "first_name": "Nome",
+    "last_name": "Sobrenome",
+    "email": "E-mail",
+    "country": "País",
+    "country_placeholder": "Selecione...",
+    "message": "Mensagem",
+    "submit": "Enviar",
+    "success": "Obrigado pelo contato. Nossa equipe entrará em contato em breve."
+  }
+}

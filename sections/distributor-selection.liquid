@@ -1,0 +1,744 @@
+{%- comment -%} Static enrollment styles live in assets/enrollment.css (cached, minified). Only the theme-editor color variables are inlined below. {%- endcomment -%}
+{%- liquid
+  # Editor text: as entered on the primary language, enrollment.copy.* translations elsewhere.
+  capture t_step2_subheading
+    render 'editor-text', value: section.settings.step2_subheading, key: 'enrollment.copy.step2_subheading'
+  endcapture
+  capture t_step2_heading
+    render 'editor-text', value: section.settings.step2_heading, key: 'enrollment.copy.step2_heading'
+  endcapture
+  capture t_step2_description
+    render 'editor-text', value: section.settings.step2_description, key: 'enrollment.copy.step2_description'
+  endcapture
+  capture t_step2_note
+    render 'editor-text', value: section.settings.step2_note, key: 'enrollment.copy.step2_note'
+  endcapture
+  capture t_step2_note_tooltip
+    render 'editor-text', value: section.settings.step2_note_tooltip, key: 'enrollment.copy.step2_note_tooltip'
+  endcapture
+  capture t_step3_subheading
+    render 'editor-text', value: section.settings.step3_subheading, key: 'enrollment.copy.step3_subheading'
+  endcapture
+  capture t_step3_heading
+    render 'editor-text', value: section.settings.step3_heading, key: 'enrollment.copy.step3_heading'
+  endcapture
+  capture t_step3_note
+    render 'editor-text', value: section.settings.step3_note, key: 'enrollment.copy.step3_note'
+  endcapture
+  capture t_step3_note_tooltip
+    render 'editor-text', value: section.settings.step3_note_tooltip, key: 'enrollment.copy.step3_note_tooltip'
+  endcapture
+  capture t_summary_step3_title
+    render 'editor-text', value: section.settings.summary_step3_title, key: 'enrollment.copy.summary_step3_title'
+  endcapture
+  capture t_summary_step4_title
+    render 'editor-text', value: section.settings.summary_step4_title, key: 'enrollment.copy.summary_step4_title'
+  endcapture
+  capture t_summary_sponsor_help
+    render 'editor-text', value: section.settings.summary_sponsor_help, key: 'enrollment.copy.summary_sponsor_help'
+  endcapture
+  capture t_finish_heading
+    render 'editor-text', value: section.settings.finish_heading, key: 'enrollment.copy.finish_heading', fallback: true
+  endcapture
+  capture t_finish_subtext
+    render 'editor-text', value: section.settings.finish_subtext, key: 'enrollment.copy.finish_subtext'
+  endcapture
+  capture t_summary_welcome_text
+    render 'editor-text', value: section.settings.summary_welcome_text, key: 'enrollment.copy.summary_welcome_text'
+  endcapture
+  capture t_summary_reassurance_text
+    render 'editor-text', value: section.settings.summary_reassurance_text, key: 'enrollment.copy.summary_reassurance_text'
+  endcapture
+-%}
+{{ 'enrollment.css' | asset_url | stylesheet_tag }}
+
+<style>
+    /* ── Enrollment green palette (configurable in the theme editor) ── */
+    .distributor-wrapper {
+    --enroll-primary: {{ section.settings.enroll_c_primary | default: '#2ea68f' }};
+    --enroll-secondary: {{ section.settings.enroll_c_secondary | default: '#45b09c' }};
+    --enroll-accent: {{ section.settings.enroll_c_accent | default: '#55c5b6' }};
+    --enroll-heading: {{ section.settings.enroll_c_heading | default: '#1c5d6e' }};
+    --enroll-total: {{ section.settings.enroll_c_total | default: '#1c6b82' }};
+    --enroll-badge-text: {{ section.settings.enroll_c_badge_text | default: '#1e755b' }};
+    --enroll-tint-bg: {{ section.settings.enroll_c_tint_bg | default: '#f0faf8' }};
+    --enroll-tint-border: {{ section.settings.enroll_c_tint_border | default: '#c6ede7' }};
+    /* Fall back to the theme fonts, then Inter Tight, then the system stack. */
+    --enroll-font-head: var(--ava-font-head, 'Inter Tight', sans-serif);
+    --enroll-font-body: var(--ava-font-body, 'Inter Tight', sans-serif);
+    font-family: var(--enroll-font-body);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    }
+</style>
+
+{%- comment -%} UI strings for assets/new-enrollment.js (locales: enrollment.*). {%- endcomment -%}
+<script type="application/json" id="enrollment-i18n">
+  {
+    "sponsor_select": {{ 'enrollment.sponsor.select' | t | json }},
+    "sponsor_enter_id": {{ 'enrollment.sponsor.enter_id' | t | json }},
+    "sponsor_searching": {{ 'enrollment.sponsor.searching' | t | json }},
+    "sponsor_not_found": {{ 'enrollment.sponsor.not_found' | t | json }},
+    "sponsor_unavailable": {{ 'enrollment.sponsor.unavailable' | t | json }},
+    "sponsor_failed": {{ 'enrollment.sponsor.failed' | t | json }},
+    "sponsor_required": {{ 'enrollment.sponsor.required' | t | json }},
+    "popup_title": {{ 'enrollment.popup.title' | t | json }},
+    "popup_go_back": {{ 'enrollment.popup.go_back' | t | json }},
+    "popup_close": {{ 'enrollment.popup.close' | t | json }},
+    "popup_select_before_checkout": {{ 'enrollment.popup.select_before_checkout' | t | json }},
+    "popup_select_before_continue": {{ 'enrollment.popup.select_before_continue' | t | json }},
+    "popup_sold_out": {{ 'enrollment.popup.sold_out' | t | json }}
+  }
+</script>
+
+<div class="distributor-wrapper" data-currency="{{ shop.currency }}" data-sponsor-url="{{ section.settings.sponsor_api_url }}">
+  <div class="distributor-step step-1">
+    <div class="distributor-inner">
+      <div class="distributor-left">
+        <img src="{{ section.settings.left_image | image_url }}" alt="Banner">
+      </div>
+
+      <div class="distributor-right">
+        <div class="inner-distributor_right">
+          <p class="sub-heading">{{ 'enrollment.sponsor.eyebrow' | t }}</p>
+          <h2>{{ 'enrollment.sponsor.heading' | t }}</h2>
+
+          <div class="custom-dropdown">
+            <div class="dropdown-selected" id="sponsorDropdownSelected">{{ 'enrollment.sponsor.select' | t }}</div>
+
+            <div class="dropdown-list" id="sponsorDropdownList">
+              <div class="dropdown-search-wrap">
+                <input type="text" id="sponsorSearchInput" class="dropdown-search" placeholder="{{ 'enrollment.sponsor.search_placeholder' | t | escape }}" autocomplete="off" spellcheck="false" autocapitalize="characters" pattern="[A-Za-z]{0,2}[0-9]+" aria-label="{{ 'enrollment.sponsor.search_label' | t | escape }}">
+              </div>
+              <ul class="dropdown-results" id="sponsorResults">
+                <li class="dropdown-state-msg">{{ 'enrollment.sponsor.enter_id' | t }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <button class="continue-btn">{{ 'enrollment.sponsor.continue' | t }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="distributor-step step-2" style="display:none;">
+    <div class="page-width">
+     <div class="enroll-shell">
+      <div class="enroll-main">
+
+      <div class="subscription-header">
+        <div class="inner-subscription-header">
+          {% if t_step2_subheading != blank %}
+            <p class="subheading">
+              {{ t_step2_subheading }}
+            </p>
+          {% endif %}
+
+          {% if t_step2_heading != blank %}
+            <h2 class="heading">
+              {{ t_step2_heading }}
+            </h2>
+          {% endif %}
+
+          {% if t_step2_description != blank %}
+            <p class="description">
+              {{ t_step2_description }}
+            </p>
+          {% endif %}
+        </div>
+        {% if t_step2_subheading != blank
+          or t_step2_heading != blank
+          or t_step2_description != blank
+        %}
+          <div class="divider"></div>
+        {% endif %}
+
+        {% if t_step2_note != blank %}
+          <p class="note">
+            {{ t_step2_note }}
+            <span class="info-icon" tabindex="0" aria-label="{{ 'enrollment.copy.more_info' | t | escape }}">i{%- if t_step2_note_tooltip != blank -%}<span class="info-tooltip">{{ t_step2_note_tooltip }}</span>{%- endif -%}</span>
+          </p>
+        {% endif %}
+      </div>
+      <div class="package-grid">
+        {% assign step2_collection = collections[section.settings.step2_collection] %}
+
+        {% for product in step2_collection.products %}
+          <div class="package-card"
+            data-product-id="{{ product.id }}"
+            data-variant-id="{{ product.variants.first.id }}"
+            data-title="{{ product.title | escape }}"
+            data-price="{{ product.price }}"
+            data-image="{{ product.featured_image | image_url: width: 120 }}"
+            data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"
+            {% if product.selling_plan_groups.size > 0 %}data-subscription="true"{% endif %}
+          >
+            {% unless product.available %}
+              <div class="sold-out-badge">{{ 'enrollment.products.sold_out' | t }}</div>
+            {% endunless %}
+
+            <div class="select-circle"></div>
+
+            <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title }}">
+
+            <div class="product-info">
+              <div class="product-title">
+                <h3>{{ product.title | truncate: 30 }}</h3>
+                <p class="price">{{ product.price | money }}</p>
+              </div>
+
+              {% if product.metafields.custom.package != blank or product.metafields.custom.business_kit != blank %}
+                <div class="product-meta">
+                  {% if product.metafields.custom.package != blank %}
+                    <div class="meta-block">
+                      <strong>{{ 'enrollment.products.package' | t }}</strong>
+                      {{ product.metafields.custom.package | metafield_tag }}
+                    </div>
+                  {% endif %}
+
+                  {% if product.metafields.custom.business_kit != blank %}
+                    <div class="meta-block">
+                      <strong>{{ 'enrollment.products.business_kit' | t }}</strong>
+                      {{ product.metafields.custom.business_kit | metafield_tag }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              <input type="hidden" class="variant-id" value="{{ product.variants.first.id }}">
+              <input type="hidden" class="is-available" value="{{ product.available }}">
+
+              {% if product.selling_plan_groups.size > 0 %}
+                <input
+                  type="hidden"
+                  class="selling-plan-id"
+                  value="{{ product.selling_plan_groups.first.selling_plans.first.id }}"
+                >
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      </div>
+      {% render 'enrollment-summary',
+        step3_show: section.settings.summary_step3_show,
+        step3_title: t_summary_step3_title,
+        step4_show: section.settings.summary_step4_show,
+        step4_title: t_summary_step4_title,
+        sponsor_help: t_summary_sponsor_help
+      %}
+     </div>
+    </div>
+  </div>
+
+  <div class="distributor-step step-3" style="display:none;">
+    <div class="page-width">
+     <div class="enroll-shell">
+      <div class="enroll-main">
+
+      {% render 'enrollment-additional-products',
+        subheading: t_step3_subheading,
+        heading: t_step3_heading,
+        description: section.settings.step3_description,
+        note: t_step3_note,
+        note_tooltip: t_step3_note_tooltip,
+        collection: collections[section.settings.step3_collection],
+        show_metafields: section.settings.show_metafeilds_container
+      %}
+
+      <div class="step-navigation">
+         <div class="back-button">
+            <button class="back-btn back step3-back">
+              <span>
+                <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.75 10.75L0.75 5.75L5.75 0.75" stroke="#111729" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>{{ 'enrollment.products.back' | t }}</span>
+            </button>
+         </div>
+        </div>
+      </div>
+      {% render 'enrollment-summary',
+        step3_show: section.settings.summary_step3_show,
+        step3_title: t_summary_step3_title,
+        step4_show: section.settings.summary_step4_show,
+        step4_title: t_summary_step4_title,
+        sponsor_help: t_summary_sponsor_help
+      %}
+     </div>
+    </div>
+  </div>
+
+  {%- if section.settings.china_enrollment_address_enabled -%}
+  <div class="distributor-step step-shipping" style="display:none;" data-confirm-message="{{ 'enrollment.shipping.confirm_before_checkout' | t | escape }}">
+    <div class="page-width">
+     <div class="enroll-shell">
+      <div class="enroll-main">
+      {% render 'enrollment-shipping',
+        subheading: section.settings.shipping_subheading,
+        heading: section.settings.shipping_heading,
+        proxy_path: section.settings.shipping_proxy_path
+      %}
+      <div class="step-navigation step-navigation--split">
+         <div class="back-button">
+            <button type="button" class="back-btn back shipping-back">
+              <span>
+                <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.75 10.75L0.75 5.75L5.75 0.75" stroke="#111729" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>{{ 'enrollment.shipping.back' | t }}</span>
+            </button>
+         </div>
+         <button type="button" class="continue-btn shipping-next-btn">{{ 'enrollment.shipping.continue' | t }}</button>
+      </div>
+      </div>
+     </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <div class="distributor-step step-4" style="display:none;">
+    <div class="page-width">
+     <div class="enroll-shell">
+      <div class="enroll-main">
+
+      <div class="enroll-finish-intro">
+        <h2 class="enroll-finish-title">{{ t_finish_heading }}</h2>
+        {% if t_finish_subtext != blank %}
+          <p class="enroll-finish-sub">{{ t_finish_subtext }}</p>
+        {% endif %}
+      </div>
+
+      {% render 'enrollment-overview' %}
+
+      {% comment %} Product-picking grid moved to step 2 (enrollment-additional-products). {% endcomment %}
+      {% if false %}
+        {% for product in collections[section.settings.step3_collection].products %}
+          <div class="package-card"
+            data-product-id="{{ product.id }}"
+            data-variant-id="{{ product.variants.first.id }}"
+            data-title="{{ product.title | escape }}"
+            data-price="{{ product.price }}"
+            data-image="{{ product.featured_image | image_url: width: 120 }}"
+            data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"
+            {% if product.selling_plan_groups.size > 0 %}data-subscription="true"{% endif %}
+          >
+            {% unless product.available %}
+              <div class="sold-out-badge">{{ 'enrollment.products.sold_out' | t }}</div>
+            {% endunless %}
+
+            <div class="select-circle"></div>
+
+            <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title }}">
+
+            <div class="product-info">
+              <div class="product-title">
+                <p class="price">{{ product.price | money }}</p>
+                <h3>{{ product.title | truncate: 30 }}</h3>
+              </div>
+
+              <div class="short_description">
+                {% assign short_description = product.metafields.custom.short_description.value %}
+                  <p>{{ short_description }}</p>
+              </div>
+
+              {% if section.settings.show_metafeilds_container and shop.metafields.apex.volume_tracking_enabled.value != false %}
+                <div class="metafeilds_container">
+                  <div class="bv-value PV">
+                    {% comment %} {% if customer
+                      and customer.tags contains 'member'
+                      or customer
+                      and customer.tags contains 'Affiliate'
+                    %} {% endcomment %}
+                      {% if product.metafields.apex.volume1.value != blank %}
+                        <span class="icon_svg">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="14" height="14" rx="7" fill="#FFBE4C"/>
+                            <rect x="1" y="1" width="14" height="14" rx="7" stroke="#F29C06" stroke-width="2"/>
+                            <path d="M8.33977 4.82236C7.65255 5.05438 6.92335 5.54052 6.23171 6.23216C5.54007 6.9238 5.05393 7.653 4.82192 8.34022C4.5899 9.02744 4.6584 9.60859 4.99427 9.94447L6.05493 11.0051C6.39081 11.341 6.97638 11.4051 7.65918 11.1775C8.34198 10.9499 9.0756 10.4593 9.76724 9.76769C10.4589 9.07605 10.945 8.34685 11.177 7.65963C11.4091 6.97241 11.3406 6.39126 11.0047 6.05538L9.94402 4.99472C9.60814 4.65884 9.02257 4.59476 8.33977 4.82236ZM8.5276 8.8816L9.2347 9.5887C8.79939 9.99308 8.38397 10.2848 8.00832 10.4836L7.31447 9.78979C7.71884 9.56219 8.12764 9.25504 8.5276 8.8816ZM8.88115 8.52804C9.25459 8.12809 9.56174 7.71929 9.78934 7.31491L10.4832 8.00876C10.2843 8.38441 9.99263 8.79984 9.58826 9.23515L8.88115 8.52804ZM6.40849 10.6516L5.99969 10.2428C6.20351 10.2241 6.40447 10.1819 6.59852 10.1168L6.84159 10.024L7.51334 10.6958C6.99185 10.8725 6.59189 10.835 6.40849 10.6516ZM10.6953 7.51379L10.0236 6.84204L10.1164 6.59897C10.1814 6.40491 10.2237 6.20396 10.2423 6.00014L10.6511 6.40893C10.8345 6.59234 10.8721 6.9923 10.6953 7.51379Z" fill="white"/>
+                          </svg>
+                        </span>
+                        <span class="membership-bv"> {{ product.metafields.apex.volume1.value }} QV </span>
+                      {% endif %}
+                    {% comment %} {% endif %} {% endcomment %}
+                  </div>
+
+                  <div class="bv-value BV">
+                    {% comment %} {% if customer
+                      and customer.tags contains 'member'
+                      or customer
+                      and customer.tags contains 'Affiliate'
+                    %} {% endcomment %}
+                      {% if product.metafields.apex.volume2.value != blank %}
+                        <span class="icon_svg">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.833333" y="0.833333" width="14.3333" height="14.3333" rx="7.16667" fill="#55C5B6"/>
+                            <rect x="0.833333" y="0.833333" width="14.3333" height="14.3333" rx="7.16667" stroke="#2F947C" stroke-width="1.66667"/>
+                            <path d="M8.34075 4.82236C7.65353 5.05438 6.92433 5.54052 6.23269 6.23216C5.54105 6.9238 5.05491 7.653 4.82289 8.34022C4.59087 9.02744 4.65937 9.60859 4.99525 9.94447L6.05591 11.0051C6.39179 11.341 6.97736 11.4051 7.66016 11.1775C8.34296 10.9499 9.07658 10.4593 9.76822 9.76769C10.4599 9.07605 10.946 8.34685 11.178 7.65963C11.41 6.97241 11.3415 6.39126 11.0057 6.05538L9.945 4.99472C9.60912 4.65884 9.02355 4.59476 8.34075 4.82236ZM8.52857 8.8816L9.23568 9.5887C8.80037 9.99308 8.38494 10.2848 8.00929 10.4836L7.31544 9.78979C7.71982 9.56219 8.12862 9.25504 8.52857 8.8816ZM8.88213 8.52804C9.25557 8.12809 9.56272 7.71929 9.79032 7.31491L10.4842 8.00876C10.2853 8.38441 9.99361 8.79984 9.58923 9.23515L8.88213 8.52804ZM6.40946 10.6516L6.00067 10.2428C6.20448 10.2241 6.40544 10.1819 6.5995 10.1168L6.84257 10.024L7.51432 10.6958C6.99283 10.8725 6.59287 10.835 6.40946 10.6516ZM10.6963 7.51379L10.0245 6.84204L10.1174 6.59897C10.1824 6.40491 10.2247 6.20396 10.2433 6.00014L10.6521 6.40893C10.8355 6.59234 10.8731 6.9923 10.6963 7.51379Z" fill="white"/>
+                          </svg>
+                        </span>
+                        <span class="membership-bv"> {{ product.metafields.apex.volume2.value }} CV </span>
+                      {% endif %}
+                    {% comment %} {% endif %} {% endcomment %}
+                  </div>
+
+                  <div class="bv-value product-rating">
+                      <span class="icon_svg">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0.833333" y="0.833333" width="14.3333" height="14.3333" rx="7.16667" fill="#55C5B6"/>
+                          <rect x="0.833333" y="0.833333" width="14.3333" height="14.3333" rx="7.16667" stroke="#2F947C" stroke-width="1.66667"/>
+                          <path d="M8.34075 4.82236C7.65353 5.05438 6.92433 5.54052 6.23269 6.23216C5.54105 6.9238 5.05491 7.653 4.82289 8.34022C4.59087 9.02744 4.65937 9.60859 4.99525 9.94447L6.05591 11.0051C6.39179 11.341 6.97736 11.4051 7.66016 11.1775C8.34296 10.9499 9.07658 10.4593 9.76822 9.76769C10.4599 9.07605 10.946 8.34685 11.178 7.65963C11.41 6.97241 11.3415 6.39126 11.0057 6.05538L9.945 4.99472C9.60912 4.65884 9.02355 4.59476 8.34075 4.82236ZM8.52857 8.8816L9.23568 9.5887C8.80037 9.99308 8.38494 10.2848 8.00929 10.4836L7.31544 9.78979C7.71982 9.56219 8.12862 9.25504 8.52857 8.8816ZM8.88213 8.52804C9.25557 8.12809 9.56272 7.71929 9.79032 7.31491L10.4842 8.00876C10.2853 8.38441 9.99361 8.79984 9.58923 9.23515L8.88213 8.52804ZM6.40946 10.6516L6.00067 10.2428C6.20448 10.2241 6.40544 10.1819 6.5995 10.1168L6.84257 10.024L7.51432 10.6958C6.99283 10.8725 6.59287 10.835 6.40946 10.6516ZM10.6963 7.51379L10.0245 6.84204L10.1174 6.59897C10.1824 6.40491 10.2247 6.20396 10.2433 6.00014L10.6521 6.40893C10.8355 6.59234 10.8731 6.9923 10.6963 7.51379Z" fill="white"/>
+                        </svg>
+                      </span>
+                      <span class="membership-bv">
+                        4.9
+                      </span>
+                      <span class="product-number">(450)</span>
+                  </div>
+                </div>
+              {% endif %}
+
+              <button type="button" class="add-to-cart-btn">{{ 'enrollment.products.add_to_cart' | t }}</button>
+              <div class="qty-box is-hidden">
+                <button class="qty-minus">-</button>
+                <input type="number" value="0" min="0" class="qty-input">
+                <button class="qty-plus">+</button>
+              </div>
+
+              <input type="hidden" class="variant-id" value="{{ product.variants.first.id }}">
+              <input type="hidden" class="is-available" value="{{ product.available }}">
+
+              {% if product.selling_plan_groups.size > 0 %}
+                <input
+                  type="hidden"
+                  class="selling-plan-id"
+                  value="{{ product.selling_plan_groups.first.selling_plans.first.id }}"
+                >
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <div class="step-navigation step-navigation--split">
+         <div class="back-button">
+            <button class="back-btn back step4-back">
+              <span>
+                <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.75 10.75L0.75 5.75L5.75 0.75" stroke="#111729" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>{{ 'enrollment.products.back' | t }}</span>
+            </button>
+         </div>
+      </div>
+      </div>
+      {% render 'enrollment-summary',
+        step3_show: section.settings.summary_step3_show,
+        step3_title: t_summary_step3_title,
+        step4_show: section.settings.summary_step4_show,
+        step4_title: t_summary_step4_title,
+        sponsor_help: t_summary_sponsor_help,
+        checkout_extras: true,
+        terms_page: section.settings.terms_page,
+        welcome_text: t_summary_welcome_text,
+        reassurance_text: t_summary_reassurance_text
+      %}
+     </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'enrollment-shipping-prefill.js' | asset_url }}" defer></script>
+<script src="{{ 'enrollment-obo-context.js' | asset_url }}" defer></script>
+{%- comment -%}
+  After the two above: it reads their OBO context and URL address. During an
+  OBO/EBO session snippets/obo-session.liquid loads the same two site-wide;
+  each runs once, whichever copy comes first.
+{%- endcomment -%}
+{%- if section.settings.china_enrollment_address_enabled -%}
+  <script src="{{ 'enrollment-shipping.js' | asset_url }}" defer></script>
+{%- endif -%}
+<script src="{{ 'new-enrollment.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Distributor Selection",
+  "settings": [
+       {
+      "type": "text",
+      "id": "sponsor_api_url",
+      "label": "Sponsor / Rep API URL",
+      "info": "Endpoint returning { reps: [{ repDid, name }] } or { sponsors: [{ id, name }] }. Leave blank to use the app-proxy URL from apex-config.",
+      "default": "https://g17dcc4016a8ea9-avadevdb.azure-westus3.adb.us-phoenix-1.oraclecloudapps.com/ords/ava/syncops-public/reps"
+    },
+
+    {
+      "type": "header",
+      "content": "Step 2 Content"
+    },
+    {
+      "type": "text",
+      "id": "step2_subheading",
+      "label": "Subheading",
+      "default": "Select Kit"
+    },
+    {
+      "type": "text",
+      "id": "step2_heading",
+      "label": "Heading",
+      "default": "Add a Monthly Subscription or Additional Products"
+    },
+    {
+      "type": "textarea",
+      "id": "step2_description",
+      "label": "Description",
+      "default": "Unlock the convenience of a monthly order by choosing \"Subscribe\"."
+    },
+    {
+      "type": "text",
+      "id": "step2_note",
+      "label": "Bottom Note",
+      "default": "Promotions (if applicable) will be calculated at checkout."
+    },
+    {
+      "type": "textarea",
+      "id": "step2_note_tooltip",
+      "label": "Bottom Note — Tooltip Text",
+      "default": "Any active promotions, member discounts, or bundle pricing are applied automatically when you reach checkout. No promo code entry is needed."
+    },
+    {
+      "type": "collection",
+      "id": "step2_collection",
+      "label": "Step 2 Collection"
+    },
+
+    {
+      "type": "header",
+      "content": "Step 3 Content"
+    },
+    {
+      "type": "text",
+      "id": "step3_subheading",
+      "label": "Subheading",
+      "default": "Additional Products"
+    },
+    {
+      "type": "text",
+      "id": "step3_heading",
+      "label": "Heading",
+      "default": "Boost Your Order"
+    },
+    {
+      "type": "textarea",
+      "id": "step3_description",
+      "label": "Description",
+      "default": "Add extra products to enhance your kit."
+    },
+    {
+      "type": "text",
+      "id": "step3_note",
+      "label": "Bottom Note",
+      "default": "Optional products."
+    },
+    {
+      "type": "textarea",
+      "id": "step3_note_tooltip",
+      "label": "Bottom Note — Tooltip Text",
+      "default": "These products are optional add-ons. You can adjust quantities or remove them before completing checkout."
+    },
+    {
+      "type": "collection",
+      "id": "step3_collection",
+      "label": "Step 3 Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_metafeilds_container",
+      "label": "Show QV/CV/Rating",
+      "default": false
+    },
+
+    {
+      "type": "header",
+      "content": "Order Summary Sidebar"
+    },
+    {
+      "type": "checkbox",
+      "id": "summary_step3_show",
+      "label": "Show \"Subscription\" step",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "summary_step3_title",
+      "label": "Subscription step title",
+      "default": "Setup Your Subscription!"
+    },
+    {
+      "type": "checkbox",
+      "id": "summary_step4_show",
+      "label": "Show \"Finish up\" step",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "summary_step4_title",
+      "label": "Finish step title",
+      "default": "Finish up"
+    },
+    {
+      "type": "textarea",
+      "id": "summary_sponsor_help",
+      "label": "Sponsor — \"How does this work?\" tooltip",
+      "default": "Your sponsor is the distributor who referred you. They'll be credited for your enrollment and can help you get started."
+    },
+
+    {
+      "type": "header",
+      "content": "Step 3 — Review Screen"
+    },
+    {
+      "type": "text",
+      "id": "finish_heading",
+      "label": "Review heading",
+      "default": "Nice going! You're almost there!"
+    },
+    {
+      "type": "textarea",
+      "id": "finish_subtext",
+      "label": "Review subtext",
+      "default": "Below you'll find an overview of your selection. If everything is in order, proceed to checkout."
+    },
+    {
+      "type": "url",
+      "id": "terms_page",
+      "label": "Terms & Conditions link"
+    },
+    {
+      "type": "text",
+      "id": "summary_welcome_text",
+      "label": "Welcome line (under payment icons)",
+      "default": "Welcome to our store!"
+    },
+    {
+      "type": "text",
+      "id": "summary_reassurance_text",
+      "label": "Reassurance line",
+      "default": "Ships in 24 hours, 30-day money-back guarantee"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Banner Image"
+    },
+     {
+      "type": "header",
+      "content": "Enrollment colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "The palette used across the multi-step enrollment flow."
+    },    
+    {
+      "type": "color",
+      "id": "enroll_c_primary",
+      "label": "Primary",
+      "info": "Main CTA buttons, active selections and borders.",
+      "default": "#2ea68f"
+    },
+    {
+      "type": "color",
+      "id": "enroll_c_secondary",
+      "label": "Buttons",
+      "info": "Step navigation and checkout buttons, section subheadings.",
+      "default": "#45b09c"
+    },
+    {
+      "type": "color",
+      "id": "enroll_c_accent",
+      "label": "Accent",
+      "info": "Badges and tags (e.g. the sold-out badge).",
+      "default": "#55c5b6"
+    },
+    {
+      "type": "color",
+      "id": "enroll_c_heading",
+      "label": "Overview headings",
+      "info": "Titles on the review / finish step.",
+      "default": "#1c5d6e"
+    },
+    {
+      "type": "color",
+      "id": "enroll_c_total",
+      "label": "Order total",
+      "info": "The order total amount on the review step.",
+      "default": "#1c6b82"
+    },
+    {
+      "type": "color",
+      "id": "enroll_c_badge_text",
+      "label": "Badge value text",
+      "info": "The QV / CV value text inside product cards.",
+      "default": "#1e755b"
+    },
+    {
+      "type": "color",
+      "id": "enroll_c_tint_bg",
+      "label": "Light background",
+      "info": "Sponsor banner background tint.",
+      "default": "#f0faf8"
+    },
+    {
+      "type": "color",
+      "id": "enroll_c_tint_border",
+      "label": "Light border",
+      "info": "Sponsor banner border.",
+      "default": "#c6ede7"
+    },
+    {
+      "type": "header",
+      "content": "Step 1 Content"
+    },
+    {
+      "type": "header",
+      "content": "Shipping step (China)"
+    },
+    {
+      "type": "checkbox",
+      "id": "china_enrollment_address_enabled",
+      "label": "Enable China enrollment address step",
+      "info": "Adds a Shipping step between add-ons and review in the China market: Province, City and District from Ava Attribution App's ByDesign data, validated before review and prefilled in checkout. Needs the app's app proxy. Off: enrollment goes from add-ons straight to review; checkout still validates China addresses.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "shipping_subheading",
+      "label": "Shipping subheading",
+      "info": "Leave blank to use the translated default."
+    },
+    {
+      "type": "text",
+      "id": "shipping_heading",
+      "label": "Shipping heading",
+      "info": "Leave blank to use the translated default."
+    },
+    {
+      "type": "text",
+      "id": "shipping_proxy_path",
+      "label": "Address service path",
+      "info": "Ava Attribution App's app proxy (prefix + subpath).",
+      "default": "/apps/ava-china-address"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Distributor Selection"
+    }
+  ]
+}
+{% endschema %}

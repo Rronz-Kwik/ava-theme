@@ -1,0 +1,169 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "nav": {
+      "products": "Produkte",
+      "science": "Unsere Wissenschaft",
+      "about": "Über uns",
+      "journal": "Journal",
+      "login": "Anmelden",
+      "account": "Konto",
+      "cart": "Warenkorb"
+    },
+    "dropdown": {
+      "balance": "Grundlegende Unterstützung",
+      "balance_plus": "Gezielte Unterstützung",
+      "renew": "Kollagen-Renewal"
+    },
+    "market": {
+      "label": "Region & language",
+      "title": "Choose your market",
+      "subtitle": "Select your region and language."
+    }
+  },
+  "footer": {
+    "tagline": "Balance in Motion. Präzises Wohlbefinden, um mit Ihrem Körper zu altern, nicht gegen ihn.",
+    "shop": "Shop",
+    "company": "Unternehmen",
+    "contact": "Kontakt",
+    "rights": "© 2026 AVA. Alle Rechte vorbehalten.",
+    "disclaimer": "Diese Produkte sind dazu bestimmt, tägliche Wellness-Routinen zu unterstützen, und nicht dazu, Krankheiten zu diagnostizieren, zu behandeln, zu heilen oder zu verhindern.",
+    "join": "Join the movement",
+    "join_body": "Insights on aging well, precision wellness, and living in rhythm with your body.",
+    "email_placeholder": "Email address",
+    "join_button": "Join"
+  },
+  "cta": {
+    "heading": "Finden Sie Ihre Balance in Bewegung.",
+    "subtitle": "Entdecken Sie Präzisions-Wellnessprodukte, die Ihnen helfen, mit Ihrem Körper zu altern, nicht gegen ihn.",
+    "shop": "AVA entdecken"
+  },
+  "product": {
+    "about": "Über",
+    "subscribe": "Abo",
+    "save20": "20 % sparen mit einem Abo",
+    "free_ship": "Immer kostenloser Versand",
+    "guarantee": "90 Tage Geld-zurück-Garantie",
+    "cancel": "Jederzeit ändern oder kündigen",
+    "onetime": "Einmalige Bestellung",
+    "add_cart": "In den Warenkorb",
+    "ic_precision": "Präzise formuliert",
+    "ic_clean": "Sauber & bewusst",
+    "ic_gmp": "GMP-Qualität",
+    "acc_benefits": "Vorteile",
+    "acc_ingredients": "Inhaltsstoffe & Highlights",
+    "acc_howto": "Anwendung",
+    "acc_faqs": "Häufige Fragen",
+    "why_label": "Warum es zählt",
+    "blend_label": "In der Rezeptur",
+    "blend_h": "Zielgerichtete Inhaltsstoffe, jeder aus einem Grund gewählt.",
+    "ritual_label": "Das Ritual",
+    "howto_label": "Anwendung",
+    "standard_label": "Der AVA-Anspruch",
+    "reviews": "reviews"
+  },
+  "journal": {
+    "header": "Lernen Sie die Wissenschaft der Balance.",
+    "subhead": "Einblicke in gutes Altern, präzises Wohlbefinden und ein Leben im Rhythmus des Körpers – von den Menschen, die AVA formulieren.",
+    "chip_all": "Alle",
+    "cat_precision": "Präzises Wohlbefinden",
+    "cat_aging": "Gut altern",
+    "cat_renewal": "Renewal",
+    "cat_rhythm": "Täglicher Rhythmus",
+    "cat_products": "Die Produkte",
+    "cat_science": "Unsere Wissenschaft",
+    "featured": "Empfohlen",
+    "latest": "Neueste Artikel",
+    "nl_h": "Werden Sie Teil der Bewegung.",
+    "nl_sub": "Neue Texte über gutes Altern, präzises Wohlbefinden und ein Leben im Rhythmus des Körpers – gelegentlich, nie laut.",
+    "nl_email": "E-Mail-Adresse",
+    "nl_btn": "Abonnieren",
+    "read_more": "Read article"
+  },
+  "article": {
+    "back": "Journal",
+    "back_btn": "Zurück zum Journal",
+    "written_by": "Geschrieben von",
+    "bio_suffix": " bei AVA. Schreibt über präzises Wohlbefinden und das Altern mit dem eigenen Körper."
+  },
+  "about": {
+    "hero_ey": "Über AVA",
+    "hero_h1": "Was es heißt, wirklich zu leben – nicht nur zu funktionieren.",
+    "hero_sub": "AVA, was „Leben“ bedeutet, wurde für Menschen geschaffen, die sich in jeder Lebensphase ausgeglichener, leistungsfähiger und mehr im Einklang mit ihrem Körper fühlen möchten.",
+    "story_ey": "Unsere Geschichte",
+    "story_h": "Balance ist keine Stille. Sie ist Bewegung.",
+    "story_p1": "AVA ist eine Premium-Marke für Gesundheit und Wohlbefinden, die auf der Überzeugung beruht, dass Balance Rhythmus ist – die Fähigkeit des Körpers, sich anzupassen, zu reagieren, sich zu verändern und durch jeden Wandel, jede Phase und jede Jahreszeit des Lebens zur Mitte zurückzukehren.",
+    "story_p2": "Die Wellness-Branche hat Gesundheit verwirrend, zu klinisch und losgelöst davon gemacht, wie Menschen tatsächlich leben. AVA stellt dieses Modell infrage. Wir glauben, dass Balance als Fundament des Lebens verstanden werden sollte – kein Nischenthema und nichts, das man erst angeht, wenn man sich angeschlagen fühlt.",
+    "mission_l": "Mission",
+    "mission_t": "AVA hilft Frauen und Männern, mit ihrem Körper zu altern, nicht gegen ihn – durch präzises, wissenschaftlich geführtes Wohlbefinden für jeden Wandel, jede Phase und jede Jahreszeit des Lebens.",
+    "vision_l": "Vision",
+    "vision_t": "AVA stellt sich eine Zukunft vor, in der gutes Altern mit Balance beginnt – aktiv, reaktionsfähig und persönlich.",
+    "origin_ey": "Ursprung",
+    "origin_h": "Geschaffen, um neu zu denken, was Wohlbefinden sein kann.",
+    "origin_p1": "AVA entstand aus der Überzeugung, dass Wohlbefinden neu gedacht werden musste. Jahrzehntelang verließ sich die Branche auf generische Lösungen und Einheitsdenken. Doch der Körper ist nicht generisch. Er ist intelligent, anpassungsfähig und ständig in Bewegung.",
+    "origin_p2": "Die Ideen hinter AVA reichen bis in die späten 1990er-Jahre zurück, als unser Entwicklungsteam sich die Sporen verdiente, indem es Annahmen hinterfragte und den Status quo neu erfand. Jahrzehnte der Beobachtung, Verfeinerung und wissenschaftlichen Erkundung wurden zu einer Vision kategoriebildender Produkte, die den Körper mit mehr Präzision, mehr Absicht und mehr Respekt vor seiner tatsächlichen Funktionsweise unterstützen.",
+    "origin_p3": "AVA glaubt, dass gutes Altern nicht bedeutet, gegen den Körper zu kämpfen. Es geht darum, ihn zu verstehen, zu unterstützen und in seinem Rhythmus mitzugehen.",
+    "pillars_l": "Markensäulen",
+    "p1_h": "Balance in Bewegung",
+    "p1_p": "Balance ist nicht statisch. Sie ist die Fähigkeit des Körpers, sich anzupassen, zu reagieren, sich zu verändern und in jeder Lebensphase zur Mitte zurückzukehren.",
+    "p2_h": "Präzises Wohlbefinden",
+    "p2_p": "Wissenschaftlich geführte Lösungen mit Absicht – fortschrittliches Denken und zielgerichtetes Design, die den Körper auf klügere Weise unterstützen.",
+    "p3_h": "Mit dem Körper altern",
+    "p3_p": "Wir helfen Menschen, mit dem natürlichen Rhythmus ihres Körpers zu arbeiten, nicht gegen ihn – gut altern, voll leben, ganz man selbst werden.",
+    "values_h": "Was uns wichtig ist",
+    "v1_h": "Präzision",
+    "v1_p": "Wohlbefinden sollte bewusst, durchdacht und genau sein – niemals generisch.",
+    "v2_h": "Balance",
+    "v2_p": "Wahres Wohlbefinden ist dynamisch und hilft dem Körper, in jeder Jahreszeit zur Mitte zurückzukehren.",
+    "v3_h": "Innovation",
+    "v3_p": "Wir hinterfragen überholte Normen, indem wir fortschrittliche Wissenschaft für klügere Lösungen einsetzen.",
+    "v4_h": "Integrität",
+    "v4_p": "Wir handeln mit Vertrauen, Transparenz und Verantwortung in allem, was wir schaffen und liefern.",
+    "v5_h": "Zugänglichkeit",
+    "v5_p": "Wir machen fortschrittliches Wohlbefinden menschlich, verständlich und erreichbar."
+  },
+  "science": {
+    "hero_h1": "Fortschrittliche Wissenschaft, menschlich gemacht.",
+    "hero_sub": "AVA setzt auf präzise Formulierung, zielgerichtete Inhaltsstoffe, durchdachte Darreichungsformen und menschzentriertes Design, um Wellnessprodukte zu schaffen, die intelligent, modern und einfach anzuwenden sind.",
+    "phil_ey": "Wissenschaftsphilosophie",
+    "phil_h": "Wissenschaft sollte fortschrittlich, präzise und zutiefst menschlich sein.",
+    "phil_p1": "Jedes AVA-Produkt wird mit Absicht gestaltet — von der Auswahl der Inhaltsstoffe und der Formulierungsstrategie bis zur Darreichungsform und dem täglichen Erlebnis. Für AVA geht es bei Wissenschaft nicht um Komplexität um ihrer selbst willen. Es geht darum, klügere, durchdachtere Wellness-Lösungen zu schaffen, die die Balance durch jeden Wandel, jede Phase und jede Jahreszeit des Lebens unterstützen.",
+    "phil_p2": "Wir hinterfragen die Vorstellung, dass fortschrittliches Wohlbefinden kalt, klinisch oder unerreichbar sein muss. Wir glauben, dass die beste Wissenschaft persönlich, zielgerichtet und mit dem echten Leben der Menschen verbunden sein sollte.",
+    "build_h": "Wie wir jedes Produkt entwickeln",
+    "b1_h": "Präzise Formulierung",
+    "b1_p": "Mit Absicht gestaltet — von der Auswahl der Inhaltsstoffe und der Formulierungsstrategie bis zur Darreichungsform.",
+    "b2_h": "Zielgerichtete Inhaltsstoffe",
+    "b2_p": "Ausgewählte Pflanzenstoffe und Nährstoffe, jeder aus einem Grund gewählt — niemals Füllstoff.",
+    "b3_h": "Durchdachte Darreichung",
+    "b3_p": "Formate, die um das echte Leben herum gestaltet sind — topische Pumpen, Einzelportions-Sachets, einfache tägliche Rituale.",
+    "b4_h": "Menschzentriertes Design",
+    "b4_p": "Fortschrittliches Wohlbefinden, das persönlich bleibt — niemals kalt oder klinisch.",
+    "band_ey": "Der AVA-Ansatz",
+    "band_h": "Disruptiv im Denken, premium in der Umsetzung und menschlich im Kern.",
+    "std_ey": "Der AVA-Anspruch",
+    "std_h": "Proaktives Wohlbefinden, bevor Sie sich abgewiesen fühlen.",
+    "std_p1": "Wir respektieren die moderne Medizin, glauben aber, dass Menschen proaktive, wissenschaftlich geführte Wellness-Lösungen verdienen, bevor sie auf ein Symptom reduziert werden oder eine Einheitsantwort erhalten.",
+    "std_p2": "AVA nutzt Wissenschaft, um Lösungen zu schaffen, die Menschen helfen, mit ihrem Körper zu altern, nicht gegen ihn — disruptiv im Denken, premium in der Umsetzung, menschlich im Kern."
+  },
+  "contact": {
+    "heading": "Zugang zu den weltweit führenden Spezialisten – überall auf der Welt, genau dann, wenn Sie sie am dringendsten brauchen.",
+    "subheading": "Kontaktieren Sie uns bei Anfragen, Wünschen oder Fragen.",
+    "form_heading": "Füllen Sie dieses Formular aus, damit unser Team Sie kontaktiert",
+    "first_name": "Vorname",
+    "last_name": "Nachname",
+    "email": "E-Mail",
+    "country": "Land",
+    "country_placeholder": "Auswählen...",
+    "message": "Nachricht",
+    "submit": "Absenden",
+    "success": "Vielen Dank für Ihre Nachricht. Unser Team meldet sich in Kürze bei Ihnen."
+  }
+}

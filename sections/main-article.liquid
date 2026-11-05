@@ -1,0 +1,82 @@
+{%- liquid
+  assign ini = article.metafields.ava.author_initials | default: article.author | slice: 0, 2 | upcase
+  assign role = article.metafields.ava.author_role
+  assign readt = article.metafields.ava.read_time
+  assign back_url = blog.url
+
+-%}
+<article class="ava-article">
+  <a href="{{ back_url }}" class="ava-link ava-article__back">&lsaquo; {{ 'article.back' | t }}</a>
+
+  {%- if article.tags.size > 0 -%}
+    {%- assign article_tag = article.tags.first -%}
+
+    <div class="ava-eyebrow ava-article__tag">
+      {%- case article_tag -%}
+        {%- when 'Precision Wellness' -%}
+          {{ 'journal.cat_precision' | t }}
+
+        {%- when 'Aging Well' -%}
+          {{ 'journal.cat_aging' | t }}
+
+        {%- when 'Renewal' -%}
+          {{ 'journal.cat_renewal' | t }}
+
+        {%- when 'Daily Rhythm' -%}
+          {{ 'journal.cat_rhythm' | t }}
+
+        {%- when 'The Products' -%}
+          {{ 'journal.cat_products' | t }}
+
+        {%- when 'Our Science' -%}
+          {{ 'journal.cat_science' | t }}
+
+        {%- else -%}
+          {{ article_tag }}
+      {%- endcase -%}
+    </div>
+  {%- endif -%}
+  
+  <h1 class="ava-h1 ava-h1--article">{{ article.title }}</h1>
+
+  <div class="ava-byline ava-article__meta">
+    <span class="ava-avatar">{{ ini }}</span>
+    <div class="ava-body-sm ava-article__byline-lines">
+      <div class="ava-byline__name">{{ article.author }}</div>
+      <div class="ava-byline__meta">{{ role }}{% if role %} &middot; {% endif %}{{ article.published_at | date: format: 'article_date' }}{% if readt %} &middot; {{ readt }}{% endif %}</div>
+    </div>
+  </div>
+
+  {%- if article.image -%}
+    <img class="ava-article__hero" src="{{ article.image | image_url: width: 1400 }}" alt="{{ article.title | escape }}">
+  {%- endif -%}
+
+  <div class="ava-rte">{{ article.content }}</div>
+
+  {%- comment -%} author bio {%- endcomment -%}
+  <div class="ava-authorbox">
+    <span class="ava-avatar ava-avatar--lg">{{ ini }}</span>
+    <div>
+      <div class="ava-authorbox__name">{{ 'article.written_by' | t }} {{ article.author }}</div>
+      <div class="ava-body-sm ava-authorbox__meta">{{ role }}{{ 'article.bio_suffix' | t }}</div>
+    </div>
+  </div>
+
+  <div class="ava-article__foot">
+    <a href="{{ back_url }}" class="ava-btn ava-btn--sm">{{ 'article.back_btn' | t }}</a>
+  </div>
+
+  {%- if blog.comments_enabled? -%}
+    {%- comment -%} Comments available if enabled in blog settings {%- endcomment -%}
+  {%- endif -%}
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Article body renders from the native article content (rich text). Author role, initials and read time come from article metafields in the `ava` namespace." }
+  ]
+}
+{% endschema %}

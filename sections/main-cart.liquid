@@ -1,0 +1,95 @@
+<section class="ava-section ava-bg-white">
+  <div class="ava-container">
+    <h1 class="ava-h1 ava-h1--page">{{ 'cart.general.title' | t | default: 'Your cart' }}</h1>
+    {%- if cart.item_count == 0 -%}
+      <p class="ava-lead ava-mt-md">{{ 'cart.general.empty' | t | default: 'Your cart is empty.' }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="ava-btn ava-mt-lg">{{ 'general.continue_shopping' | t | default: 'Continue shopping' }}</a>
+    {%- else -%}
+      {%- assign wr263_on = false -%}
+      {%- if shop.metafields.wr263.active_approach.value == '3' -%}{%- assign wr263_on = true -%}
+      {%- endif -%}
+      <form
+        action="{{ routes.cart_url }}"
+        method="post"
+        novalidate
+        class="ava-cart-form"
+        data-cart
+        data-cart-change-url="{{ routes.cart_change_url }}"
+        data-money-format="{{ shop.money_format | escape }}"
+        data-currency="{{ cart.currency.iso_code }}"
+      >
+        {%- for item in cart.items -%}
+           <div class="ava-cart-row" data-cart-row data-key="{{ item.key }}" data-line="{{ forloop.index }}"{% if wr263_on and item.product.metafields.wr263.fee_included.value == true %} data-fee-included{% endif %}>
+            {%- if item.image -%}
+              <img class="ava-cart-thumb" src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" width="80" height="80">
+            {%- endif -%}
+            <div class="ava-cart-info">
+              <a class="ava-cart-title" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}
+                <div class="ava-body-sm">{{ item.variant.title }}</div>
+              {%- endunless -%}
+              {%- if wr263_on and item.product.metafields.wr263.fee_included.value == true -%}
+                {%- assign item_base = item.final_line_price | times: 1000 | divided_by: 1207 -%}
+                {%- assign item_fee = item.final_line_price | minus: item_base -%}
+                <div class="ava-body-sm">
+                  {{ 'cart.general.fee_included' | t }} <span data-cart-line-fee>{{ cart.currency.iso_code }} {{ item_fee | money_without_currency }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="ava-cart-qtywrap">
+              <button type="button" class="ava-cart-qtybtn" data-cart-qty-minus aria-label="{{ 'cart.general.decrease' | t | default: 'Decrease quantity' }}">&minus;</button>
+              <input
+                class="ava-cart-qty"
+                type="number"
+                name="updates[]"
+                value="{{ item.quantity }}"
+                min="1"
+                inputmode="numeric"
+                data-cart-qty
+                aria-label="{{ 'cart.general.quantity' | t | default: 'Quantity' }}"
+              >
+              <button type="button" class="ava-cart-qtybtn" data-cart-qty-plus aria-label="{{ 'cart.general.increase' | t | default: 'Increase quantity' }}">&plus;</button>
+            </div>
+            <div class="ava-price ava-cart-lineprice" data-cart-line-price>{{ item.final_line_price | money }}</div>
+            <button
+              type="button"
+              class="ava-cart-remove"
+              data-cart-remove
+              aria-label="{{ 'cart.general.remove' | t | default: 'Remove' }}"
+              title="{{ 'cart.general.remove' | t | default: 'Remove' }}"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 6h18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                <path d="M19 6l-.8 13.2A2 2 0 0 1 16.2 21H7.8a2 2 0 0 1-2-1.8L5 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        {%- endfor -%}
+        {%- assign fee_cents = 0 -%}
+        {%- for item in cart.items -%}
+          {%- if item.product.metafields.wr263.fee_included.value == true -%}
+            {%- assign base_cents= item.final_line_price | times:1000 |divided_by:1207 -%}
+            {%- assign line_fee = item.final_line_price| minus: base_cents -%}
+            {%- assign fee_cents = fee_cents | plus: line_fee -%}
+          {%- endif -%}
+        {%- endfor -%}
+        
+        <div class="ava-cart-foot">
+          <div class="ava-text-right ava-cart-foot__total">
+            <div class="ava-fee-include" data-cart-fee-wrap{% if fee_cents == 0 %} hidden{% endif %}>
+              {{ 'cart.general.fee_included' | t }} <span data-cart-fee>{{ cart.currency.iso_code }} {{ fee_cents | money_without_currency }}</span>
+            </div>
+            <div class="ava-body-sm">{{ 'cart.general.subtotal' | t | default: 'Subtotal' }}</div>
+            <div class="ava-price ava-cart-total" data-cart-total>{{ cart.total_price | money }}</div>
+          </div>
+        </div>
+        <button type="submit" name="checkout" class="ava-btn ava-btn--block ava-mt-lg">{{ 'cart.general.checkout' | t | default: 'Checkout' }}</button>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Cart", "tag": "section", "settings": [] }
+{% endschema %}

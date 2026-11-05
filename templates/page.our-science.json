@@ -1,0 +1,128 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/AdobeStock_246772962.jpg",
+        "fallback_asset": "AdobeStock_246772962.jpeg",
+        "priority": true,
+        "layout": "left",
+        "height": "clamp(480px,66vh,680px)",
+        "overlay_style": "left",
+        "overlay_opacity": 75,
+        "eyebrow": "Our Science",
+        "heading": "Advanced science, made human.",
+        "subheading": "AVA uses precise formulation, purposeful ingredients, thoughtful delivery formats, and human-centered design to create wellness products that feel intelligent, modern, and easy to use."
+      }
+    },
+    "intro": {
+      "type": "rich-statement",
+      "settings": {
+        "background": "white",
+        "eyebrow": "Science Philosophy",
+        "heading": "Science should be advanced, precise, and deeply human.",
+        "body": "<p>Every AVA product is designed with intention — from ingredient selection and formulation strategy to delivery format and daily-use experience. For AVA, science is not about complexity for its own sake. It is about creating smarter, more thoughtful wellness solutions that support balance through every shift, stage, and season of life.</p><p>We challenge the idea that advanced wellness has to feel cold, clinical, or out of reach. We believe the best science should feel personal, purposeful, and connected to the way people actually live.</p>"
+      }
+    },
+    "build": {
+      "type": "numbered-cards",
+      "settings": {
+        "heading": "How we build every product",
+        "background": "panel"
+      },
+      "blocks": {
+        "step1": {
+          "type": "step",
+          "settings": {
+            "title": "Precise formulation",
+            "description": "Designed with intention, from ingredient selection and formulation strategy to delivery format."
+          }
+        },
+        "step2": {
+          "type": "step",
+          "settings": {
+            "title": "Purposeful ingredients",
+            "description": "Selected botanicals and nutrients, each chosen for a reason — never filler."
+          }
+        },
+        "step3": {
+          "type": "step",
+          "settings": {
+            "title": "Thoughtful delivery",
+            "description": "Formats designed around real life — topical pumps, single-serve sachets, simple daily rituals."
+          }
+        },
+        "step4": {
+          "type": "step",
+          "settings": {
+            "title": "Human-centered design",
+            "description": "Advanced wellness that feels personal — never cold or clinical."
+          }
+        }
+      },
+      "block_order": [
+        "step1",
+        "step2",
+        "step3",
+        "step4"
+      ]
+    },
+    "band": {
+      "type": "image-band",
+      "settings": {
+        "image": "shopify://shop_images/AdobeStock_309080008.jpg",
+        "fallback_asset": "AdobeStock_309080008.jpeg",
+        "overlay_opacity": 60,
+        "eyebrow": "The AVA Approach",
+        "heading": "Disruptive in thinking, premium in execution, and human at the core."
+      }
+    },
+    "standard": {
+      "type": "split-media",
+      "settings": {
+        "background": "white",
+        "media_side": "left",
+        "image": "shopify://shop_images/AdobeStock_896117752.jpg",
+        "fallback_asset": "AdobeStock_896117752.jpeg",
+        "image_alt": "Proactive wellness, before you feel dismissed.",
+        "eyebrow": "The AVA Standard",
+        "heading": "Proactive wellness, before you feel dismissed.",
+        "body": "<p>We respect modern healthcare, but believe people deserve proactive, science-led wellness solutions before they feel reduced to a symptom or handed a one-size-fits-all answer.</p><p>AVA uses science to create solutions that help people age with their body, not against it — disruptive in thinking, premium in execution, human at the core.</p>"
+      }
+    },
+    "cta": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/AdobeStock_479042105.jpg",
+        "fallback_asset": "AdobeStock_479042105.jpeg",
+        "priority": false,
+        "layout": "center",
+        "height": "clamp(460px,54vh,620px)",
+        "overlay_style": "full",
+        "overlay_opacity": 65,
+        "heading": "Find your balance in motion.",
+        "subheading": "Discover precision wellness products designed to help you age with your body, not against it.",
+        "button1_label": "Shop AVA",
+        "button1_link": "shopify://collections/all",
+        "button1_style": "light"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "intro",
+    "build",
+    "band",
+    "standard",
+    "cta"
+  ]
+}

@@ -1,0 +1,308 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/AdobeStock_649548351.webp",
+        "fallback_asset": "AdobeStock_649548351.jpeg",
+        "priority": false,
+        "layout": "left",
+        "height": "clamp(580px,82vh,840px)",
+        "overlay_style": "left",
+        "overlay_opacity": 60,
+        "eyebrow": "Precision Wellness",
+        "heading": "Balance the way you age.",
+        "subheading": "Precise, science-led wellness products designed to support balance through every shift, stage, and season of life.",
+        "button1_label": "Shop AVA",
+        "button1_link": "/collections/all",
+        "button1_style": "primary",
+        "button2_label": "Our science",
+        "button2_link": "/pages/our-science",
+        "button2_style": "ghost"
+      }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "label": "Third-party tested"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "label": "Free shipping"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "label": "90-day guarantee"
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "icon": "refresh",
+            "label": "Cancel anytime"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "background": "white"
+      }
+    },
+    "collection": {
+      "type": "product-cards",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "product": "core",
+            "title": "Balance",
+            "format": "Foundational · Topical",
+            "description": "Foundational topical support designed to help you build a consistent daily routine around balance, rhythm, and whole-body wellness.",
+            "button_label": "Shop",
+            "link": "/products/balance",
+            "show_price": true,
+            "fallback_asset": "balance-card.png"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "product": "active",
+            "title": "Balance+",
+            "format": "Targeted · Topical",
+            "description": "Targeted topical support designed for areas of everyday discomfort, movement, and daily care.",
+            "button_label": "Shop",
+            "link": "/products/balance-plus",
+            "show_price": true,
+            "fallback_asset": "balance-plus.png"
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "product": "renew",
+            "title": "Renew+",
+            "format": "Renewal · Collagen Drink",
+            "description": "Premium collagen nutrition designed to support skin, hair, nails, joints, and connective tissue as part of a daily renewal routine.",
+            "button_label": "Shop",
+            "link": "/products/renew-plus",
+            "show_price": true,
+            "fallback_asset": "renew.png"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "background": "white",
+        "eyebrow": "The Collection",
+        "heading": "Support your balance, your way.",
+        "subheading": "Explore AVA's collection of precision wellness products designed for foundational balance, targeted support, and daily renewal."
+      }
+    },
+    "philosophy": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/Rythm_Core_Hero_Woman.webp",
+        "fallback_asset": "AdobeStock_267328747.jpeg",
+        "priority": false,
+        "layout": "center",
+        "height": "clamp(560px,62vh,720px)",
+        "overlay_style": "full",
+        "overlay_opacity": 55,
+        "eyebrow": "Balance in Motion",
+        "heading": "Balance is not static. It is in motion.",
+        "subheading": "Your body is constantly adapting to age, stress, lifestyle, environment, and change. AVA was created to support that motion with precision, helping you return to center and keep moving forward.",
+        "button1_label": "",
+        "button1_link": "",
+        "button1_style": "primary",
+        "button2_label": "",
+        "button2_link": "",
+        "button2_style": "ghost"
+      }
+    },
+    "benefits": {
+      "type": "benefit-cards",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "shutterstock_1231591345.jpg",
+            "eyebrow": "Foundational",
+            "title": "Foundational Balance",
+            "description": "Daily support for balance, rhythm, and whole-body wellness.",
+            "button_label": "Shop Balance",
+            "button_link": "/products/balance"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "AdobeStock_403219790.jpeg",
+            "eyebrow": "Targeted",
+            "title": "Targeted Balance",
+            "description": "Topical support for areas of everyday discomfort, movement, and daily care.",
+            "button_label": "Shop Balance+",
+            "button_link": "/products/balance-plus"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "AdobeStock_170293818.jpeg",
+            "eyebrow": "Renewal",
+            "title": "Renewal Support",
+            "description": "Collagen-based support for skin, hair, nails, joints, and connective tissue.",
+            "button_label": "Shop Renew+",
+            "button_link": "/products/renew-plus"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "disabled": true,
+      "settings": {
+        "background": "panel",
+        "eyebrow": "Shop by Benefit",
+        "heading": "Find the support your body is asking for.",
+        "subheading": "AVA products are organized around the ways people experience balance: foundational daily support, targeted support, and renewal-focused nutrition."
+      }
+    },
+    "science": {
+      "type": "split-media",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "marker": "i",
+            "title": "Precise formulation",
+            "description": "Designed with intention, from ingredient selection to delivery format."
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "marker": "ii",
+            "title": "Purposeful ingredients",
+            "description": "Selected botanicals and nutrients chosen for a reason, not for filler."
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "marker": "iii",
+            "title": "Human-centered design",
+            "description": "Disruptive in thinking, premium in execution, human at the core."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "background": "white",
+        "media_side": "right",
+        "image": "shopify://shop_images/testavaeye.jpg",
+        "fallback_asset": "AdobeStock_280164805.jpeg",
+        "image_alt": "AVA science",
+        "eyebrow": "Our Science",
+        "heading": "Advanced science, made human.",
+        "body": "<p>AVA uses precise formulation, purposeful ingredients, thoughtful delivery formats, and human-centered design to create wellness products that feel intelligent, modern, and easy to use.</p>",
+        "button_label": "Explore our science",
+        "button_link": "/pages/our-science",
+        "button_style": "button"
+      }
+    },
+    "origin": {
+      "type": "split-media",
+      "settings": {
+        "background": "panel",
+        "media_side": "left",
+        "image": "shopify://shop_images/Rythm_Family.webp",
+        "fallback_asset": "ava-family-shelf.png",
+        "image_alt": "AVA story",
+        "eyebrow": "Our Story",
+        "heading": "Created to challenge what wellness could be.",
+        "body": "<p>AVA was built from a belief that people deserve more than generic wellness. More precision. More intention. More respect for the way the body changes, adapts, and moves through life.</p><p>We create category-defining products for those who want to age with their body, not against it.</p>",
+        "button_label": "Read our story",
+        "button_link": "/pages/about",
+        "button_style": "link"
+      }
+    },
+    "journal": {
+      "type": "article-list",
+      "settings": {
+        "background": "white",
+        "eyebrow": "Journal",
+        "heading": "Learn the science of balance.",
+        "blog": "journal",
+        "limit": 3,
+        "link_label": "View all"
+      }
+    },
+    "cta": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/AdobeStock_649548351.webp",
+        "fallback_asset": "AdobeStock_388020313.jpeg",
+        "priority": false,
+        "layout": "center",
+        "height": "clamp(560px,60vh,720px)",
+        "overlay_style": "full",
+        "overlay_opacity": 65,
+        "eyebrow": "",
+        "heading": "Find your balance in motion.",
+        "subheading": "Discover precision wellness products designed to help you age with your body, not against it.",
+        "button1_label": "Shop AVA",
+        "button1_link": "/collections/all",
+        "button1_style": "light",
+        "button2_label": "",
+        "button2_link": "",
+        "button2_style": "ghost"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "collection",
+    "philosophy",
+    "benefits",
+    "science",
+    "origin",
+    "journal",
+    "cta"
+  ]
+}

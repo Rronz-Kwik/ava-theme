@@ -1,0 +1,153 @@
+{%- liquid
+  assign logo_light = settings.logo_light
+
+  assign locale_root = routes.root_url
+  assign locale_root_last_char = locale_root | slice: -1, 1
+  unless locale_root_last_char == '/'
+    assign locale_root = locale_root | append: '/'
+  endunless
+
+  assign core_product = all_products['core']
+  assign active_product = all_products['active']
+  assign renew_product = all_products['renew']
+-%}
+
+<footer class="ava-footer">
+  <div class="ava-footer__top">
+
+    <div class="ava-footer__brand">
+      {%- if logo_light != blank -%}
+        <img
+          class="ava-footer__logo"
+          src="{{ logo_light | image_url: width: 320 }}"
+          alt="{{ shop.name }}"
+        >
+      {%- else -%}
+        <img
+          class="ava-footer__logo"
+          src="{{ 'ava-logo-white.png' | asset_url }}"
+          alt="{{ shop.name }}"
+        >
+      {%- endif -%}
+
+      <p class="ava-footer__tag">
+        {{ 'footer.tagline' | t }}
+      </p>
+    </div>
+
+    <div class="ava-footer__cols">
+
+      <div>
+        <div class="ava-footer__coltitle">
+          {{ 'footer.shop' | t }}
+        </div>
+
+        <div class="ava-footer__links">
+
+          {%- if core_product != blank -%}
+            <a href="{{ core_product.url }}">
+              {{ core_product.title }}
+            </a>
+          {%- else -%}
+            <a href="{{ locale_root }}products/core">
+              Core
+            </a>
+          {%- endif -%}
+
+          {%- if active_product != blank -%}
+            <a href="{{ active_product.url }}">
+              {{ active_product.title }}
+            </a>
+          {%- else -%}
+            <a href="{{ locale_root }}products/active">
+              Active
+            </a>
+          {%- endif -%}
+
+          {%- if renew_product != blank -%}
+            <a href="{{ renew_product.url }}">
+              {{ renew_product.title }}
+            </a>
+          {%- else -%}
+            <a href="{{ locale_root }}products/renew">
+              Renew
+            </a>
+          {%- endif -%}
+
+        </div>
+      </div>
+
+      <div>
+        <div class="ava-footer__coltitle">
+          {{ 'footer.company' | t }}
+        </div>
+
+        <div class="ava-footer__links">
+
+          <a href="{{ locale_root }}pages/about">
+            {{ 'general.nav.about' | t }}
+          </a>
+
+          <a href="{{ locale_root }}pages/our-science">
+            {{ 'general.nav.science' | t }}
+          </a>
+
+          <a href="{{ locale_root }}pages/contact">
+            {{ 'footer.contact' | t }}
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {%- if section.settings.show_language_selector -%}
+    <div class="ava-footer__lang">
+      {%- render 'language-selector',
+        uid: section.id,
+        variant: 'footer',
+        geo: section.settings.geo_language
+      -%}
+    </div>
+  {%- endif -%}
+
+  <div class="ava-footer__bottom">
+
+    <span>
+      {{ 'footer.rights' | t }}
+    </span>
+
+    <span>
+      {{ 'footer.disclaimer' | t }}
+    </span>
+
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Footer copy is localised in locales/*.json. Core, Active and Renew product names are pulled directly from Shopify products so translated product titles can display automatically."
+    },
+    { "type": "header", "content": "Language selector" },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "label": "Show language selector",
+      "default": true,
+      "info": "Only appears once more than one language is published in Settings > Languages."
+    },
+    {
+      "type": "checkbox",
+      "id": "geo_language",
+      "label": "Preselect the language from the visitor's location",
+      "default": true,
+      "info": "First visit only. Picking a language by hand always wins from then on."
+    }
+  ]
+}
+{% endschema %}

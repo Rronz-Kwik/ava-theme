@@ -1,0 +1,51 @@
+{%- liquid
+  assign bg = section.settings.background | default: 'white'
+-%}
+<div class="ava-trust ava-bg-{{ bg }}">
+  <div class="ava-trust__grid">
+    {%- for block in section.blocks -%}
+      <div class="ava-trust__item ava-trust__item--blue" {{ block.shopify_attributes }}>
+        {% render 'ava-icon', icon: block.settings.icon, size: 26 %}
+        <span>{{ block.settings.label }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust bar",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "select", "id": "background", "label": "Background", "options": [ {"value":"white","label":"White"}, {"value":"panel","label":"Light panel"}, {"value":"panel-2","label":"Off-white"} ], "default": "white" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          {"value":"shield","label":"Shield / tested"},
+          {"value":"truck","label":"Truck / shipping"},
+          {"value":"clock","label":"Clock / guarantee"},
+          {"value":"refresh","label":"Refresh / cancel"},
+          {"value":"leaf","label":"Leaf"},
+          {"value":"gmp","label":"GMP shield"},
+          {"value":"precision","label":"Precision"}
+        ], "default": "shield" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Third-party tested" }
+      ]
+    }
+  ],
+  "presets": [ {
+    "name": "Trust bar",
+    "blocks": [
+      { "type": "item", "settings": { "icon": "shield", "label": "Third-party tested" } },
+      { "type": "item", "settings": { "icon": "truck", "label": "Free shipping" } },
+      { "type": "item", "settings": { "icon": "clock", "label": "90-day guarantee" } },
+      { "type": "item", "settings": { "icon": "refresh", "label": "Cancel anytime" } }
+    ]
+  } ]
+}
+{% endschema %}

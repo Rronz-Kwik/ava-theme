@@ -1,0 +1,107 @@
+{%- liquid
+  assign img = section.settings.image
+  assign layout = section.settings.layout | default: 'left'
+  assign minh = section.settings.height | default: '640px'
+  assign scrim = section.settings.overlay_style
+  assign op = section.settings.overlay_opacity | default: 60 | times: 0.01
+  assign op_mid = op | times: 0.6
+
+  assign hero_alt = img.alt | default: section.settings.heading | default: shop.name
+
+  if section.settings.fallback_asset != blank
+    assign fallback_url = section.settings.fallback_asset | asset_url
+  endif
+
+  # Only the first, above-the-fold banner should load eagerly at high priority.
+  # Reused feature bands / closing CTAs stay lazy so they don't compete for LCP.
+  assign img_loading = 'lazy'
+  assign img_priority = 'auto'
+  if section.settings.priority
+    assign img_loading = 'eager'
+    assign img_priority = 'high'
+  endif
+
+  case scrim
+    when 'left'
+      assign overlay = 'linear-gradient(90deg,rgba(13,22,33,' | append: op | append: ') 0%,rgba(13,22,33,' | append: op_mid | append: ') 46%,rgba(13,22,33,0.12) 100%)'
+    when 'full'
+      assign overlay = 'linear-gradient(rgba(13,22,33,' | append: op | append: '),rgba(13,22,33,' | append: op | append: '))'
+    else
+      assign overlay = 'none'
+  endcase
+
+  assign align_class = ''
+  if layout == 'center'
+    assign align_class = 'ava-hero--center'
+  endif
+-%}
+<section class="ava-hero ava-on-dark ava-hero--dynamic {{ align_class }}" style="--hero-minh:{{ minh }};">
+  {%- if img != blank -%}
+    {{ img | image_url: width: 2400 | image_tag:
+      loading: img_loading,
+      fetchpriority: img_priority,
+      decoding: 'async',
+      class: 'ava-hero__bg',
+      widths: '640, 960, 1280, 1600, 2000, 2400',
+      sizes: '100vw',
+      alt: hero_alt
+    }}
+  {%- elsif fallback_url -%}
+    <img class="ava-hero__bg" src="{{ fallback_url }}" alt="{{ hero_alt | escape }}" width="1600" height="1000"
+         loading="{{ img_loading }}" fetchpriority="{{ img_priority }}" decoding="async">
+  {%- endif -%}
+  {%- if overlay != 'none' -%}
+    <div class="ava-hero__overlay" style="background:{{ overlay }};"></div>
+  {%- endif -%}
+  <div class="ava-hero__inner">
+    <div class="ava-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="ava-eyebrow ava-eyebrow--light">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="ava-h1">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="ava-lead ava-measure-sm ava-mt-fluid-sm{% if layout == 'center' %} ava-center{% endif %}">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      {%- if section.settings.button1_label != blank or section.settings.button2_label != blank -%}
+        <div class="ava-btn-row">
+          {%- if section.settings.button1_label != blank -%}
+            <a href="{{ section.settings.button1_link | default: '#' }}" class="ava-btn ava-btn--{{ section.settings.button1_style | default: 'primary' }}">{{ section.settings.button1_label }}</a>
+          {%- endif -%}
+          {%- if section.settings.button2_label != blank -%}
+            <a href="{{ section.settings.button2_link | default: '#' }}" class="ava-btn ava-btn--{{ section.settings.button2_style | default: 'ghost' }}">{{ section.settings.button2_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "info": "Bundled /assets file shown when no image is set, e.g. AdobeStock_649548351.jpeg" },
+    { "type": "checkbox", "id": "priority", "label": "Prioritise image loading", "info": "Enable ONLY for the first banner above the fold (e.g. the homepage hero). Loads it eagerly at high priority to improve LCP. Leave off for feature bands and closing CTAs.", "default": false },
+    { "type": "select", "id": "layout", "label": "Content alignment", "options": [ {"value":"left","label":"Left"}, {"value":"center","label":"Centred"} ], "default": "left" },
+    { "type": "text", "id": "height", "label": "Min height (CSS)", "default": "clamp(580px,82vh,840px)" },
+    { "type": "select", "id": "overlay_style", "label": "Overlay", "options": [ {"value":"left","label":"Left-to-right scrim"}, {"value":"full","label":"Full scrim"}, {"value":"none","label":"None"} ], "default": "left" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 60 },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button1_label", "label": "Button 1 label" },
+    { "type": "url", "id": "button1_link", "label": "Button 1 link" },
+    { "type": "select", "id": "button1_style", "label": "Button 1 style", "options": [ {"value":"primary","label":"Primary (blue)"}, {"value":"light","label":"Light (white)"}, {"value":"ghost","label":"Ghost"} ], "default": "primary" },
+    { "type": "text", "id": "button2_label", "label": "Button 2 label" },
+    { "type": "url", "id": "button2_link", "label": "Button 2 link" },
+    { "type": "select", "id": "button2_style", "label": "Button 2 style", "options": [ {"value":"primary","label":"Primary (blue)"}, {"value":"light","label":"Light (white)"}, {"value":"ghost","label":"Ghost"} ], "default": "ghost" }
+  ],
+  "presets": [ { "name": "Image banner" } ]
+}
+{% endschema %}

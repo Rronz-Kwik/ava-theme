@@ -1,0 +1,121 @@
+{%- comment -%}
+  "Add additional products" section (header + product grid) for the Distributor
+  Selection flow. Extracted so it can live on step 2 alongside the kit grid.
+
+  Accepts:
+    subheading, heading, description, note, note_tooltip - header copy
+    collection      - the collection object to list
+    show_metafields - whether to show the QV/CV/rating row
+{%- endcomment -%}
+<div class="subscription-header">
+  <div class="inner-subscription-header">
+    {% if subheading != blank %}
+      <p class="subheading">{{ subheading }}</p>
+    {% endif %}
+    {% if heading != blank %}
+      <h2 class="heading">{{ heading }}</h2>
+    {% endif %}
+    {% if description != blank %}
+      <p class="description">{{ description }}</p>
+    {% endif %}
+  </div>
+  {% if subheading != blank or heading != blank or description != blank %}
+    <div class="divider"></div>
+  {% endif %}
+  {% if note != blank %}
+    <p class="note">
+      {{ note }}
+      <span class="info-icon" tabindex="0" aria-label="{{ 'enrollment.copy.more_info' | t | escape }}">i{%- if note_tooltip != blank -%}<span class="info-tooltip">{{ note_tooltip }}</span>{%- endif -%}</span>
+    </p>
+  {% endif %}
+</div>
+
+<div class="package-grid additional-products">
+  {% for product in collection.products %}
+    <div class="package-card"
+      data-product-id="{{ product.id }}"
+      data-variant-id="{{ product.variants.first.id }}"
+      data-title="{{ product.title | escape }}"
+      data-price="{{ product.price }}"
+      data-image="{{ product.featured_image | image_url: width: 120 }}"
+      data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"
+      {% if product.selling_plan_groups.size > 0 %}data-subscription="true"{% endif %}
+    >
+      {% unless product.available %}
+        <div class="sold-out-badge">{{ 'enrollment.products.sold_out' | t }}</div>
+      {% endunless %}
+
+      <div class="select-circle"></div>
+
+      <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title }}">
+
+      <div class="product-info">
+        <div class="product-title">
+          <p class="price">{{ product.price | money }}</p>
+          <h3>{{ product.title | truncate: 30 }}</h3>
+        </div>
+
+        <div class="short_description">
+          {% assign short_description = product.metafields.custom.short_description.value %}
+            <p>{{ short_description }}</p>
+        </div>
+
+        {% if show_metafields and shop.metafields.apex.volume_tracking_enabled.value != false %}
+          <div class="metafeilds_container">
+            <div class="bv-value PV">
+              {% if product.metafields.apex.volume1.value != blank %}
+                <span class="icon_svg">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="14" height="14" rx="7" fill="#FFBE4C"/>
+                    <rect x="1" y="1" width="14" height="14" rx="7" stroke="#F29C06" stroke-width="2"/>
+                    <path d="M8.33977 4.82236C7.65255 5.05438 6.92335 5.54052 6.23171 6.23216C5.54007 6.9238 5.05393 7.653 4.82192 8.34022C4.5899 9.02744 4.6584 9.60859 4.99427 9.94447L6.05493 11.0051C6.39081 11.341 6.97638 11.4051 7.65918 11.1775C8.34198 10.9499 9.0756 10.4593 9.76724 9.76769C10.4589 9.07605 10.945 8.34685 11.177 7.65963C11.4091 6.97241 11.3406 6.39126 11.0047 6.05538L9.94402 4.99472C9.60814 4.65884 9.02257 4.59476 8.33977 4.82236ZM8.5276 8.8816L9.2347 9.5887C8.79939 9.99308 8.38397 10.2848 8.00832 10.4836L7.31447 9.78979C7.71884 9.56219 8.12764 9.25504 8.5276 8.8816ZM8.88115 8.52804C9.25459 8.12809 9.56174 7.71929 9.78934 7.31491L10.4832 8.00876C10.2843 8.38441 9.99263 8.79984 9.58826 9.23515L8.88115 8.52804ZM6.40849 10.6516L5.99969 10.2428C6.20351 10.2241 6.40447 10.1819 6.59852 10.1168L6.84159 10.024L7.51334 10.6958C6.99185 10.8725 6.59189 10.835 6.40849 10.6516ZM10.6953 7.51379L10.0236 6.84204L10.1164 6.59897C10.1814 6.40491 10.2237 6.20396 10.2423 6.00014L10.6511 6.40893C10.8345 6.59234 10.8721 6.9923 10.6953 7.51379Z" fill="white"/>
+                  </svg>
+                </span>
+                <span class="membership-bv"> {{ product.metafields.apex.volume1.value }} QV </span>
+              {% endif %}
+            </div>
+
+            <div class="bv-value BV">
+              {% if product.metafields.apex.volume2.value != blank %}
+                <span class="icon_svg">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.833333" y="0.833333" width="14.3333" height="14.3333" rx="7.16667" fill="#55C5B6"/>
+                    <rect x="0.833333" y="0.833333" width="14.3333" height="14.3333" rx="7.16667" stroke="#2F947C" stroke-width="1.66667"/>
+                    <path d="M8.34075 4.82236C7.65353 5.05438 6.92433 5.54052 6.23269 6.23216C5.54105 6.9238 5.05491 7.653 4.82289 8.34022C4.59087 9.02744 4.65937 9.60859 4.99525 9.94447L6.05591 11.0051C6.39179 11.341 6.97736 11.4051 7.66016 11.1775C8.34296 10.9499 9.07658 10.4593 9.76822 9.76769C10.4599 9.07605 10.946 8.34685 11.178 7.65963C11.41 6.97241 11.3415 6.39126 11.0057 6.05538L9.945 4.99472C9.60912 4.65884 9.02355 4.59476 8.34075 4.82236ZM8.52857 8.8816L9.23568 9.5887C8.80037 9.99308 8.38494 10.2848 8.00929 10.4836L7.31544 9.78979C7.71982 9.56219 8.12862 9.25504 8.52857 8.8816ZM8.88213 8.52804C9.25557 8.12809 9.56272 7.71929 9.79032 7.31491L10.4842 8.00876C10.2853 8.38441 9.99361 8.79984 9.58923 9.23515L8.88213 8.52804ZM6.40946 10.6516L6.00067 10.2428C6.20448 10.2241 6.40544 10.1819 6.5995 10.1168L6.84257 10.024L7.51432 10.6958C6.99283 10.8725 6.59287 10.835 6.40946 10.6516ZM10.6963 7.51379L10.0245 6.84204L10.1174 6.59897C10.1824 6.40491 10.2247 6.20396 10.2433 6.00014L10.6521 6.40893C10.8355 6.59234 10.8731 6.9923 10.6963 7.51379Z" fill="white"/>
+                  </svg>
+                </span>
+                <span class="membership-bv"> {{ product.metafields.apex.volume2.value }} CV </span>
+              {% endif %}
+            </div>
+
+            <div class="bv-value product-rating">
+              <span class="icon_svg">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0.833333" y="0.833333" width="14.3333" height="14.3333" rx="7.16667" fill="#55C5B6"/>
+                  <rect x="0.833333" y="0.833333" width="14.3333" height="14.3333" rx="7.16667" stroke="#2F947C" stroke-width="1.66667"/>
+                  <path d="M8.34075 4.82236C7.65353 5.05438 6.92433 5.54052 6.23269 6.23216C5.54105 6.9238 5.05491 7.653 4.82289 8.34022C4.59087 9.02744 4.65937 9.60859 4.99525 9.94447L6.05591 11.0051C6.39179 11.341 6.97736 11.4051 7.66016 11.1775C8.34296 10.9499 9.07658 10.4593 9.76822 9.76769C10.4599 9.07605 10.946 8.34685 11.178 7.65963C11.41 6.97241 11.3415 6.39126 11.0057 6.05538L9.945 4.99472C9.60912 4.65884 9.02355 4.59476 8.34075 4.82236ZM8.52857 8.8816L9.23568 9.5887C8.80037 9.99308 8.38494 10.2848 8.00929 10.4836L7.31544 9.78979C7.71982 9.56219 8.12862 9.25504 8.52857 8.8816ZM8.88213 8.52804C9.25557 8.12809 9.56272 7.71929 9.79032 7.31491L10.4842 8.00876C10.2853 8.38441 9.99361 8.79984 9.58923 9.23515L8.88213 8.52804ZM6.40946 10.6516L6.00067 10.2428C6.20448 10.2241 6.40544 10.1819 6.5995 10.1168L6.84257 10.024L7.51432 10.6958C6.99283 10.8725 6.59287 10.835 6.40946 10.6516ZM10.6963 7.51379L10.0245 6.84204L10.1174 6.59897C10.1824 6.40491 10.2247 6.20396 10.2433 6.00014L10.6521 6.40893C10.8355 6.59234 10.8731 6.9923 10.6963 7.51379Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="membership-bv">4.9</span>
+              <span class="product-number">(450)</span>
+            </div>
+          </div>
+        {% endif %}
+
+        <button type="button" class="add-to-cart-btn">{{ 'enrollment.products.add_to_cart' | t }}</button>
+        <div class="qty-box is-hidden">
+          <button class="qty-minus">-</button>
+          <input type="number" value="0" min="0" class="qty-input">
+          <button class="qty-plus">+</button>
+        </div>
+
+        <input type="hidden" class="variant-id" value="{{ product.variants.first.id }}">
+        <input type="hidden" class="is-available" value="{{ product.available }}">
+
+        {% if product.selling_plan_groups.size > 0 %}
+          <input type="hidden" class="selling-plan-id" value="{{ product.selling_plan_groups.first.selling_plans.first.id }}">
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

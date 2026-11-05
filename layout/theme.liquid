@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction | default: 'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- comment -%} Warm up connections to Shopify's asset + font CDNs for faster first paint. {%- endcomment -%}
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <title>{{ page_title }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+
+  {%- liquid
+    assign heading_font = settings.font_heading | default: settings.font_heading_fallback
+    assign body_font = settings.font_body | default: settings.font_body_fallback
+  -%}
+  {%- if heading_font or body_font -%}
+  <style>
+    {% if heading_font %}{{ heading_font | font_face: font_display: 'swap' }}{% endif %}
+    {% if body_font %}{{ body_font | font_face: font_display: 'swap' }}{% endif %}
+  </style>
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  {%- if customer -%}
+    {%- assign shipping_form_completed = customer.metafields.apex.shipping_form_completed.value -%}
+    {%- if shipping_form_completed != true and shipping_form_completed != 'true' -%}
+      {%- liquid
+        assign shipping_form_page = pages['confirm-shipping-address']
+        assign shipping_form_url = shipping_form_page.url
+
+        assign skip_shipping_redirect = false
+        if shipping_form_url == blank
+          assign skip_shipping_redirect = true
+        endif
+        if page.handle == 'confirm-shipping-address' or page.template_suffix == 'confirm-shipping-address'
+          assign skip_shipping_redirect = true
+        endif
+        if request.path == shipping_form_url
+          assign skip_shipping_redirect = true
+        endif
+        if request.page_type contains 'customers'
+          assign skip_shipping_redirect = true
+        endif
+      -%}
+      {%- unless skip_shipping_redirect -%}
+        <script>window.location.replace({{ shipping_form_url | json }});</script>
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <style>
+    :root{
+      --ava-blue:{{ settings.color_primary }};
+      --ava-blue-dark:{{ settings.color_primary_dark }};
+      --ava-ink:{{ settings.color_ink }};
+      --ava-dark:{{ settings.color_dark }};
+      --ava-dark-2:{{ settings.color_dark_2 }};
+      --ava-panel:{{ settings.color_panel }};
+      --ava-panel-2:{{ settings.color_panel_2 }};
+      --ava-pack-enrolment:{{ settings.pack_colour_enrolment | default: '#E3EDF6' }};
+      --ava-pack-reorder:{{ settings.pack_colour_reorder | default: '#EAF4EE' }};
+      {%- if heading_font %}
+      --ava-font-head:{{ heading_font.family | json }},{{ heading_font.fallback_families }};
+      {%- endif %}
+      {%- if body_font %}
+      --ava-font-body:{{ body_font.family | json }},{{ body_font.fallback_families }};
+      {%- endif %}
+    }
+ 
+  </style>
+
+  {% render 'apex-attribution' %}
+
+  {% render 'structured-data' %}
+</head>
+<body class="template-{{ request.page_type | handle }}">
+  <a class="ava-hide" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t | default: 'Skip to content' }}</a>
+
+  {% render 'obo-session' %}
+
+  {% sections 'header-group' %}
+
+  <main id="MainContent">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

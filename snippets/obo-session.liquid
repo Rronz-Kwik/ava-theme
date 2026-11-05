@@ -1,0 +1,137 @@
+{% doc %}
+  OBO / EBO session (order or register for another influencer), site-wide.
+  Render once at the top of <body> in layout/theme.liquid, after
+  apex-attribution (it reads the apex-config island).
+
+  - #obo-cart-context: the cart's OBO attributes (the readable "_" copies of
+    the "__" keys, which Liquid can't see), read synchronously by
+    assets/enrollment-obo-context.js so the session follows the rep to pages
+    whose URL has no link params.
+  - #ava-obo-banner: "Shopping for / Registering {name}" with Clear, filled by
+    assets/obo-session.js. Rendered here too so it doesn't pop in.
+  - Loads the OBO scripts only while a session is on the cart, or when the URL
+    carries a dashboard link (?obo_type=). The enrollment section loads its own
+    copies; each script runs once.
+
+  @example
+  {% render 'obo-session' %}
+{% enddoc %}
+
+{%- liquid
+  assign obo_type = cart.attributes['_netfi_obo_type'] | downcase
+  assign obo_active = false
+  if obo_type == 'obo' or obo_type == 'ebo'
+    assign obo_active = true
+  endif
+
+  assign obo_name = cart.attributes['_netfi_obo_recipient_name']
+  if obo_name == blank
+    assign obo_name = cart.attributes['customer_first_name'] | append: ' ' | append: cart.attributes['customer_last_name'] | strip
+  endif
+  if obo_name == blank
+    assign obo_name = cart.attributes['customer_email']
+  endif
+  assign obo_name_safe = obo_name | escape
+
+  # Same rule as AvaObo.isIncomplete() in assets/enrollment-obo-context.js.
+  assign obo_incomplete = false
+  if obo_type == 'obo' and cart.attributes['_netfi_obo_recipient_uuid'] == blank
+    assign obo_incomplete = true
+  elsif obo_type == 'ebo'
+    if cart.attributes['customer_email'] == blank or cart.attributes['_netfi_obo_recipient_name'] == blank
+      assign obo_incomplete = true
+    endif
+  endif
+
+  assign obo_label_obo = 'obo.banner.shopping_for' | t: name: '%NAME%'
+  assign obo_label_ebo = 'obo.banner.registering' | t: name: '%NAME%'
+  if obo_type == 'ebo'
+    assign obo_label = obo_label_ebo
+  else
+    assign obo_label = obo_label_obo
+  endif
+-%}
+
+<style>
+  .ava-obo-banner{position:sticky;top:0;z-index:60;background:var(--ava-dark-2);color:#fff;font-size:15px;}
+  .ava-obo-banner[hidden]{display:none;}
+  .ava-obo-banner__inner{max-width:var(--ava-container);margin:0 auto;padding:10px var(--ava-gutter,16px);display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .ava-obo-banner__text{font-weight:600;overflow-wrap:anywhere;}
+  .ava-obo-banner__clear{flex:none;background:#fff;color:var(--ava-dark-2);border:0;border-radius:999px;padding:6px 16px;font:inherit;font-weight:600;cursor:pointer;}
+  .ava-obo-banner__clear:disabled{opacity:.6;cursor:wait;}
+  .ava-obo-banner__incomplete{max-width:var(--ava-container);margin:0 auto;padding:0 var(--ava-gutter,16px) 10px;color:#FECDCA;}
+  .ava-obo-banner__incomplete[hidden]{display:none;}
+  .ava-header{top:var(--ava-obo-banner-h,0px);}
+  .ava-obo-incomplete{color:#B42318;font-size:14px;margin-top:8px;}
+  html.ava-obo-blocked [name="checkout"]{opacity:.5;pointer-events:none;cursor:not-allowed;}
+  html.ava-obo-blocked .shopify-payment-button,
+  html.ava-obo-blocked shopify-accelerated-checkout,
+  html.ava-obo-blocked shopify-accelerated-checkout-cart{display:none !important;}
+</style>
+
+<script id="obo-cart-context" type="application/json">
+  {%- if obo_active -%}
+  {
+    "is_obo": {{ cart.attributes['is_obo'] | default: '' | json }},
+    "customer_id": {{ cart.attributes['customer_id'] | default: '' | json }},
+    "customer_first_name": {{ cart.attributes['customer_first_name'] | default: '' | json }},
+    "customer_last_name": {{ cart.attributes['customer_last_name'] | default: '' | json }},
+    "customer_email": {{ cart.attributes['customer_email'] | default: '' | json }},
+    "customer_phone": {{ cart.attributes['customer_phone'] | default: '' | json }},
+    "obo_recipient_type": {{ cart.attributes['obo_recipient_type'] | default: '' | json }},
+    "_netfi_obo_type": {{ obo_type | json }},
+    "_netfi_obo_recipient_uuid": {{ cart.attributes['_netfi_obo_recipient_uuid'] | default: '' | json }},
+    "_netfi_obo_recipient_name": {{ cart.attributes['_netfi_obo_recipient_name'] | default: '' | json }},
+    "_netfi_obo_recipient_profile_url": {{ cart.attributes['_netfi_obo_recipient_profile_url'] | default: '' | json }},
+    "_obo_payer_rep_did": {{ cart.attributes['_obo_payer_rep_did'] | default: '' | json }},
+    "_obo_started_at": {{ cart.attributes['_obo_started_at'] | default: '' | json }},
+    "_obo_sponsor_id": {{ cart.attributes['_obo_sponsor_id'] | default: '' | json }}
+  }
+  {%- else -%}
+  {}
+  {%- endif -%}
+</script>
+
+<div
+  id="ava-obo-banner"
+  class="ava-obo-banner"
+  role="region"
+  aria-label="{{ 'obo.banner.region_label' | t | escape }}"
+  data-label-obo="{{ obo_label_obo | escape }}"
+  data-label-ebo="{{ obo_label_ebo | escape }}"
+  data-incomplete="{{ 'obo.banner.incomplete' | t | escape }}"
+  {% unless obo_active %}hidden{% endunless %}
+>
+  <div class="ava-obo-banner__inner">
+    <span class="ava-obo-banner__text" data-obo-banner-text>{{ obo_label | replace: '%NAME%', obo_name_safe }}</span>
+    <button type="button" class="ava-obo-banner__clear" data-obo-clear>{{ 'obo.banner.clear' | t }}</button>
+  </div>
+  <p class="ava-obo-banner__incomplete" role="alert" data-obo-banner-incomplete {% unless obo_incomplete %}hidden{% endunless %}>
+    {{- 'obo.banner.incomplete' | t -}}
+  </p>
+</div>
+
+{%- if obo_active -%}
+  {%- if obo_incomplete -%}
+    <script>document.documentElement.classList.add('ava-obo-blocked');</script>
+  {%- endif -%}
+  <script src="{{ 'enrollment-shipping-prefill.js' | asset_url }}" defer></script>
+  <script src="{{ 'enrollment-obo-context.js' | asset_url }}" defer></script>
+  <script src="{{ 'obo-session.js' | asset_url }}" defer></script>
+{%- else -%}
+  <script>
+    (function () {
+      if (!/[?&]obo_type=/i.test(window.location.search)) return;
+      [
+        {{ 'enrollment-shipping-prefill.js' | asset_url | json }},
+        {{ 'enrollment-obo-context.js' | asset_url | json }},
+        {{ 'obo-session.js' | asset_url | json }}
+      ].forEach(function (src) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = false; // run in this order
+        document.head.appendChild(s);
+      });
+    })();
+  </script>
+{%- endif -%}

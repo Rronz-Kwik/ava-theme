@@ -1,0 +1,68 @@
+{%- liquid
+  assign bg = section.settings.background | default: 'panel'
+-%}
+<section class="ava-section ava-bg-{{ bg }}">
+  <div class="ava-container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="ava-block-head">
+        {%- if section.settings.eyebrow != blank -%}<div class="ava-eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="ava-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.subheading != blank -%}<p class="ava-lead ava-block-head__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="ava-grid ava-grid--3">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign img = block.settings.image
+          if img != blank
+            assign img_url = img | image_url: width: 800
+          else
+            assign img_url = block.settings.fallback_asset | asset_url
+          endif
+        -%}
+        <div class="ava-bcard" {{ block.shopify_attributes }}>
+          <img src="{{ img_url }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+          <div class="ava-bcard__body">
+            {%- if block.settings.eyebrow != blank -%}<div class="ava-eyebrow ava-eyebrow--blue">{{ block.settings.eyebrow }}</div>{%- endif -%}
+            <h3 class="ava-h3">{{ block.settings.title }}</h3>
+            {%- if block.settings.description != blank -%}<p class="ava-bcard__desc">{{ block.settings.description }}</p>{%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a href="{{ block.settings.button_link | default: '#' }}" class="ava-btn ava-btn--sm ava-btn--self-start">{{ block.settings.button_label }} &rarr;</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefit cards",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "select", "id": "background", "label": "Background", "options": [ {"value":"white","label":"White"}, {"value":"panel","label":"Light panel"}, {"value":"panel-2","label":"Off-white"} ], "default": "panel" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by Benefit" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Benefit cards" } ]
+}
+{% endschema %}

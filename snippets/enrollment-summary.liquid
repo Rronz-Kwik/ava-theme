@@ -1,0 +1,126 @@
+{%- comment -%}
+  Order-summary sidebar for the Distributor Selection enrollment flow.
+  A step checklist (pack → additional products → subscription → finish) plus the
+  sponsor and order totals. Steps 1–2 and the totals are populated live by
+  assets/new-enrollment.js from the current enrollment state; steps 3–4 are
+  static placeholders that mirror the rest of the enrollment journey.
+
+  Accepts:
+    step3_title  - title for the (static) subscription step
+    step3_show   - whether to render step 3
+    step4_title  - title for the (static) finish step
+    step4_show   - whether to render step 4
+    sponsor_help - optional "How does this work?" tooltip text
+{%- endcomment -%}
+<aside class="enroll-summary" aria-label="{{ 'enrollment.summary.summary_label' | t }}" data-remove-label="{{ 'enrollment.summary.remove' | t }}">
+  <div class="enroll-summary__inner">
+    <div class="enroll-summary__card">
+
+      <div class="enroll-step" data-summary-kit-group>
+        <div class="enroll-step__head">
+          <span class="enroll-step__badge" data-summary-kit-badge>1</span>
+          <span class="enroll-step__title">{{ 'enrollment.summary.choose_pack' | t }}</span>
+        </div>
+        <div class="enroll-step__items" data-summary-kit></div>
+        <p class="enroll-step__empty" data-summary-kit-empty>{{ 'enrollment.summary.no_pack' | t }}</p>
+      </div>
+
+      <div class="enroll-step" data-summary-addon-group>
+        <div class="enroll-step__head">
+          <span class="enroll-step__badge" data-summary-addon-badge>2</span>
+          <span class="enroll-step__title">{{ 'enrollment.summary.add_products' | t }}</span>
+        </div>
+        <div class="enroll-step__items" data-summary-addons></div>
+        <p class="enroll-step__empty" data-summary-addon-empty>{{ 'enrollment.summary.no_products' | t }}</p>
+      </div>
+
+      {%- assign next_step = 3 -%}
+      {%- if step3_show -%}
+        <div class="enroll-step enroll-step--pending">
+          <div class="enroll-step__head">
+            <span class="enroll-step__badge">{{ next_step }}</span>
+            <span class="enroll-step__title">{%- assign step3_fallback = 'enrollment.copy.summary_step3_title' | t -%}{{ step3_title | default: step3_fallback }}</span>
+          </div>
+        </div>
+        {%- assign next_step = next_step | plus: 1 -%}
+      {%- endif -%}
+
+      {%- if step4_show -%}
+        <div class="enroll-step enroll-step--pending">
+          <div class="enroll-step__head">
+            <span class="enroll-step__badge">{{ next_step }}</span>
+            <span class="enroll-step__title">{%- assign step4_fallback = 'enrollment.copy.summary_step4_title' | t -%}{{ step4_title | default: step4_fallback }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="enroll-sponsor">
+        {%- if sponsor_help != blank -%}
+          <span class="enroll-sponsor__help info-icon" tabindex="0" aria-label="{{ 'enrollment.summary.how_it_works' | t }}">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="8" cy="8" r="7.25" stroke="#111729" stroke-width="1.5"/>
+              <path d="M8 7.2V11.2" stroke="#111729" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="8" cy="4.9" r="0.9" fill="#111729"/>
+            </svg>
+            {{ 'enrollment.summary.how_it_works' | t }}
+            <span class="info-tooltip">{{ sponsor_help }}</span>
+          </span>
+        {%- endif -%}
+        <div class="enroll-sponsor__value" data-summary-sponsor-name>—</div>
+      </div>
+
+    </div>
+
+    <div class="enroll-summary__totals">
+      <div class="enroll-summary__row">
+        <span>{{ 'enrollment.summary.subtotal' | t }}</span>
+        <span data-summary-subtotal>—</span>
+      </div>
+      <div class="enroll-summary__row">
+        <span>{{ 'enrollment.summary.shipping' | t }}</span>
+        <span class="enroll-summary__muted">{{ 'enrollment.summary.calculated_at_checkout' | t }}</span>
+      </div>
+      <div class="enroll-summary__row">
+        <span>{{ 'enrollment.summary.taxes' | t }}</span>
+        <span class="enroll-summary__muted">{{ 'enrollment.summary.calculated_at_checkout' | t }}</span>
+      </div>
+      <div class="enroll-summary__row enroll-summary__row--total">
+        <span>{{ 'enrollment.summary.total' | t }}</span>
+        <span data-summary-total>—</span>
+      </div>
+    </div>
+
+    {%- if checkout_extras -%}
+      <label class="enroll-terms-label">
+        <input type="checkbox" class="enroll-terms">
+        <span>{{ 'enrollment.summary.agree_to' | t }}
+          {%- if terms_page != blank -%}
+            <a href="{{ terms_page }}" target="_blank" rel="noopener">{{ 'enrollment.summary.terms' | t }}</a>
+          {%- else -%}
+            <a href="/policies/terms-of-service" target="_blank" rel="noopener">{{ 'enrollment.summary.terms' | t }}</a>
+          {%- endif -%}
+        </span>
+      </label>
+    {%- endif -%}
+
+    <button type="button" class="enroll-summary__checkout" data-next-label="{{ 'enrollment.summary.next' | t }}" disabled>{{ 'enrollment.summary.checkout' | t }}</button>
+
+    {%- if checkout_extras -%}
+      <div class="enroll-payments">
+        <p class="enroll-payments__label">{{ 'enrollment.summary.payment_methods' | t }}</p>
+        <div class="enroll-payments__icons">
+          {% for type in shop.enabled_payment_types %}
+            {{ type | payment_type_svg_tag: class: 'enroll-payments__icon' }}
+          {% endfor %}
+        </div>
+      </div>
+
+      {%- if welcome_text != blank -%}
+        <p class="enroll-welcome">{{ welcome_text }}</p>
+      {%- endif -%}
+      {%- if reassurance_text != blank -%}
+        <p class="enroll-reassurance">{{ reassurance_text }}</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</aside>

@@ -1,0 +1,33 @@
+{%- comment -%}
+  Theme-editor text that also follows the storefront language.
+
+  Editor settings hold one value for every language, so on its own a setting
+  shows the same (English) text on /zh. This keeps the editor in charge of the
+  primary language and swaps in the locale translation everywhere else:
+
+    - primary language → the editor value, exactly as entered
+    - other languages  → the translation at `key` (Edit default theme content)
+    - editor value blank → nothing, in every language (blank still hides it),
+      unless `fallback` is true, which shows the translation instead
+
+  Accepts:
+    value    - REQUIRED. The section/block setting.
+    key      - REQUIRED. Locale key holding the translated text.
+    fallback - optional. Show the translation when the setting is blank.
+
+  Usage:
+    capture heading
+      render 'editor-text', value: section.settings.heading, key: 'contact.heading'
+    endcapture
+{%- endcomment -%}
+{%- liquid
+  if value == blank
+    if fallback
+      echo key | t
+    endif
+  elsif request.locale.primary
+    echo value
+  else
+    echo key | t
+  endif
+-%}

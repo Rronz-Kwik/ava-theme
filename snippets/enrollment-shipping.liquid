@@ -1,0 +1,132 @@
+{%- comment -%}
+  China enrollment Shipping step (assets/enrollment-shipping.js).
+
+  Province -> City -> District come from Ava Attribution App's synced ByDesign
+  data through its app proxy (proxy_path, default /apps/ava-china-address). The
+  address is validated there before the buyer can continue, then prefilled in
+  checkout, where it is validated again.
+
+  Only offered in the China market: localization.country (the same market
+  country the language selector uses) must be CN. Elsewhere the step stays
+  hidden and enrollment runs as before.
+
+  Accepts:
+  - subheading / heading: step titles (blank: the enrollment.shipping.* translations)
+  - proxy_path: app proxy prefix + subpath
+{%- endcomment -%}
+{%- liquid
+  if subheading == blank
+    assign subheading = 'enrollment.shipping.subheading' | t
+  endif
+  if heading == blank
+    assign heading = 'enrollment.shipping.heading' | t
+  endif
+  assign prefill = nil
+  if customer and customer.default_address.country_code == 'CN'
+    assign prefill = customer.default_address
+  endif
+-%}
+<div
+  class="enroll-shipping"
+  data-enroll-shipping
+  data-proxy-path="{{ proxy_path | default: '/apps/ava-china-address' | escape }}"
+  data-locale="{{ request.locale.iso_code }}"
+  data-country="{{ localization.country.iso_code }}"
+>
+  {%- comment -%} Messages enrollment-shipping.js shows (select placeholders, status). {%- endcomment -%}
+  <script type="application/json" data-shipping-messages>
+    {
+      "selectProvince": {{ 'enrollment.shipping.select_province' | t | json }},
+      "selectCity": {{ 'enrollment.shipping.select_city' | t | json }},
+      "selectProvinceFirst": {{ 'enrollment.shipping.select_province_first' | t | json }},
+      "selectDistrict": {{ 'enrollment.shipping.select_district' | t | json }},
+      "selectCityFirst": {{ 'enrollment.shipping.select_city_first' | t | json }},
+      "noDistricts": {{ 'enrollment.shipping.no_districts' | t | json }},
+      "loadFailed": {{ 'enrollment.shipping.load_failed' | t | json }},
+      "validateFailed": {{ 'enrollment.shipping.validate_failed' | t | json }},
+      "fixErrors": {{ 'enrollment.shipping.fix_errors' | t | json }},
+      "checking": {{ 'enrollment.shipping.checking' | t | json }}
+    }
+  </script>
+  <p class="sub-heading">{{ subheading }}</p>
+  <h2 class="enroll-finish-title">{{ heading }}</h2>
+  <p class="enroll-shipping__country">
+    {{ 'enrollment.shipping.country_label' | t }} <strong>{{ 'enrollment.shipping.country_name' | t }}</strong>
+  </p>
+
+  <p class="enroll-shipping__status" data-shipping-status role="alert" hidden></p>
+
+  <form
+    class="enroll-shipping__form"
+    data-shipping-form
+    novalidate
+    {% if prefill %}
+      data-prefill-province="{{ prefill.province_code | escape }}"
+      data-prefill-city="{{ prefill.city | escape }}"
+    {% endif %}
+  >
+    <div class="enroll-shipping__field">
+      <label for="enrollShipLastName">{{ 'enrollment.shipping.last_name' | t }} *</label>
+      <input id="enrollShipLastName" name="lastName" type="text" autocomplete="shipping family-name" maxlength="255" required value="{{ prefill.last_name | escape }}">
+      <p class="enroll-shipping__error" data-error-for="lastName" hidden></p>
+    </div>
+    <div class="enroll-shipping__field">
+      <label for="enrollShipFirstName">{{ 'enrollment.shipping.first_name' | t }}</label>
+      <input id="enrollShipFirstName" name="firstName" type="text" autocomplete="shipping given-name" maxlength="255" value="{{ prefill.first_name | escape }}">
+      <p class="enroll-shipping__error" data-error-for="firstName" hidden></p>
+    </div>
+
+    <div class="enroll-shipping__field">
+      <label for="enrollShipProvince">{{ 'enrollment.shipping.province' | t }} *</label>
+      <select id="enrollShipProvince" name="provinceCode" autocomplete="shipping address-level1" required disabled>
+        <option value="">{{ 'enrollment.shipping.select_province' | t }}</option>
+      </select>
+      <p class="enroll-shipping__error" data-error-for="provinceCode" hidden></p>
+    </div>
+    <div class="enroll-shipping__field">
+      <label for="enrollShipCity">{{ 'enrollment.shipping.city' | t }} *</label>
+      <select id="enrollShipCity" name="city" autocomplete="shipping address-level2" required disabled>
+        <option value="">{{ 'enrollment.shipping.select_province_first' | t }}</option>
+      </select>
+      {%- comment -%} Used instead of the select when no city list is synced for the province. {%- endcomment -%}
+      <input id="enrollShipCityText" name="cityText" type="text" autocomplete="shipping address-level2" maxlength="255" hidden>
+      <p class="enroll-shipping__error" data-error-for="city" hidden></p>
+    </div>
+    <div class="enroll-shipping__field" data-district-field>
+      <label for="enrollShipDistrict">{{ 'enrollment.shipping.district' | t }} <span data-district-required hidden>*</span></label>
+      <select id="enrollShipDistrict" name="district" disabled>
+        <option value="">{{ 'enrollment.shipping.select_city_first' | t }}</option>
+      </select>
+      <p class="enroll-shipping__error" data-error-for="district" hidden></p>
+    </div>
+
+    <div class="enroll-shipping__field enroll-shipping__field--wide">
+      <label for="enrollShipAddress1">{{ 'enrollment.shipping.address1' | t }} *</label>
+      <input id="enrollShipAddress1" name="address1" type="text" autocomplete="shipping address-line1" maxlength="255" required value="{{ prefill.address1 | escape }}">
+      <p class="enroll-shipping__error" data-error-for="address1" hidden></p>
+    </div>
+    <div class="enroll-shipping__field enroll-shipping__field--wide">
+      <label for="enrollShipAddress2">{{ 'enrollment.shipping.address2' | t }}</label>
+      <input id="enrollShipAddress2" name="address2" type="text" autocomplete="shipping address-line2" maxlength="255" value="{{ prefill.address2 | escape }}">
+      <p class="enroll-shipping__error" data-error-for="address2" hidden></p>
+    </div>
+
+    <div class="enroll-shipping__field">
+      <label for="enrollShipZip">{{ 'enrollment.shipping.zip' | t }} *</label>
+      <input id="enrollShipZip" name="zip" type="text" inputmode="numeric" autocomplete="shipping postal-code" maxlength="12" required value="{{ prefill.zip | escape }}">
+      <p class="enroll-shipping__error" data-error-for="zip" hidden></p>
+    </div>
+    <div class="enroll-shipping__field">
+      <label for="enrollShipPhone">{{ 'enrollment.shipping.phone' | t }}</label>
+      <input id="enrollShipPhone" name="phone" type="tel" autocomplete="shipping tel" maxlength="255" placeholder="+86 138 0013 8000" value="{{ prefill.phone | escape }}">
+      <p class="enroll-shipping__error" data-error-for="phone" hidden></p>
+    </div>
+
+    {% if customer %}
+      <label class="enroll-shipping__save enroll-shipping__field--wide">
+        <input type="checkbox" name="saveAsDefault" checked>
+        {{ 'enrollment.shipping.save_default' | t }}
+      </label>
+    {% endif %}
+  </form>
+</div>

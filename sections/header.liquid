@@ -1,0 +1,328 @@
+{%- liquid
+  assign scheme = section.settings.color_scheme | default: 'light'
+  assign logo_dark = settings.logo_dark
+  assign logo_light = settings.logo_light
+  assign lh = settings.logo_height | default: 52
+
+  assign locale_root = routes.root_url
+  assign locale_root_last_char = locale_root | slice: -1, 1
+
+  unless locale_root_last_char == '/'
+    assign locale_root = locale_root | append: '/'
+  endunless
+
+  assign core_product = all_products['core']
+  assign active_product = all_products['active']
+  assign renew_product = all_products['renew']
+
+  if scheme == 'dark'
+    assign logo_img = logo_light
+    assign logo_fallback = 'ava-logo-white.png'
+  else
+    assign logo_img = logo_dark
+    assign logo_fallback = 'ava-logo-ink.png'
+  endif
+-%}
+
+<header class="ava-header ava-header--{{ scheme }}">
+
+  <input
+    class="ava-navtoggle"
+    id="nav-{{ section.id }}"
+    type="checkbox"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+
+  <div class="ava-navbar">
+
+    <label
+      class="ava-burger"
+      for="nav-{{ section.id }}"
+      aria-label="Menu"
+    >
+      <i></i>
+    </label>
+
+    <nav class="ava-navlinks" aria-label="Primary">
+
+      <div class="ava-hasmenu">
+
+        <span>
+          {{ 'general.nav.products' | t }}
+          <span class="ava-caret">&#9662;</span>
+        </span>
+
+        <div class="ava-menu">
+          <div class="ava-menu-card">
+
+            <a href="{{ locale_root }}collections/all">
+
+              <span class="ava-menu-title">
+                {{ 'general.dropdown.all_products' | t }}
+              </span>
+
+              <span class="ava-menu-desc">
+                {{ 'general.dropdown.view_all_products' | t }}
+              </span>
+
+            </a>
+
+            {%- if core_product != blank -%}
+
+              <a href="{{ core_product.url }}">
+
+                <span class="ava-menu-title">
+                  {{ core_product.title }}
+                </span>
+
+                <span class="ava-menu-desc">
+                  {{ 'general.dropdown.balance' | t }}
+                </span>
+
+              </a>
+
+            {%- else -%}
+
+              <a href="{{ locale_root }}products/core">
+
+                <span class="ava-menu-title">
+                  Core
+                </span>
+
+                <span class="ava-menu-desc">
+                  {{ 'general.dropdown.balance' | t }}
+                </span>
+
+              </a>
+
+            {%- endif -%}
+
+            {%- if active_product != blank -%}
+
+              <a href="{{ active_product.url }}">
+
+                <span class="ava-menu-title">
+                  {{ active_product.title }}
+                </span>
+
+                <span class="ava-menu-desc">
+                  {{ 'general.dropdown.balance_plus' | t }}
+                </span>
+
+              </a>
+
+            {%- else -%}
+
+              <a href="{{ locale_root }}products/active">
+
+                <span class="ava-menu-title">
+                  Active
+                </span>
+
+                <span class="ava-menu-desc">
+                  {{ 'general.dropdown.balance_plus' | t }}
+                </span>
+
+              </a>
+
+            {%- endif -%}
+
+            {%- if renew_product != blank -%}
+
+              <a href="{{ renew_product.url }}">
+
+                <span class="ava-menu-title">
+                  {{ renew_product.title }}
+                </span>
+
+                <span class="ava-menu-desc">
+                  {{ 'general.dropdown.renew' | t }}
+                </span>
+
+              </a>
+
+            {%- else -%}
+
+              <a href="{{ locale_root }}products/renew">
+
+                <span class="ava-menu-title">
+                  Renew
+                </span>
+
+                <span class="ava-menu-desc">
+                  {{ 'general.dropdown.renew' | t }}
+                </span>
+
+              </a>
+
+            {%- endif -%}
+
+          </div>
+        </div>
+
+      </div>
+
+      <a href="{{ locale_root }}pages/our-science">
+        {{ 'general.nav.science' | t }}
+      </a>
+
+      <a href="{{ locale_root }}pages/about">
+        {{ 'general.nav.about' | t }}
+      </a>
+
+    </nav>
+    {%- liquid
+      assign home_url = '/'
+      unless request.locale.primary
+        assign lang = request.locale.iso_code | split: '-' | first | downcase
+        assign home_url = '/' | append: lang
+      endunless
+    -%}
+    <a
+      class="ava-logo"
+      href="{{ home_url }}"
+      aria-label="{{ shop.name }}"
+      style="--logo-h:{{ lh }}px"
+    >
+
+      {%- if logo_img != blank -%}
+
+        <img
+          class="ava-logo-img"
+          src="{{ logo_img | image_url: width: 400 }}"
+          alt="{{ shop.name }}"
+          width="{{ logo_img.width }}"
+          height="{{ logo_img.height }}"
+        >
+
+      {%- else -%}
+
+        <img
+          class="ava-logo-img"
+          src="{{ logo_fallback | asset_url }}"
+          alt="{{ shop.name }}"
+        >
+
+      {%- endif -%}
+
+    </a>
+
+    <div class="ava-navright">
+
+      {%- if section.settings.right_menu != blank -%}
+
+        {%- for link in section.settings.right_menu.links -%}
+
+          <a
+            href="{{ link.url }}"
+            class="ava-join"
+          >
+            {{ link.title }}
+          </a>
+
+        {%- endfor -%}
+
+      {%- else -%}
+
+        <a
+          href="{{ locale_root }}collections/all"
+          class="ava-join"
+        >
+          Shop All
+        </a>
+
+        <a
+          href="{{ locale_root }}pages/enrollment"
+          class="ava-join"
+        >
+          Become a Member
+        </a>
+
+      {%- endif -%}
+
+      <a
+        href="{{ locale_root }}pages/enrollment"
+        class="ava-join"
+      >
+        {{ 'general.nav.become_influencer' | t }}
+      </a>
+
+      {%- comment -%}
+        Shopify customer-accounts link. Turn the setting off if the shop moves to
+        an external login, and repoint the href at that system.
+      {%- endcomment -%}
+      {%- if section.settings.show_account_link -%}
+
+        <a
+          href="{{ routes.account_url }}"
+          class="ava-login"
+        >
+          {%- if customer -%}
+            {{ 'general.nav.account' | t }}
+          {%- else -%}
+            {{ 'general.nav.login' | t }}
+          {%- endif -%}
+        </a>
+
+      {%- endif -%}
+
+    </div>
+
+    <a
+      href="{{ routes.cart_url }}"
+      class="ava-cart"
+    >
+
+      {{ 'general.nav.cart' | t }}
+
+      <span class="ava-cart-count">
+        {{ cart.item_count | default: 0 }}
+      </span>
+
+    </a>
+
+  </div>
+
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "options": [
+        {
+          "value": "light",
+          "label": "Light (white / blur)"
+        },
+        {
+          "value": "dark",
+          "label": "Dark (ink / blur)"
+        }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "link_list",
+      "id": "right_menu",
+      "label": "Right navigation menu"
+    },
+    {
+      "type": "paragraph",
+      "content": "Header navigation uses Core, Active and Renew products. Select the right-side Shopify navigation menu above for Shop All and Become a Member."
+    },
+    { "type": "header", "content": "Account" },
+    {
+      "type": "checkbox",
+      "id": "show_account_link",
+      "label": "Show the log in link",
+      "default": true,
+      "info": "Points at Shopify customer accounts. Turn off if the shop uses an external login system."
+    }
+  ]
+}
+{% endschema %}

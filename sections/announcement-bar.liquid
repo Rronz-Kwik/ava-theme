@@ -1,0 +1,39 @@
+{%- liquid
+  comment
+    A schema `default` is baked into the theme and is NOT a Shopify translatable
+    resource, so it can never be translated. Leaving the setting empty and falling
+    back to a locale key is what lets this string follow the active language.
+
+    The language selector used to live here; it now sits in the footer
+    (see snippets/language-selector.liquid).
+  endcomment
+  assign bar_text = section.settings.text
+  if bar_text == blank
+    assign bar_text = 'general.announcement.default' | t
+  endif
+-%}
+{%- if bar_text != blank -%}
+  <div class="ava-announce" style="--ann-bg:{{ section.settings.bg }};--ann-color:{{ section.settings.color }}">
+    <div class="ava-announce__inner">
+      <div class="ava-announce__msg">
+        {%- if section.settings.link != blank -%}
+          <a href="{{ section.settings.link }}">{{ bar_text }}</a>
+        {%- else -%}
+          {{ bar_text }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text", "info": "Leave empty to use the translated default from your locale files, which follows the visitor's language." },
+    { "type": "url", "id": "link", "label": "Link (optional)" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#162430" },
+    { "type": "color", "id": "color", "label": "Text colour", "default": "#C6D2DC" }
+  ]
+}
+{% endschema %}

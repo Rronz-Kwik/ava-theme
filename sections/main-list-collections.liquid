@@ -1,0 +1,16 @@
+<section class="ava-section ava-bg-white">
+  <div class="ava-container">
+    <h1 class="ava-h1 ava-h1--page ava-mb-fluid">{{ 'general.nav.products' | t }}</h1>
+    <div class="ava-grid ava-grid--3">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="ava-bcard ava-list-cols__link">
+          {%- if collection.featured_image -%}<img src="{{ collection.featured_image | image_url: width: 800 }}" alt="{{ collection.title | escape }}" loading="lazy">{%- endif -%}
+          <div class="ava-bcard__body"><h3 class="ava-h3">{{ collection.title }}</h3></div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "List collections", "tag": "section", "settings": [] }
+{% endschema %}

@@ -1,0 +1,40 @@
+<section class="ava-section ava-bg-dark-2">
+  <div class="ava-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="ava-eyebrow ava-eyebrow--light ava-mb-fluid">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <div class="ava-grid ava-grid--3">
+      {%- for block in section.blocks -%}
+        <div class="ava-pillar" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pillars",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Brand Pillars" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "description", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [ {
+    "name": "Pillars",
+    "blocks": [ { "type": "pillar" }, { "type": "pillar" }, { "type": "pillar" } ]
+  } ]
+}
+{% endschema %}

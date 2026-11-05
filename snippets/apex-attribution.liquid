@@ -1,0 +1,23 @@
+{% doc %}
+  Apex bootstrap. Render once near the end of <head> in layout/theme.liquid.
+  Emits the config JSON island, then loads the attribution engine and the
+  cart-volume helper.
+
+  Script order matters: apex-attribution.js defines
+  window.__APEX_SYNC_CART_METAFIELDS__, which apex-cart-volume.js calls after
+  cart mutations. Both are deferred, so they execute in document order and the
+  global is always defined before the helper looks for it.
+
+  Both scripts load unconditionally. Whether attribution actually runs is
+  decided in JS from the config island (attribution_enabled), so the kill
+  switch lives in exactly one place and a cached page can never ship without
+  the scripts.
+
+  @example
+  {% render 'apex-attribution' %}
+{% enddoc %}
+
+{% render 'apex-config' %}
+
+<script src="{{ 'apex-attribution.js' | asset_url }}" defer></script>
+<script src="{{ 'apex-cart-volume.js' | asset_url }}" defer></script>

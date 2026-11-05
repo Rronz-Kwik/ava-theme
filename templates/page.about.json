@@ -1,0 +1,187 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/AdobeStock_243466445_6c82a1bb-e0f3-4d96-b321-aa0c373e4fbf.jpg",
+        "fallback_asset": "AdobeStock_243466445.jpeg",
+        "priority": true,
+        "layout": "left",
+        "height": "clamp(480px,66vh,680px)",
+        "overlay_style": "left",
+        "overlay_opacity": 70,
+        "eyebrow": "About AVA",
+        "heading": "What it means to truly live, not just function.",
+        "subheading": "AVA, meaning “life,” was created for people who want to feel more balanced, more capable, and more in tune with their body at every stage of life."
+      }
+    },
+    "story": {
+      "type": "split-media",
+      "settings": {
+        "background": "white",
+        "media_side": "right",
+        "image": "shopify://shop_images/AdobeStock_439114244.jpg",
+        "fallback_asset": "AdobeStock_439114244.jpeg",
+        "image_alt": "Balance is not stillness. It is movement.",
+        "eyebrow": "Our Story",
+        "heading": "Balance is not stillness. It is movement.",
+        "body": "<p>AVA is a premium health and wellness brand built around the belief that balance is rhythm — the body’s ability to adapt, respond, shift, and return to center through every shift, stage, and season of life.</p><p>The wellness industry has made health feel confusing, overly clinical, and disconnected from how people actually live. AVA challenges that model. We believe balance should be understood as a foundation of life — not a niche issue, and not something addressed only when people feel broken.</p>"
+      }
+    },
+    "mission_vision": {
+      "type": "mission-vision",
+      "blocks": {
+        "mission": {
+          "type": "panel",
+          "settings": {
+            "label": "Mission",
+            "statement": "AVA helps men and women age with their bodies, not against them, through precise, science-led wellness for every shift, stage, and season of life."
+          }
+        },
+        "vision": {
+          "type": "panel",
+          "settings": {
+            "label": "Vision",
+            "statement": "AVA envisions a future where aging well begins with balance — active, responsive, and personal."
+          }
+        }
+      },
+      "block_order": [
+        "mission",
+        "vision"
+      ],
+      "settings": {
+        "background": "panel"
+      }
+    },
+    "statement": {
+      "type": "rich-statement",
+      "settings": {
+        "background": "white",
+        "eyebrow": "Origin",
+        "heading": "Created to challenge what wellness could be.",
+        "body": "<p>AVA was born from a belief that wellness needed to be reimagined. For decades, the industry relied on generic solutions and one-size-fits-all thinking. But the body is not generic. It is intelligent, adaptive, and constantly in motion.</p><p>The ideas behind AVA trace back to the late 1990s, where our development team cut their teeth challenging assumptions and reinventing the status quo. Decades of observation, refinement, and scientific exploration evolved into a vision for category-creating products designed to support the body with more precision, more intention, and more respect for how it actually works.</p><p>AVA believes aging well is not about fighting the body. It is about understanding it, supporting it, and moving in rhythm with it.</p>"
+      }
+    },
+    "pillars": {
+      "type": "pillars",
+      "blocks": {
+        "p1": {
+          "type": "pillar",
+          "settings": {
+            "title": "Balance in Motion",
+            "description": "Balance is not static. It is the body’s ability to adapt, respond, shift, and return to center through every stage of life."
+          }
+        },
+        "p2": {
+          "type": "pillar",
+          "settings": {
+            "title": "Precision Wellness",
+            "description": "Science-led solutions made with intention — advanced thinking and purposeful design that support the body in smarter ways."
+          }
+        },
+        "p3": {
+          "type": "pillar",
+          "settings": {
+            "title": "Age With Your Body",
+            "description": "We help people work with their body’s natural rhythm, not against it — aging well, living fully, becoming their fullest self."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "eyebrow": "Brand Pillars"
+      }
+    },
+    "values": {
+      "type": "values-grid",
+      "blocks": {
+        "v1": {
+          "type": "value",
+          "settings": {
+            "title": "Precision",
+            "description": "Wellness should be intentional, thoughtful, and exacting — never generic."
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "title": "Balance",
+            "description": "True wellness is dynamic, helping the body return to center through every season."
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "title": "Innovation",
+            "description": "We challenge outdated norms by applying advanced science to create smarter solutions."
+          }
+        },
+        "v4": {
+          "type": "value",
+          "settings": {
+            "title": "Integrity",
+            "description": "We lead with trust, transparency, and responsibility in all we create and deliver."
+          }
+        },
+        "v5": {
+          "type": "value",
+          "settings": {
+            "title": "Accessibility",
+            "description": "We make advanced wellness feel human, understandable, and within reach."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5"
+      ],
+      "settings": {
+        "heading": "What we value",
+        "background": "panel"
+      }
+    },
+    "cta": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/Depositphotos_64377651_ds.jpg",
+        "fallback_asset": "Depositphotos_64377651_ds.jpg",
+        "priority": false,
+        "layout": "center",
+        "height": "clamp(460px,54vh,620px)",
+        "overlay_style": "full",
+        "overlay_opacity": 65,
+        "heading": "Find your balance in motion.",
+        "subheading": "Discover precision wellness products designed to help you age with your body, not against it.",
+        "button1_label": "Shop AVA",
+        "button1_link": "shopify://collections/all",
+        "button1_style": "light"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "story",
+    "mission_vision",
+    "statement",
+    "pillars",
+    "values",
+    "cta"
+  ]
+}

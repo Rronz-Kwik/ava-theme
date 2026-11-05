@@ -1,0 +1,175 @@
+{%- liquid 
+  assign blog = blogs[section.settings.blog] 
+  assign limit = section.settings.limit | default: 3 
+-%} 
+
+<section class="ava-section ava-bg-{{ section.settings.background | default: 'white' }}"> 
+  <div class="ava-container"> 
+
+    <div class="ava-flex-between ava-articlelist__head"> 
+      <div class="ava-measure"> 
+
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="ava-eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {%- endif -%} 
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ava-h2">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%} 
+
+      </div> 
+
+      {%- if blog != blank -%} 
+        <a href="{{ blog.url }}" class="ava-link">
+          {{ section.settings.link_label | default: 'View all' }} &rarr;
+        </a> 
+      {%- endif -%} 
+    </div> 
+ 
+    <div class="ava-grid ava-grid--3"> 
+
+      {%- if blog != blank and blog.articles_count > 0 -%} 
+
+        {%- for article in blog.articles limit: limit -%} 
+
+          <a href="{{ article.url }}" class="ava-acard"> 
+
+            {%- if article.image -%} 
+              <img
+                src="{{ article.image | image_url: width: 700 }}"
+                alt="{{ article.title | escape }}"
+                loading="lazy"
+              >
+            {%- endif -%} 
+
+            <div class="ava-acard__body"> 
+
+              {%- if article.tags.size > 0 -%}
+                {%- assign article_tag = article.tags.first -%}
+
+                <div class="ava-acard__cat">
+                  {%- case article_tag -%}
+
+                    {%- when 'Precision Wellness' -%}
+                      {{ 'journal.cat_precision' | t }}
+
+                    {%- when 'Aging Well' -%}
+                      {{ 'journal.cat_aging' | t }}
+
+                    {%- when 'Renewal' -%}
+                      {{ 'journal.cat_renewal' | t }}
+
+                    {%- when 'Daily Rhythm' -%}
+                      {{ 'journal.cat_rhythm' | t }}
+
+                    {%- when 'The Products' -%}
+                      {{ 'journal.cat_products' | t }}
+
+                    {%- when 'Our Science' -%}
+                      {{ 'journal.cat_science' | t }}
+
+                    {%- else -%}
+                      {{ article_tag }}
+
+                  {%- endcase -%}
+                </div>
+
+              {%- endif -%} 
+
+              <h3 class="ava-acard__title">
+                {{ article.title }}
+              </h3> 
+
+            </div> 
+          </a> 
+
+        {%- endfor -%} 
+
+      {%- else -%} 
+
+        {%- comment -%} Placeholder while no blog/articles exist yet {%- endcomment -%} 
+
+        {%- for i in (1..limit) -%} 
+          <div class="ava-acard">
+            <div class="ava-acard__body">
+              <div class="ava-acard__cat">
+                {{ 'journal.cat_products' | t }}
+              </div>
+              <h3 class="ava-acard__title">
+                {{ 'onboarding.article_title' | t }}
+              </h3>
+            </div>
+          </div> 
+        {%- endfor -%} 
+
+      {%- endif -%} 
+
+    </div> 
+  </div> 
+</section> 
+ 
+{% schema %} 
+{ 
+  "name": "Article list", 
+  "tag": "section", 
+  "settings": [ 
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "panel",
+          "label": "Light panel"
+        }
+      ],
+      "default": "white"
+    }, 
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Journal"
+    }, 
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Learn the science of balance."
+    }, 
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    }, 
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Articles to show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    }, 
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "View-all label",
+      "default": "View all"
+    } 
+  ], 
+  "presets": [
+    {
+      "name": "Article list"
+    }
+  ] 
+} 
+{% endschema %}

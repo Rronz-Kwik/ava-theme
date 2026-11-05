@@ -1,0 +1,41 @@
+<section class="ava-section ava-bg-{{ section.settings.background | default: 'panel' }}">
+  <div class="ava-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ava-h2 ava-mb-fluid">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <div class="ava-values">
+      {%- for block in section.blocks -%}
+        <div class="ava-values__cell" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Values grid",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What we value" },
+    { "type": "select", "id": "background", "label": "Background", "options": [ {"value":"white","label":"White"}, {"value":"panel","label":"Light panel"}, {"value":"panel-2","label":"Off-white"} ], "default": "panel" }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "description", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [ {
+    "name": "Values grid",
+    "blocks": [ { "type": "value" }, { "type": "value" }, { "type": "value" }, { "type": "value" }, { "type": "value" } ]
+  } ]
+}
+{% endschema %}

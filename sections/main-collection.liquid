@@ -1,0 +1,29 @@
+<section class="ava-section ava-bg-white">
+  <div class="ava-container">
+    <div class="ava-block-head">
+      <div class="ava-eyebrow">{{ 'general.nav.products' | t }}</div>
+      <h1 class="ava-h1 ava-h1--page">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}<div class="ava-lead ava-collection__desc">{{ collection.description }}</div>{%- endif -%}
+    </div>
+    {%- paginate collection.products by 12 -%}
+      <div class="ava-grid ava-grid--3">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- else -%}
+          <p class="ava-body">{{ 'collections.general.no_matches' | t | default: 'No products found.' }}</p>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <div class="ava-collection__pager">
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}<a class="ava-chip" href="{{ part.url }}">{{ part.title }}</a>
+            {%- else -%}<span class="ava-chip ava-chip--active">{{ part.title }}</span>{%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Collection", "tag": "section", "settings": [] }
+{% endschema %}

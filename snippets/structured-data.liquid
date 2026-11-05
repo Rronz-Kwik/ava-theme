@@ -1,0 +1,41 @@
+{% doc %}
+  Site-wide JSON-LD structured data for SEO / rich results.
+  Organization + WebSite are emitted once, on the homepage only, to avoid
+  duplicate entities across the site. Product structured data is emitted
+  per-product in sections/main-product.liquid.
+
+  @example
+  {% render 'structured-data' %}
+{% enddoc %}
+
+{%- if request.page_type == 'index' -%}
+  {%- assign org_logo = settings.logo_dark | default: settings.logo_light -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ request.origin | json }},
+    "description": {{ shop.description | default: shop.name | strip_html | json }}
+    {%- if org_logo != blank -%}
+    ,"logo": {{ org_logo | image_url: width: 512 | prepend: 'https:' | json }}
+    {%- endif -%}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ request.origin | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "{{ request.origin }}/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+{%- endif -%}

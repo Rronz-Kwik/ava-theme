@@ -1,0 +1,25 @@
+<section class="ava-section ava-bg-white">
+  <div class="ava-container">
+    <h1 class="ava-h1 ava-h1--page">{{ 'general.search.title' | t | default: 'Search' }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="ava-search-form">
+      <input class="ava-footer__pill ava-search-input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t | default: 'Search' }}">
+      <button type="submit" class="ava-btn ava-btn--sm">{{ 'general.search.submit' | t | default: 'Search' }}</button>
+    </form>
+
+    {%- if search.performed -%}
+      <p class="ava-body-sm ava-mt-lg">{{ search.results_count }} results for &ldquo;{{ search.terms }}&rdquo;</p>
+      <div class="ava-grid ava-grid--3 ava-mt-lg">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item %}
+          {%- else -%}
+            <a href="{{ item.url }}" class="ava-acard"><div class="ava-acard__body"><h3 class="ava-acard__title">{{ item.title }}</h3></div></a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Search", "tag": "section", "settings": [] }
+{% endschema %}

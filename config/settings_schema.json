@@ -1,0 +1,99 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "AVA — Balance in Motion",
+    "theme_version": "1.0.0",
+    "theme_author": "AVA",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_primary", "label": "Primary / accent", "default": "#2C6FB0" },
+      { "type": "color", "id": "color_primary_dark", "label": "Primary (hover)", "default": "#235A90" },
+      { "type": "color", "id": "color_ink", "label": "Text / ink", "default": "#1B2228" },
+      { "type": "color", "id": "color_dark", "label": "Dark background (footer)", "default": "#0F1A22" },
+      { "type": "color", "id": "color_dark_2", "label": "Dark background (sections)", "default": "#162430" },
+      { "type": "color", "id": "color_panel", "label": "Light panel", "default": "#EAF1F6" },
+      { "type": "color", "id": "color_panel_2", "label": "Off-white panel", "default": "#F7FAFB" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "paragraph", "content": "Fonts are served by Shopify (font_face) — pick any font in the Shopify library. The original design used Schibsted Grotesk / Hanken Grotesk, which aren't in Shopify's library; defaults below are the closest grotesk substitutes." },
+      { "type": "font_picker", "id": "font_heading", "label": "Headings", "default": "work_sans_n6" },
+      { "type": "font_picker", "id": "font_body", "label": "Body", "default": "work_sans_n4" }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "image_picker", "id": "logo_dark", "label": "Logo — dark (for light headers)", "info": "Falls back to bundled ava-logo-ink.png" },
+      { "type": "image_picker", "id": "logo_light", "label": "Logo — light (for dark headers & footer)", "info": "Falls back to bundled ava-logo-white.png" },
+      { "type": "range", "id": "logo_height", "label": "Logo height", "min": 28, "max": 72, "step": 2, "unit": "px", "default": 52 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "32×32 recommended" }
+    ]
+  },
+  {
+    "name": "Pack types",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The word \"Enrolment\" is being removed from pack names, so this colour block is the only thing telling a customer whether they are looking at an enrolment pack or a reorder pack. Treat it as meaning, not decoration. THE COLOURS BELOW ARE PLACEHOLDERS PENDING CLIENT CONFIRMATION (ClickUp 869etbgcb) — change them here, no code change needed."
+      },
+      {
+        "type": "checkbox",
+        "id": "pack_colour_enabled",
+        "label": "Show pack-type colour blocks",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "pack_colour_enrolment",
+        "label": "Enrolment pack block",
+        "default": "#E3EDF6"
+      },
+      {
+        "type": "color",
+        "id": "pack_colour_reorder",
+        "label": "Reorder pack block",
+        "default": "#EAF4EE"
+      },
+      {
+        "type": "header",
+        "content": "Fallback classification"
+      },
+      {
+        "type": "paragraph",
+        "content": "A product's pack type is read from its ava.pack_type metafield first. These comma-separated collection handles are only a fallback for products whose metafield is not set yet, and can be emptied once every pack carries the metafield."
+      },
+      {
+        "type": "text",
+        "id": "pack_enrolment_collections",
+        "label": "Enrolment collection handles",
+        "default": "enrollement,enrollment",
+        "info": "The live collection handle is misspelled 'enrollement'; both spellings are listed so it keeps working if that is corrected."
+      },
+      {
+        "type": "text",
+        "id": "pack_reorder_collections",
+        "label": "Reorder collection handles",
+        "info": "Deliberately empty by default. 'wholesale' also contains the single Balance / Balance+ / Renew+ products, so using it here would tint those too. Populate the ava.pack_type metafield instead, or list handles here only if they contain reorder packs exclusively."
+      }
+    ]
+  },
+
+    {
+    "name": "Storefront API",
+    "settings": [
+      {
+        "type": "text",
+        "id": "storefront_api_token",
+        "label": "Storefront API public access token",
+        "info": "Public access token from a custom app (Settings > Apps and sales channels > Develop apps > your app > API credentials). Used to sync cart attributes into a cart metafield via cartMetafieldsSet. Leave blank to disable."
+      }
+    ]
+  }
+]
