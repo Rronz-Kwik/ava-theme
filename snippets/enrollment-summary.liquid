@@ -95,9 +95,9 @@
         <input type="checkbox" class="enroll-terms">
         <span>{{ 'enrollment.summary.agree_to' | t }}
           {%- if terms_page != blank -%}
-            <a href="{{ terms_page }}" target="_blank" rel="noopener">{{ 'enrollment.summary.terms' | t }}</a>
+            <a href="{% render 'localized-url', url: terms_page %}" target="_blank" rel="noopener">{{ 'enrollment.summary.terms' | t }}</a>
           {%- else -%}
-            <a href="/policies/terms-of-service" target="_blank" rel="noopener">{{ 'enrollment.summary.terms' | t }}</a>
+            <a href="{% render 'localized-url', url: '/policies/terms-of-service' %}" target="_blank" rel="noopener">{{ 'enrollment.summary.terms' | t }}</a>
           {%- endif -%}
         </span>
       </label>

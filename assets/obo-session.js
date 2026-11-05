@@ -211,8 +211,7 @@
 
   // Removes every OBO attribute (the "__" keys blind, as /cart.js never shows
   // them), the obo.* metafields mirrored from them and the one-time delivery
-  // address. `sponsor`, an EBO session's, goes too — attribute, cookie and
-  // apex.sponsor_id metafield.
+  // address. `sponsor`, an EBO session's, goes too.
   function removeSession(cart, sponsor) {
     var current = (cart && cart.attributes) || {};
     var attributes = obo.attributes();

@@ -7,7 +7,7 @@
     </form>
 
     {%- if search.performed -%}
-      <p class="ava-body-sm ava-mt-lg">{{ search.results_count }} results for &ldquo;{{ search.terms }}&rdquo;</p>
+      <p class="ava-body-sm ava-mt-lg">{{ 'general.search.results' | t: count: search.results_count, terms: search.terms }}</p>
       <div class="ava-grid ava-grid--3 ava-mt-lg">
         {%- for item in search.results -%}
           {%- if item.object_type == 'product' -%}

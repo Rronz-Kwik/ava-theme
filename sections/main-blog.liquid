@@ -15,12 +15,15 @@
     </div>
 
     <h1 class="ava-h1 ava-blog__title">
-      {{ section.settings.heading | default: blog.title }}
+      {%- assign blog_heading_fallback = 'journal.header' | t -%}
+      {{ section.settings.heading | default: blog_heading_fallback }}
     </h1>
 
-    {%- if section.settings.subheading != blank -%}
+    {%- assign blog_sub_fallback = 'journal.subhead' | t -%}
+    {%- assign blog_sub = section.settings.subheading | default: blog_sub_fallback -%}
+    {%- if blog_sub != blank -%}
       <p class="ava-lead ava-blog__sub">
-        {{ section.settings.subheading }}
+        {{ blog_sub }}
       </p>
     {%- endif -%}
 
@@ -384,13 +387,13 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Learn the science of balance."
+      "info": "Leave blank to use the translated default."
     },
     {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Insights on aging well, precision wellness, and living in rhythm with your body, from the people who formulate AVA."
+      "info": "Leave blank to use the translated default."
     }
   ]
 }

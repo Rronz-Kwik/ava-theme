@@ -95,7 +95,8 @@
   <div class="distributor-step step-1">
     <div class="distributor-inner">
       <div class="distributor-left">
-        <img src="{{ section.settings.left_image | image_url }}" alt="Banner">
+        {%- assign banner_alt_fallback = 'enrollment.banner_alt' | t -%}
+        <img src="{{ section.settings.left_image | image_url }}" alt="{{ section.settings.left_image.alt | escape | default: banner_alt_fallback }}">
       </div>
 
       <div class="distributor-right">

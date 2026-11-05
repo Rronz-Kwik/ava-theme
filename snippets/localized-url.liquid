@@ -1,0 +1,36 @@
+{%- comment -%}
+  Prefixes a typed storefront path with the active locale root so links
+  keep the shopper in their language (/pages/about -> /zh/pages/about).
+
+  A `url` setting renders a typed path verbatim, while a resource picked
+  with the url picker (shopify://...) already renders localized. Both are
+  handled: paths already under the locale root, external URLs, anchors
+  and protocol-relative URLs pass through unchanged.
+
+  Accepts:
+  - url {String} - the link to localize. Blank renders '#'.
+
+  Usage:
+  href="{% render 'localized-url', url: section.settings.button_link %}"
+{%- endcomment -%}
+{%- liquid
+  assign root = routes.root_url
+  assign path = url | default: '#'
+  assign out = path
+
+  if root != '/'
+    assign first_char = path | slice: 0, 1
+    assign second_char = path | slice: 1, 1
+    if first_char == '/' and second_char != '/'
+      assign root_slash = root | append: '/'
+      assign path_head = path | slice: 0, root_slash.size
+      if path == '/'
+        assign out = root
+      elsif path != root and path_head != root_slash
+        assign out = root | append: path
+      endif
+    endif
+  endif
+
+  echo out
+-%}

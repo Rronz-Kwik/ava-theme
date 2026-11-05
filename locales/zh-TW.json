@@ -31,6 +31,22 @@
       "label": "Region & language",
       "title": "Choose your market",
       "subtitle": "Select your region and language."
+    },
+    "search": {
+      "title": "搜尋",
+      "placeholder": "搜尋",
+      "submit": "搜尋",
+      "results": {
+        "one": "找到 {{ count }} 個與「{{ terms }}」相關的結果",
+        "other": "找到 {{ count }} 個與「{{ terms }}」相關的結果"
+      }
+    },
+    "accessibility": {
+      "menu": "Menu",
+      "primary_nav": "Primary"
+    },
+    "404": {
+      "title": "Page not found"
     }
   },
   "footer": {
@@ -72,7 +88,11 @@
     "ritual_label": "儀式",
     "howto_label": "使用方法",
     "standard_label": "AVA 標準",
-    "reviews": "reviews"
+    "reviews": "reviews",
+    "pack_type": {
+      "enrolment": "Enrolment pack",
+      "reorder": "Reorder pack"
+    }
   },
   "journal": {
     "header": "了解平衡的科學。",
@@ -156,6 +176,20 @@
     "std_h": "主動的健康，在你被忽視之前。",
     "std_p1": "我們尊重現代醫療，但相信人們值得擁有主動、以科學為導的健康方案，而不是被簡化為一個症狀或得到一個「一體適用」的答案。",
     "std_p2": "AVA 運用科學創造解決方案，幫助人們順應身體而非對抗身體地老去——思維顓覆、執行高端、以人為本。"
+  },
+  "cart": {
+    "general": {
+      "title": "您的購物車",
+      "empty": "您的購物車是空的。",
+      "update": "更新",
+      "remove": "移除",
+      "quantity": "數量",
+      "increase": "增加數量",
+      "decrease": "減少數量",
+      "subtotal": "小計",
+      "checkout": "結帳",
+      "fee_included": "含運費及進口費用 20.7%："
+    }
   },
   "enrollment": {
     "summary": {
@@ -260,7 +294,8 @@
       "summary_welcome_text": "歡迎光臨本店！",
       "summary_reassurance_text": "24 小時內出貨，30 天無理由退款保證",
       "more_info": "更多資訊"
-    }
+    },
+    "banner_alt": "Sign-up banner"
   },
   "confirm_shipping": {
     "eyebrow": "收貨地址",
@@ -301,5 +336,14 @@
     "message": "留言",
     "submit": "提交",
     "success": "感謝您的來信，我們的團隊將盡快與您聯絡。"
+  },
+  "products": {
+    "product": {
+      "media": {
+        "view_image": "View image {{ index }}",
+        "previous": "Previous",
+        "next": "Next"
+      }
+    }
   }
 }

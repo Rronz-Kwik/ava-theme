@@ -17,20 +17,10 @@
     "color_panel": "#EAF1F6",
     "color_panel_2": "#F7FAFB",
     "logo_dark": "shopify://shop_images/ava-logo-ink.png",
-    "logo_light": "shopify://shop_images/ava-logo-white.png",
+    "logo_light": "shopify://shop_images/ava-logo-white_c12ede98-1d9c-417b-b63d-3334ce414462.webp",
     "logo_height": 52,
-    "favicon": "shopify://shop_images/ava-logo-azure.png",
-    "storefront_api_token": "e5d91e128b503dab82aae4745716d69e",
-    "content_for_index": [],
-    "blocks": {
-      "6813491992938784016": {
-        "type": "shopify://apps/ava-attribution-staging/blocks/fee_breakdown/01a16912-1eca-7ef2-8350-c6ea5105ff77",
-        "disabled": false,
-        "settings": {
-          "product_cost_label": "Product cost",
-          "fee_label": "Includes Shipping and Import Cost 20.7%"
-        }
-      }
-    }
+    "favicon": "shopify://shop_images/ava-logo-azure.webp",
+    "storefront_api_token": "9106b7e36f63bccc77661b442c5f1fc0",
+    "content_for_index": []
   }
 }

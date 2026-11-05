@@ -165,13 +165,6 @@
     return lineCents - Math.floor(lineCents * 1000 / 1207);
   }
 
-  // "HKD 354.80" — currency code first, amount with thousands separators
-  // (matches Liquid's `money_without_currency`).
-  function formatFee(cents, currency) {
-    var value = (cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return (currency ? currency + ' ' : '') + value;
-  }
-
   function initCart(form) {
     var changeUrl = form.getAttribute('data-cart-change-url') || '/cart/change';
     var moneyFormat = form.getAttribute('data-money-format') || '${{amount}}';
@@ -256,13 +249,13 @@
           var lineFee = feeForLine(item.final_line_price);
           feeCents += lineFee;
           var lineFeeEl = row.querySelector('[data-cart-line-fee]');
-          if (lineFeeEl) lineFeeEl.textContent = formatFee(lineFee, currency);
+          if (lineFeeEl) lineFeeEl.textContent = formatMoney(lineFee, moneyFormat, currency) + ' ' + currency;
         }
       });
 
       var feeEl = form.querySelector('[data-cart-fee]');
       var feeWrap = form.querySelector('[data-cart-fee-wrap]');
-      if (feeEl) feeEl.textContent = formatFee(feeCents, currency);
+      if (feeEl) feeEl.textContent = formatMoney(feeCents, moneyFormat, currency) + ' ' + currency;
       if (feeWrap) feeWrap.hidden = feeCents === 0;
 
       if (!cart.item_count) {

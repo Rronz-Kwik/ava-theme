@@ -28,7 +28,7 @@
             <h3 class="ava-h3">{{ block.settings.title }}</h3>
             {%- if block.settings.description != blank -%}<p class="ava-bcard__desc">{{ block.settings.description }}</p>{%- endif -%}
             {%- if block.settings.button_label != blank -%}
-              <a href="{{ block.settings.button_link | default: '#' }}" class="ava-btn ava-btn--sm ava-btn--self-start">{{ block.settings.button_label }} &rarr;</a>
+              <a href="{% render 'localized-url', url: block.settings.button_link %}" class="ava-btn ava-btn--sm ava-btn--self-start">{{ block.settings.button_label }} &rarr;</a>
             {%- endif -%}
           </div>
         </div>

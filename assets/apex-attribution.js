@@ -991,19 +991,15 @@
     });
   }
 
-  // Deletes the cart metafields mirrored from the given attribute keys, in one
-  // request: obo.* for OBO keys, apex.sponsor_id for sponsor_id (an EBO
-  // session's sponsor); any other key is ignored. Used when an OBO session is
-  // cleared: a sync skips blank values rather than writing them, so blanking
-  // the attributes alone would leave the metafields on the cart to be copied
-  // onto the next order. Always resolves.
+  // Deletes the obo.* cart metafields mirrored from the given attribute keys
+  // (non-OBO keys are ignored), in one request. Used when an OBO session is
+  // cleared: blanking the attributes alone would leave the metafields on the
+  // cart to be copied onto the next order. Always resolves.
   function deleteOboMetafields(token, ownerId, attrKeys) {
     var keys = [];
     for (var i = 0; i < attrKeys.length; i++) {
-      var key = OBO_ATTR_RE.test(attrKeys[i]) ? oboMetafieldKey(attrKeys[i])
-        : attrKeys[i] === 'sponsor_id' ? 'apex.' + metafieldKeyFor(attrKeys[i])
-        : '';
-      if (key && keys.indexOf(key) === -1) keys.push(key);
+      var key = oboMetafieldKey(attrKeys[i]);
+      if (OBO_ATTR_RE.test(attrKeys[i]) && keys.indexOf(key) === -1) keys.push(key);
     }
     if (!keys.length) return Promise.resolve(true);
 
@@ -1143,8 +1139,7 @@
     };
 
     // For assets/obo-session.js when it clears a session: deletes the obo.*
-    // (and, for sponsor_id, apex.sponsor_id) metafields mirrored from
-    // `attrKeys`. Always resolves.
+    // metafields mirrored from `attrKeys`. Always resolves.
     window.__APEX_DELETE_OBO_METAFIELDS__ = function (cart, attrKeys) {
       var token = config.storefront_api_token;
       if (!token || !cart || !cart.token) return Promise.resolve(false);

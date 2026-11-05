@@ -46,12 +46,18 @@
       "page": "第 {{ page }} 页"
     },
     "accessibility": {
-      "skip_to_content": "跳至内容"
+      "skip_to_content": "跳至内容",
+      "menu": "菜单",
+      "primary_nav": "主导航"
     },
     "search": {
       "title": "搜索",
       "placeholder": "搜索",
-      "submit": "搜索"
+      "submit": "搜索",
+      "results": {
+        "one": "找到 {{ count }} 个与“{{ terms }}”相关的结果",
+        "other": "找到 {{ count }} 个与“{{ terms }}”相关的结果"
+      }
     },
     "newsletter": {
       "confirmation": "感谢您的订阅。"
@@ -97,10 +103,14 @@
     "ritual_label": "仪式",
     "howto_label": "使用方法",
     "standard_label": "AVA 标准",
-    "reviews": "reviews"
+    "reviews": "reviews",
+    "pack_type": {
+      "enrolment": "注册礼包",
+      "reorder": "复购礼包"
+    }
   },
   "journal": {
-    "header": "了解平衡的科学。",
+    "header": "学习平衡的科学。",
     "subhead": "关于优雅老去、精准健康以及与身体同节奏生活的见解，来自配制 AVA 的团队。",
     "chip_all": "全部",
     "cat_precision": "精准健康",
@@ -112,7 +122,7 @@
     "featured": "精选",
     "latest": "最新文章",
     "nl_h": "加入这场运动。",
-    "nl_sub": "关于优雅老去、精准健康与与身体同节奏生活的新作，偶尔送达，绝不喧嚣。",
+    "nl_sub": "关于优雅老去、精准健康以及与身体同节奏生活的新作，偶尔送达，绝不喧嚣。",
     "nl_email": "电子邮箱",
     "nl_btn": "订阅",
     "read_more": "Read article"
@@ -193,12 +203,17 @@
       "decrease": "减少数量",
       "subtotal": "小计",
       "checkout": "结账",
-      "fee_included": "含运费及进口费用"
+      "fee_included": "含运费及进口费用 20.7%："
     }
   },
   "products": {
     "product": {
-      "sold_out": "售罄"
+      "sold_out": "售罄",
+      "media": {
+        "view_image": "查看第 {{ index }} 张图片",
+        "previous": "上一张",
+        "next": "下一张"
+      }
     }
   },
   "collections": {
@@ -317,7 +332,8 @@
       "summary_welcome_text": "欢迎光临本店！",
       "summary_reassurance_text": "24 小时内发货，30 天无理由退款保证",
       "more_info": "更多信息"
-    }
+    },
+    "banner_alt": "注册页横幅"
   },
   "confirm_shipping": {
     "eyebrow": "收货地址",
