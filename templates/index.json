@@ -130,6 +130,7 @@
     "philosophy": {
       "type": "image-banner",
       "settings": {
+        "image": "shopify://shop_images/Rythm_Core_Hero_Woman.png",
         "fallback_asset": "AdobeStock_267328747.jpeg",
         "priority": false,
         "layout": "center",
@@ -249,6 +250,7 @@
       "settings": {
         "background": "panel",
         "media_side": "left",
+        "image": "shopify://shop_images/Rythm_Family.png",
         "fallback_asset": "ava-family-shelf.png",
         "image_alt": "AVA story",
         "eyebrow": "Our Story",
@@ -273,6 +275,7 @@
     "cta": {
       "type": "image-banner",
       "settings": {
+        "image": "shopify://shop_images/AdobeStock_649548351.jpg",
         "fallback_asset": "AdobeStock_388020313.jpeg",
         "priority": false,
         "layout": "center",
