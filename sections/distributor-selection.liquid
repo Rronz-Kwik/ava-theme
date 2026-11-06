@@ -49,6 +49,15 @@
   capture t_summary_reassurance_text
     render 'editor-text', value: section.settings.summary_reassurance_text, key: 'enrollment.copy.summary_reassurance_text'
   endcapture
+
+  # QV/CV display switch: shop metafield apex.volume_display_enabled ("Volume
+  # Display Enabled") is the only control for the QV/CV/rating row. Shown only
+  # when true; false or unset hides it. Display only, the volume data synced
+  # to the cart and order is never affected.
+  assign show_volume = false
+  if shop.metafields.apex.volume_display_enabled.value == true
+    assign show_volume = true
+  endif
 -%}
 {{ 'enrollment.css' | asset_url | stylesheet_tag }}
 
@@ -172,7 +181,7 @@
             data-title="{{ product.title | escape }}"
             data-price="{{ product.price }}"
             data-image="{{ product.featured_image | image_url: width: 120 }}"
-            data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"
+            {% if show_volume %}data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"{% endif %}
             {% if product.selling_plan_groups.size > 0 %}data-subscription="true"{% endif %}
           >
             {% unless product.available %}
@@ -245,8 +254,7 @@
         description: section.settings.step3_description,
         note: t_step3_note,
         note_tooltip: t_step3_note_tooltip,
-        collection: collections[section.settings.step3_collection],
-        show_metafields: section.settings.show_metafeilds_container
+        collection: collections[section.settings.step3_collection]
       %}
 
       <div class="step-navigation">
@@ -325,7 +333,7 @@
             data-title="{{ product.title | escape }}"
             data-price="{{ product.price }}"
             data-image="{{ product.featured_image | image_url: width: 120 }}"
-            data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"
+            {% if show_volume %}data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"{% endif %}
             {% if product.selling_plan_groups.size > 0 %}data-subscription="true"{% endif %}
           >
             {% unless product.available %}
@@ -347,7 +355,7 @@
                   <p>{{ short_description }}</p>
               </div>
 
-              {% if section.settings.show_metafeilds_container and shop.metafields.apex.volume_tracking_enabled.value != false %}
+              {% if show_volume %}
                 <div class="metafeilds_container">
                   <div class="bv-value PV">
                     {% comment %} {% if customer
@@ -556,12 +564,6 @@
       "type": "collection",
       "id": "step3_collection",
       "label": "Step 3 Collection"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_metafeilds_container",
-      "label": "Show QV/CV/Rating",
-      "default": false
     },
 
     {

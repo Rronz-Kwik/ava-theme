@@ -31,7 +31,6 @@
         "step3_note": "Promotions (if applicable) will be calculated at checkout.",
         "step3_note_tooltip": "These products are optional add-ons. You can adjust quantities or remove them before completing checkout.",
         "step3_collection": "wholesale",
-        "show_metafeilds_container": false,
         "summary_step3_show": false,
         "summary_step3_title": "Setup Your Subscription!",
         "summary_step4_show": true,

@@ -5,8 +5,18 @@
   Accepts:
     subheading, heading, description, note, note_tooltip - header copy
     collection      - the collection object to list
-    show_metafields - whether to show the QV/CV/rating row
+
+  The QV/CV/rating row is controlled only by the shop metafield
+  apex.volume_display_enabled ("Volume Display Enabled"): shown when it is
+  true, hidden when false or unset. Display only; it never touches the volume
+  data synced to the cart and order.
 {%- endcomment -%}
+{%- liquid
+  assign show_volume = false
+  if shop.metafields.apex.volume_display_enabled.value == true
+    assign show_volume = true
+  endif
+-%}
 <div class="subscription-header">
   <div class="inner-subscription-header">
     {% if subheading != blank %}
@@ -38,7 +48,7 @@
       data-title="{{ product.title | escape }}"
       data-price="{{ product.price }}"
       data-image="{{ product.featured_image | image_url: width: 120 }}"
-      data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"
+      {% if show_volume %}data-qv="{{ product.metafields.apex.volume1.value | default: 0 }}"{% endif %}
       {% if product.selling_plan_groups.size > 0 %}data-subscription="true"{% endif %}
     >
       {% unless product.available %}
@@ -60,7 +70,7 @@
             <p>{{ short_description }}</p>
         </div>
 
-        {% if show_metafields and shop.metafields.apex.volume_tracking_enabled.value != false %}
+        {% if show_volume %}
           <div class="metafeilds_container">
             <div class="bv-value PV">
               {% if product.metafields.apex.volume1.value != blank %}

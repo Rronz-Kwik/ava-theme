@@ -1070,9 +1070,9 @@
       }
       var carryExtra = extraEnrollmentCartToken === liveCart.token ? extraEnrollment : null;
 
-      // Volume always syncs — volume_tracking_enabled only gates the QV/CV
-      // enrollment UI display (in the Liquid templates directly), never this
-      // data.
+      // Volume always syncs. The QV/CV enrollment UI display is gated by the
+      // shop metafield apex.volume_display_enabled (in the Liquid templates
+      // directly), never this data.
       return fetchApexVolumeMap(token, liveCart.items || []).then(function (apexVolumeMap) {
         var metafields = computeMetafields(liveCart, attrs || {}, config, carryExtra, apexVolumeMap, ownerId);
         if (!metafields.length) return;
