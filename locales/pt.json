@@ -27,6 +27,22 @@
       "label": "Region & language",
       "title": "Choose your market",
       "subtitle": "Select your region and language."
+    },
+    "search": {
+      "title": "Pesquisar",
+      "placeholder": "Pesquisar",
+      "submit": "Pesquisar",
+      "results": {
+        "one": "{{ count }} resultado para “{{ terms }}”",
+        "other": "{{ count }} resultados para “{{ terms }}”"
+      }
+    },
+    "accessibility": {
+      "menu": "Menu",
+      "primary_nav": "Primary"
+    },
+    "404": {
+      "title": "Page not found"
     }
   },
   "footer": {
@@ -68,7 +84,11 @@
     "ritual_label": "O ritual",
     "howto_label": "Como usar",
     "standard_label": "O padrão AVA",
-    "reviews": "reviews"
+    "reviews": "reviews",
+    "pack_type": {
+      "enrolment": "Enrolment pack",
+      "reorder": "Reorder pack"
+    }
   },
   "journal": {
     "header": "Conheça a ciência do equilíbrio.",
@@ -153,6 +173,20 @@
     "std_p1": "Respeitamos a medicina moderna, mas acreditamos que as pessoas merecem soluções de bem-estar proativas e guiadas pela ciência antes de serem reduzidas a um sintoma ou receberem uma resposta de tamanho único.",
     "std_p2": "A AVA usa a ciência para criar soluções que ajudam as pessoas a envelhecer com o corpo, não contra ele — disruptiva no pensamento, premium na execução, humana no cerne."
   },
+  "cart": {
+    "general": {
+      "title": "Seu carrinho",
+      "empty": "Seu carrinho está vazio.",
+      "update": "Atualizar",
+      "remove": "Remover",
+      "quantity": "Quantidade",
+      "increase": "Aumentar quantidade",
+      "decrease": "Diminuir quantidade",
+      "subtotal": "Subtotal",
+      "checkout": "Finalizar compra",
+      "fee_included": "Inclui frete e custos de importação 20,7%:"
+    }
+  },
   "contact": {
     "heading": "Acesse os maiores especialistas do mundo, em qualquer lugar, quando você mais precisar.",
     "subheading": "Fale conosco para dúvidas, solicitações ou perguntas.",
@@ -165,5 +199,17 @@
     "message": "Mensagem",
     "submit": "Enviar",
     "success": "Obrigado pelo contato. Nossa equipe entrará em contato em breve."
+  },
+  "products": {
+    "product": {
+      "media": {
+        "view_image": "View image {{ index }}",
+        "previous": "Previous",
+        "next": "Next"
+      }
+    }
+  },
+  "enrollment": {
+    "banner_alt": "Sign-up banner"
   }
 }

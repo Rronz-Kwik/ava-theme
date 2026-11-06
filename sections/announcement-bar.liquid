@@ -17,7 +17,7 @@
     <div class="ava-announce__inner">
       <div class="ava-announce__msg">
         {%- if section.settings.link != blank -%}
-          <a href="{{ section.settings.link }}">{{ bar_text }}</a>
+          <a href="{% render 'localized-url', url: section.settings.link %}">{{ bar_text }}</a>
         {%- else -%}
           {{ bar_text }}
         {%- endif -%}

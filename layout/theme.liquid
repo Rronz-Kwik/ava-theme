@@ -14,7 +14,13 @@
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
   {%- endif -%}
 
-  <title>{{ page_title }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+  {%- liquid
+    assign title_text = page_title
+    if request.page_type == '404'
+      assign title_text = 'general.404.title' | t
+    endif
+  -%}
+  <title>{{ title_text }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless title_text contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
 
   {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
 

@@ -1,13 +1,23 @@
+{%- liquid
+  assign nl_heading = 'journal.nl_h' | t
+  assign nl_sub = 'journal.nl_sub' | t
+  assign nl_email = 'journal.nl_email' | t
+  assign nl_btn = 'journal.nl_btn' | t
+  assign nl_heading = section.settings.heading | default: nl_heading
+  assign nl_sub = section.settings.subheading | default: nl_sub
+  assign nl_email = section.settings.placeholder | escape | default: nl_email
+  assign nl_btn = section.settings.button_label | default: nl_btn
+-%}
 <section class="ava-section ava-bg-dark ava-news ava-on-dark">
   <div class="ava-news__inner">
-    {%- if section.settings.heading != blank -%}<h2 class="ava-h2">{{ section.settings.heading }}</h2>{%- endif -%}
-    {%- if section.settings.subheading != blank -%}<p class="ava-lead ava-news__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+    {%- if nl_heading != blank -%}<h2 class="ava-h2">{{ nl_heading }}</h2>{%- endif -%}
+    {%- if nl_sub != blank -%}<p class="ava-lead ava-news__sub">{{ nl_sub }}</p>{%- endif -%}
     {%- form 'customer', class: 'ava-news__form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       <input class="ava-input" type="email" name="contact[email]" required
-             placeholder="{{ section.settings.placeholder | default: 'Email address' }}"
-             aria-label="{{ section.settings.placeholder | default: 'Email address' }}">
-      <button type="submit" class="ava-btn ava-btn--light ava-news__btn">{{ section.settings.button_label | default: 'Subscribe' }}</button>
+             placeholder="{{ nl_email }}"
+             aria-label="{{ nl_email }}">
+      <button type="submit" class="ava-btn ava-btn--light ava-news__btn">{{ nl_btn }}</button>
     {%- endform -%}
     {%- if form.posted_successfully? -%}
       <p class="ava-body ava-news__confirm">{{ 'general.newsletter.confirmation' | t | default: 'Thanks for subscribing.' }}</p>
@@ -20,10 +30,10 @@
   "name": "Newsletter",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Join the movement." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading" },
-    { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Email address" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" }
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave blank to use the translated default." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "info": "Leave blank to use the translated default." },
+    { "type": "text", "id": "placeholder", "label": "Input placeholder", "info": "Leave blank to use the translated default." },
+    { "type": "text", "id": "button_label", "label": "Button label", "info": "Leave blank to use the translated default." }
   ],
   "presets": [ { "name": "Newsletter" } ]
 }

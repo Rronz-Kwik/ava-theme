@@ -19,8 +19,11 @@
     assign proxy_path = '/apps/ava-china-address'
   endif
 
-  assign success_url = section.settings.success_redirect
-  if success_url == blank
+  if section.settings.success_redirect != blank
+    capture success_url
+      render 'localized-url', url: section.settings.success_redirect
+    endcapture
+  else
     assign success_url = routes.account_url
   endif
 

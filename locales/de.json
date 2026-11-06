@@ -27,6 +27,22 @@
       "label": "Region & language",
       "title": "Choose your market",
       "subtitle": "Select your region and language."
+    },
+    "search": {
+      "title": "Suche",
+      "placeholder": "Suchen",
+      "submit": "Suchen",
+      "results": {
+        "one": "{{ count }} Ergebnis für „{{ terms }}“",
+        "other": "{{ count }} Ergebnisse für „{{ terms }}“"
+      }
+    },
+    "accessibility": {
+      "menu": "Menu",
+      "primary_nav": "Primary"
+    },
+    "404": {
+      "title": "Page not found"
     }
   },
   "footer": {
@@ -68,7 +84,11 @@
     "ritual_label": "Das Ritual",
     "howto_label": "Anwendung",
     "standard_label": "Der AVA-Anspruch",
-    "reviews": "reviews"
+    "reviews": "reviews",
+    "pack_type": {
+      "enrolment": "Enrolment pack",
+      "reorder": "Reorder pack"
+    }
   },
   "journal": {
     "header": "Lernen Sie die Wissenschaft der Balance.",
@@ -153,6 +173,20 @@
     "std_p1": "Wir respektieren die moderne Medizin, glauben aber, dass Menschen proaktive, wissenschaftlich geführte Wellness-Lösungen verdienen, bevor sie auf ein Symptom reduziert werden oder eine Einheitsantwort erhalten.",
     "std_p2": "AVA nutzt Wissenschaft, um Lösungen zu schaffen, die Menschen helfen, mit ihrem Körper zu altern, nicht gegen ihn — disruptiv im Denken, premium in der Umsetzung, menschlich im Kern."
   },
+  "cart": {
+    "general": {
+      "title": "Ihr Warenkorb",
+      "empty": "Ihr Warenkorb ist leer.",
+      "update": "Aktualisieren",
+      "remove": "Entfernen",
+      "quantity": "Menge",
+      "increase": "Menge erhöhen",
+      "decrease": "Menge verringern",
+      "subtotal": "Zwischensumme",
+      "checkout": "Zur Kasse",
+      "fee_included": "Inkl. Versand- und Importkosten 20,7 %:"
+    }
+  },
   "contact": {
     "heading": "Zugang zu den weltweit führenden Spezialisten – überall auf der Welt, genau dann, wenn Sie sie am dringendsten brauchen.",
     "subheading": "Kontaktieren Sie uns bei Anfragen, Wünschen oder Fragen.",
@@ -165,5 +199,17 @@
     "message": "Nachricht",
     "submit": "Absenden",
     "success": "Vielen Dank für Ihre Nachricht. Unser Team meldet sich in Kürze bei Ihnen."
+  },
+  "products": {
+    "product": {
+      "media": {
+        "view_image": "View image {{ index }}",
+        "previous": "Previous",
+        "next": "Next"
+      }
+    }
+  },
+  "enrollment": {
+    "banner_alt": "Sign-up banner"
   }
 }
