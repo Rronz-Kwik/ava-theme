@@ -67,10 +67,10 @@
       {%- if section.settings.button1_label != blank or section.settings.button2_label != blank -%}
         <div class="ava-btn-row">
           {%- if section.settings.button1_label != blank -%}
-            <a href="{{ section.settings.button1_link | default: '#' }}" class="ava-btn ava-btn--{{ section.settings.button1_style | default: 'primary' }}">{{ section.settings.button1_label }}</a>
+            <a href="{% render 'localized-url', url: section.settings.button1_link %}" class="ava-btn ava-btn--{{ section.settings.button1_style | default: 'primary' }}">{{ section.settings.button1_label }}</a>
           {%- endif -%}
           {%- if section.settings.button2_label != blank -%}
-            <a href="{{ section.settings.button2_link | default: '#' }}" class="ava-btn ava-btn--{{ section.settings.button2_style | default: 'ghost' }}">{{ section.settings.button2_label }}</a>
+            <a href="{% render 'localized-url', url: section.settings.button2_link %}" class="ava-btn ava-btn--{{ section.settings.button2_style | default: 'ghost' }}">{{ section.settings.button2_label }}</a>
           {%- endif -%}
         </div>
       {%- endif -%}

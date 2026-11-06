@@ -32,7 +32,7 @@
                 {%- assign item_base = item.final_line_price | times: 1000 | divided_by: 1207 -%}
                 {%- assign item_fee = item.final_line_price | minus: item_base -%}
                 <div class="ava-body-sm">
-                  {{ 'cart.general.fee_included' | t }} <span data-cart-line-fee>{{ cart.currency.iso_code }} {{ item_fee | money_without_currency }}</span>
+                  {{ 'cart.general.fee_included' | t }} <span data-cart-line-fee>{{ item_fee | money }} {{ cart.currency.iso_code }}</span>
                 </div>
               {%- endif -%}
             </div>
@@ -79,7 +79,7 @@
         <div class="ava-cart-foot">
           <div class="ava-text-right ava-cart-foot__total">
             <div class="ava-fee-include" data-cart-fee-wrap{% if fee_cents == 0 %} hidden{% endif %}>
-              {{ 'cart.general.fee_included' | t }} <span data-cart-fee>{{ cart.currency.iso_code }} {{ fee_cents | money_without_currency }}</span>
+              {{ 'cart.general.fee_included' | t }} <span data-cart-fee>{{ fee_cents | money }} {{ cart.currency.iso_code }}</span>
             </div>
             <div class="ava-body-sm">{{ 'cart.general.subtotal' | t | default: 'Subtotal' }}</div>
             <div class="ava-price ava-cart-total" data-cart-total>{{ cart.total_price | money }}</div>

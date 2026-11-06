@@ -27,6 +27,22 @@
       "label": "Region & language",
       "title": "Choose your market",
       "subtitle": "Select your region and language."
+    },
+    "search": {
+      "title": "Recherche",
+      "placeholder": "Rechercher",
+      "submit": "Rechercher",
+      "results": {
+        "one": "{{ count }} résultat pour « {{ terms }} »",
+        "other": "{{ count }} résultats pour « {{ terms }} »"
+      }
+    },
+    "accessibility": {
+      "menu": "Menu",
+      "primary_nav": "Primary"
+    },
+    "404": {
+      "title": "Page not found"
     }
   },
   "footer": {
@@ -68,7 +84,11 @@
     "ritual_label": "Le rituel",
     "howto_label": "Mode d’emploi",
     "standard_label": "L’exigence AVA",
-    "reviews": "reviews"
+    "reviews": "reviews",
+    "pack_type": {
+      "enrolment": "Enrolment pack",
+      "reorder": "Reorder pack"
+    }
   },
   "journal": {
     "header": "Apprenez la science de l’équilibre.",
@@ -153,6 +173,20 @@
     "std_p1": "Nous respectons la médecine moderne, mais nous pensons que chacun mérite des solutions de bien-être proactives et guidées par la science, avant d’être réduit à un symptôme ou de recevoir une réponse uniforme.",
     "std_p2": "AVA utilise la science pour créer des solutions qui aident chacun à vieillir avec son corps, et non contre lui — disruptif dans la pensée, premium dans l’exécution, humain au cœur."
   },
+  "cart": {
+    "general": {
+      "title": "Votre panier",
+      "empty": "Votre panier est vide.",
+      "update": "Mettre à jour",
+      "remove": "Supprimer",
+      "quantity": "Quantité",
+      "increase": "Augmenter la quantité",
+      "decrease": "Diminuer la quantité",
+      "subtotal": "Sous-total",
+      "checkout": "Paiement",
+      "fee_included": "Comprend la livraison et les frais d’importation 20,7 % :"
+    }
+  },
   "contact": {
     "heading": "Accédez aux meilleurs spécialistes du monde, où que vous soyez, au moment où vous en avez le plus besoin.",
     "subheading": "Contactez-nous pour toute demande ou question.",
@@ -165,5 +199,17 @@
     "message": "Message",
     "submit": "Envoyer",
     "success": "Merci pour votre message. Notre équipe vous contactera très bientôt."
+  },
+  "products": {
+    "product": {
+      "media": {
+        "view_image": "View image {{ index }}",
+        "previous": "Previous",
+        "next": "Next"
+      }
+    }
+  },
+  "enrollment": {
+    "banner_alt": "Sign-up banner"
   }
 }

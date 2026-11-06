@@ -20,7 +20,9 @@
             assign ptitle = product.title
             assign pimg = product.featured_image
           else
-            assign purl = block.settings.link | default: '#'
+            capture purl
+              render 'localized-url', url: block.settings.link
+            endcapture
             assign ptitle = block.settings.title
           endif
         -%}

@@ -46,12 +46,18 @@
       "page": "Page {{ page }}"
     },
     "accessibility": {
-      "skip_to_content": "Skip to content"
+      "skip_to_content": "Skip to content",
+      "menu": "Menu",
+      "primary_nav": "Primary"
     },
     "search": {
       "title": "Search",
       "placeholder": "Search",
-      "submit": "Search"
+      "submit": "Search",
+      "results": {
+        "one": "{{ count }} result for “{{ terms }}”",
+        "other": "{{ count }} results for “{{ terms }}”"
+      }
     },
     "newsletter": {
       "confirmation": "Thanks for subscribing."
@@ -97,7 +103,11 @@
     "ritual_label": "The Ritual",
     "howto_label": "How to Use",
     "standard_label": "The AVA Standard",
-    "reviews": "reviews"
+    "reviews": "reviews",
+    "pack_type": {
+      "enrolment": "Enrolment pack",
+      "reorder": "Reorder pack"
+    }
   },
   "journal": {
     "header": "Learn the science of balance.",
@@ -193,12 +203,17 @@
       "decrease": "Decrease quantity",
       "subtotal": "Subtotal",
       "checkout": "Checkout",
-      "fee_included": "Includes Shipping and Import Costs"
+      "fee_included": "Includes Shipping and Import Cost 20.7%:"
     }
   },
   "products": {
     "product": {
-      "sold_out": "Sold out"
+      "sold_out": "Sold out",
+      "media": {
+        "view_image": "View image {{ index }}",
+        "previous": "Previous",
+        "next": "Next"
+      }
     }
   },
   "collections": {
@@ -317,7 +332,8 @@
       "summary_welcome_text": "Welcome to our store!",
       "summary_reassurance_text": "Ships in 24 hours, 30-day money-back guarantee",
       "more_info": "More information"
-    }
+    },
+    "banner_alt": "Sign-up banner"
   },
   "confirm_shipping": {
     "eyebrow": "Shipping address",

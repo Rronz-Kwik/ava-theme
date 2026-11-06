@@ -27,6 +27,22 @@
       "label": "Region & language",
       "title": "Choose your market",
       "subtitle": "Select your region and language."
+    },
+    "search": {
+      "title": "Buscar",
+      "placeholder": "Buscar",
+      "submit": "Buscar",
+      "results": {
+        "one": "{{ count }} resultado para «{{ terms }}»",
+        "other": "{{ count }} resultados para «{{ terms }}»"
+      }
+    },
+    "accessibility": {
+      "menu": "Menu",
+      "primary_nav": "Primary"
+    },
+    "404": {
+      "title": "Page not found"
     }
   },
   "footer": {
@@ -68,7 +84,11 @@
     "ritual_label": "El ritual",
     "howto_label": "Cómo usar",
     "standard_label": "El estándar AVA",
-    "reviews": "reviews"
+    "reviews": "reviews",
+    "pack_type": {
+      "enrolment": "Enrolment pack",
+      "reorder": "Reorder pack"
+    }
   },
   "journal": {
     "header": "Aprende la ciencia del equilibrio.",
@@ -153,6 +173,20 @@
     "std_p1": "Respetamos la medicina moderna, pero creemos que las personas merecen soluciones de bienestar proactivas y guiadas por la ciencia antes de sentirse reducidas a un síntoma o recibir una respuesta genérica.",
     "std_p2": "AVA usa la ciencia para crear soluciones que ayudan a las personas a envejecer con su cuerpo, no contra él: disruptivo en el pensamiento, premium en la ejecución, humano en su esencia."
   },
+  "cart": {
+    "general": {
+      "title": "Tu carrito",
+      "empty": "Tu carrito está vacío.",
+      "update": "Actualizar",
+      "remove": "Eliminar",
+      "quantity": "Cantidad",
+      "increase": "Aumentar cantidad",
+      "decrease": "Disminuir cantidad",
+      "subtotal": "Subtotal",
+      "checkout": "Finalizar compra",
+      "fee_included": "Incluye envío y costes de importación 20,7 %:"
+    }
+  },
   "contact": {
     "heading": "Acceda a los especialistas líderes del mundo, en cualquier lugar, cuando más los necesite.",
     "subheading": "Contáctenos para consultas, solicitudes o preguntas.",
@@ -165,5 +199,17 @@
     "message": "Mensaje",
     "submit": "Enviar",
     "success": "Gracias por escribirnos. Nuestro equipo se pondrá en contacto con usted pronto."
+  },
+  "products": {
+    "product": {
+      "media": {
+        "view_image": "View image {{ index }}",
+        "previous": "Previous",
+        "next": "Next"
+      }
+    }
+  },
+  "enrollment": {
+    "banner_alt": "Sign-up banner"
   }
 }

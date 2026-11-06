@@ -39,12 +39,12 @@
     <label
       class="ava-burger"
       for="nav-{{ section.id }}"
-      aria-label="Menu"
+      aria-label="{{ 'general.accessibility.menu' | t }}"
     >
       <i></i>
     </label>
 
-    <nav class="ava-navlinks" aria-label="Primary">
+    <nav class="ava-navlinks" aria-label="{{ 'general.accessibility.primary_nav' | t }}">
 
       <div class="ava-hasmenu">
 
@@ -241,12 +241,12 @@
 
       {%- endif -%}
 
-      <a
+      {% comment %} <a
         href="{{ locale_root }}pages/enrollment"
         class="ava-join"
       >
         {{ 'general.nav.become_influencer' | t }}
-      </a>
+      </a> {% endcomment %}
 
       {%- comment -%}
         Shopify customer-accounts link. Turn the setting off if the shop moves to

@@ -17,7 +17,7 @@
       <div class="ava-pdp__galtop">
         <div class="ava-pdp__thumbs">
           {%- for media in product.media -%}
-            <button type="button" class="ava-thumb {% if forloop.first %}ava-thumb--active{% endif %}" data-thumb="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}">
+            <button type="button" class="ava-thumb {% if forloop.first %}ava-thumb--active{% endif %}" data-thumb="{{ forloop.index0 }}" aria-label="{{ 'products.product.media.view_image' | t: index: forloop.index }}">
               <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape }}" loading="lazy">
             </button>
           {%- endfor -%}
@@ -29,7 +29,7 @@
         {%- unless settings.pack_colour_enabled -%}{%- assign pack_type = '' -%}{%- endunless -%}
         <div class="ava-pdp__stage" data-gal-stage{% if pack_type != blank %} data-ava-pack="{{ pack_type }}"{% endif %}>
           {%- if pack_type != blank -%}
-            <span class="ava-visually-hidden">{% if pack_type == 'enrolment' %}Enrolment pack{% else %}{{ 'product.pack_type.reorder' | t }}{% endif %}</span>
+            <span class="ava-visually-hidden">{% if pack_type == 'enrolment' %}{{ 'product.pack_type.enrolment' | t }}{% else %}{{ 'product.pack_type.reorder' | t }}{% endif %}</span>
           {%- endif -%}
           {%- if product.media.size > 0 -%}
             <div class="ava-pdp__track" data-gal-track>
@@ -47,8 +47,8 @@
             <div class="ava-pdp__placeholder"></div>
           {%- endif -%}
           {%- if product.media.size > 1 -%}
-            <button type="button" class="ava-galnav ava-galnav--prev" data-gal-prev aria-label="Previous">&lsaquo;</button>
-            <button type="button" class="ava-galnav ava-galnav--next" data-gal-next aria-label="Next">&rsaquo;</button>
+            <button type="button" class="ava-galnav ava-galnav--prev" data-gal-prev aria-label="{{ 'products.product.media.previous' | t }}">&lsaquo;</button>
+            <button type="button" class="ava-galnav ava-galnav--next" data-gal-next aria-label="{{ 'products.product.media.next' | t }}">&rsaquo;</button>
           {%- endif -%}
         </div>
       </div>

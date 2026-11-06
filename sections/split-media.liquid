@@ -38,9 +38,9 @@
 
       {%- if section.settings.button_label != blank -%}
         {%- if section.settings.button_style == 'link' -%}
-          <a href="{{ section.settings.button_link | default: '#' }}" class="ava-link ava-split__link">{{ section.settings.button_label }} &rarr;</a>
+          <a href="{% render 'localized-url', url: section.settings.button_link %}" class="ava-link ava-split__link">{{ section.settings.button_label }} &rarr;</a>
         {%- else -%}
-          <a href="{{ section.settings.button_link | default: '#' }}" class="ava-btn ava-split__btn">{{ section.settings.button_label }}</a>
+          <a href="{% render 'localized-url', url: section.settings.button_link %}" class="ava-btn ava-split__btn">{{ section.settings.button_label }}</a>
         {%- endif -%}
       {%- endif -%}
     </div>
